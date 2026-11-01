@@ -19,6 +19,7 @@
     "devDependencies": {
         "@11ty/eleventy": "^3",
         "@eslint/js": "^10",
+        "@fontsource/fredoka": "^5",
         "@oclif/plugin-help": "^7",
         "@stylistic/eslint-plugin": "^5",
         "@types/chai": "^5",
