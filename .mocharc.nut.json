@@ -1,0 +1,6 @@
+{
+    "spec": ["test/nut/**/*.nut.ts"],
+    "reporter": "spec",
+    "timeout": 120000,
+    "slow": 4500
+}

@@ -21,6 +21,7 @@
         "@eslint/js": "^10",
         "@fontsource/fredoka": "^5",
         "@oclif/plugin-help": "^7",
+        "@salesforce/cli-plugins-testkit": "^5",
         "@stylistic/eslint-plugin": "^5",
         "@types/chai": "^5",
         "@types/mocha": "^10",
@@ -76,6 +77,7 @@
         "lint": "wireit",
         "prepack": "npm run compile",
         "test": "wireit",
+        "test:nut": "wireit",
         "test:unit": "wireit"
     },
     "wireit": {
@@ -129,9 +131,28 @@
             ],
             "output": []
         },
+        "test:nut": {
+            "command": "mocha --config .mocharc.nut.json",
+            "dependencies": [
+                "compile"
+            ],
+            "env": {
+                "FORCE_COLOR": "0",
+                "NO_COLOR": "1",
+                "SF_DISABLE_TELEMETRY": "true"
+            },
+            "files": [
+                "test/nut/**",
+                "test/fixtures/**",
+                "test/tsconfig.json",
+                ".mocharc.nut.json"
+            ],
+            "output": []
+        },
         "test": {
             "dependencies": [
-                "test:unit"
+                "test:unit",
+                "test:nut"
             ]
         }
     },
