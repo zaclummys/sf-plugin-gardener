@@ -61,7 +61,9 @@ function addRuleStatus(state) {
 
 export default function (eleventyConfig) {
     eleventyConfig.addPlugin(EleventyHtmlBasePlugin)
-    eleventyConfig.addPassthroughCopy({ "assets/logo.svg": "logo.svg" })
+    eleventyConfig.addPassthroughCopy({
+        "assets/logo.svg": "logo.svg",
+    })
     eleventyConfig.addPassthroughCopy({
         "node_modules/@fontsource/fredoka/files/fredoka-latin-500-normal.woff2": "fonts/fredoka-500.woff2",
         "node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2": "fonts/fredoka-600.woff2",

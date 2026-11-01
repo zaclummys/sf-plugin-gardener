@@ -21,7 +21,9 @@ export default class Run extends SfCommand<LintRunResult> {
             default: '.',
             exists: true,
         }),
-        strict: Flags.boolean({ summary: messages.getMessage('flags.strict.summary') }),
+        strict: Flags.boolean({
+            summary: messages.getMessage('flags.strict.summary'),
+        }),
     };
 
     public async run(): Promise<LintRunResult> {
@@ -34,7 +36,9 @@ export default class Run extends SfCommand<LintRunResult> {
             configurationFinder,
         });
 
-        const outcome = await service.run({ directory: flags.directory });
+        const outcome = await service.run({
+            directory: flags.directory,
+        });
 
         if (outcome.success) {
             return outcome.result;

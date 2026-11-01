@@ -61,8 +61,12 @@ export default defineConfig([
     {
         files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
         extends: [js.configs.recommended],
-        languageOptions: { globals: globals.node },
-        plugins: { "@stylistic": stylistic },
+        languageOptions: {
+            globals: globals.node,
+        },
+        plugins: {
+            "@stylistic": stylistic,
+        },
         rules: {
             // Always brace a block statement, even a single-line if: a braceless body
             // makes the next added line silently fall outside the branch.
@@ -84,14 +88,18 @@ export default defineConfig([
             "@stylistic/brace-style": [
                 "error",
                 "1tbs",
-                { allowSingleLine: false },
+                {
+                    allowSingleLine: false,
+                },
             ],
             // Four spaces, matching .editorconfig, so an editor and the linter never
             // disagree about a line.
             "@stylistic/indent": [
                 "error",
                 4,
-                { SwitchCase: 1 },
+                {
+                    SwitchCase: 1,
+                },
             ],
 
             // A trailing comma on a multiline literal keeps the next added element to a
@@ -136,7 +144,7 @@ export default defineConfig([
                 {
                     "ObjectExpression": {
                         "multiline": true,
-                        "minProperties": 2,
+                        "minProperties": 1,
                     },
                     "ObjectPattern": {
                         "multiline": true,
@@ -145,8 +153,12 @@ export default defineConfig([
                     // An import or export specifier list is not a value literal: it
                     // stays on one line however many names it carries, and breaks only
                     // when a specifier itself spans lines.
-                    "ImportDeclaration": { "multiline": true },
-                    "ExportDeclaration": { "multiline": true },
+                    "ImportDeclaration": {
+                        "multiline": true,
+                    },
+                    "ExportDeclaration": {
+                        "multiline": true,
+                    },
                 },
             ],
 
@@ -155,7 +167,9 @@ export default defineConfig([
             // enforces one name per line inside it. That part is a review call.
             "@stylistic/object-property-newline": [
                 "error",
-                { "allowAllPropertiesOnSameLine": false },
+                {
+                    "allowAllPropertiesOnSameLine": false,
+                },
             ],
 
             "@stylistic/no-trailing-spaces": "error",
@@ -209,7 +223,9 @@ export default defineConfig([
             // so keep the recommended allowance rather than wrap it in String().
             "@typescript-eslint/restrict-template-expressions": [
                 "error",
-                { allowNumber: true },
+                {
+                    allowNumber: true,
+                },
             ],
             // Both type and interface are allowed: the two differ in declaration merging
             // and in what they can express, so the choice is the declaration's to make.
@@ -456,7 +472,9 @@ export default defineConfig([
     // rather than a file's structure hold there too.
     {
         files: ["test/**/*.ts"],
-        rules: { ...sharedCaps },
+        rules: {
+            ...sharedCaps,
+        },
     },
 
     // Specs only (see CLAUDE.md): a branch in a test body can skip every assertion and
