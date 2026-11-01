@@ -1,3 +1,5 @@
+![Gardener](assets/banner.svg)
+
 # Gardener
 
 Gardener is a Salesforce CLI plugin that lints the metadata of Salesforce DX projects.
