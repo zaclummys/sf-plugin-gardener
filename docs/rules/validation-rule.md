@@ -2,7 +2,29 @@
 
 [Back to catalog](README.md)
 
-Applies `description-required` and `no-inactive-component` via the `active` element.
+## `validation-rule/no-inactive-component`
+
+Same as `flow/no-inactive-component`. Applies to the `active` element.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "validation-rule/no-inactive-component": {
+      "severity": "warn",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
 
 ## `validation-rule/bypass-required`
 

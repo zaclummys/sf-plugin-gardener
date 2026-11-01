@@ -2,7 +2,96 @@
 
 [Back to catalog](README.md)
 
-Applies `description-required`, `naming-convention` and `no-inactive-component`. Applies `custom-field/single-default-picklist-value` to each `picklistValues`.
+Applies `custom-field/single-default-picklist-value` to each `picklistValues`.
+
+## `record-type/description-required`
+
+Same as `custom-object/description-required`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `minLength`: minimum description length in characters
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "record-type/description-required": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "minLength": 20
+    }
+  }
+}
+```
+
+## `record-type/naming-convention`
+
+Same as `custom-object/naming-convention`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `patterns`: map from metadata type to a regular expression for the name
+- `forbiddenSuffixes`: list of forbidden suffixes
+- `forbiddenPrefixes`: list of forbidden prefixes
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "record-type/naming-convention": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "patterns": {
+        "CustomField": "^[A-Z][A-Za-z0-9]*__c$"
+      },
+      "forbiddenSuffixes": [
+        "_v2",
+        "_old",
+        "_del",
+        "_final"
+      ],
+      "forbiddenPrefixes": [
+        "Copy_of"
+      ]
+    }
+  }
+}
+```
+
+## `record-type/no-inactive-component`
+
+Same as `flow/no-inactive-component`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "record-type/no-inactive-component": {
+      "severity": "warn",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
 
 ## `record-type/assigned`
 

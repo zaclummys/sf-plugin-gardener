@@ -2,7 +2,70 @@
 
 [Back to catalog](README.md)
 
-Applies `description-required` and `naming-convention`.
+## `custom-object/description-required`
+
+Every custom component needs a filled-in description. The description is the context that humans and AI read before touching the component.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `minLength`: minimum description length in characters
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "custom-object/description-required": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "minLength": 20
+    }
+  }
+}
+```
+
+## `custom-object/naming-convention`
+
+The API name must follow the pattern configured for the type. Suffixes such as `_v2`, `_old`, `_del`, `_final` and prefixes such as `Copy_of` are forbidden.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `patterns`: map from metadata type to a regular expression for the name
+- `forbiddenSuffixes`: list of forbidden suffixes
+- `forbiddenPrefixes`: list of forbidden prefixes
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "custom-object/naming-convention": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "patterns": {
+        "CustomField": "^[A-Z][A-Za-z0-9]*__c$"
+      },
+      "forbiddenSuffixes": [
+        "_v2",
+        "_old",
+        "_del",
+        "_final"
+      ],
+      "forbiddenPrefixes": [
+        "Copy_of"
+      ]
+    }
+  }
+}
+```
 
 ## `custom-object/sharing-model-explicit`
 

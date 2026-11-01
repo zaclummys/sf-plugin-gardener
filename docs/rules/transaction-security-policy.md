@@ -2,7 +2,53 @@
 
 [Back to catalog](README.md)
 
-Applies `no-inactive-component` and `no-specific-user-reference`.
+## `transaction-security-policy/no-inactive-component`
+
+Same as `flow/no-inactive-component`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "transaction-security-policy/no-inactive-component": {
+      "severity": "warn",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
+
+## `transaction-security-policy/no-specific-user-reference`
+
+Same as `approval-process/no-specific-user-reference`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt usernames
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "transaction-security-policy/no-specific-user-reference": {
+      "severity": "warn",
+      "allowlist": [
+        "integration@example.com"
+      ]
+    }
+  }
+}
+```
 
 ## `transaction-security-policy/action-not-empty`
 

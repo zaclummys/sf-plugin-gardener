@@ -108,7 +108,7 @@ Reports email-to-case addresses outside the configured domain, because an enviro
 
 ## `settings/case-default-owner-queue`
 
-Reports a case default owner of type user, applying `no-specific-user-reference` to the assignment fallback.
+Reports a case default owner of type user, because the assignment fallback then points to a specific person.
 
 **Properties:**
 

@@ -2,7 +2,73 @@
 
 [Back to catalog](README.md)
 
-Applies `description-required`, `no-inactive-component` and `boolean-filter-valid`.
+## `duplicate-rule/description-required`
+
+Same as `custom-object/description-required`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `minLength`: minimum description length in characters
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "duplicate-rule/description-required": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "minLength": 20
+    }
+  }
+}
+```
+
+## `duplicate-rule/no-inactive-component`
+
+Same as `flow/no-inactive-component`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "duplicate-rule/no-inactive-component": {
+      "severity": "warn",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
+
+## `duplicate-rule/boolean-filter-valid`
+
+Same as `list-view/boolean-filter-valid`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "duplicate-rule/boolean-filter-valid": "error"
+  }
+}
+```
 
 ## `duplicate-rule/no-bypass-sharing-in-duplicate-rule`
 

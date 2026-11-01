@@ -2,7 +2,31 @@
 
 [Back to catalog](README.md)
 
-Applies `description-required`.
+## `custom-application/description-required`
+
+Same as `custom-object/description-required`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `minLength`: minimum description length in characters
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "custom-application/description-required": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "minLength": 20
+    }
+  }
+}
+```
 
 ## `custom-application/default-landing-tab-in-tabs`
 

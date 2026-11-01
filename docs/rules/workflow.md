@@ -2,7 +2,99 @@
 
 [Back to catalog](README.md)
 
-Applies `no-inactive-component`, `boolean-filter-valid`, `no-hardcoded-email-address` and `no-specific-user-reference`.
+## `workflow/no-inactive-component`
+
+Same as `flow/no-inactive-component`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "workflow/no-inactive-component": {
+      "severity": "warn",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
+
+## `workflow/no-specific-user-reference`
+
+Same as `approval-process/no-specific-user-reference`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt usernames
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "workflow/no-specific-user-reference": {
+      "severity": "warn",
+      "allowlist": [
+        "integration@example.com"
+      ]
+    }
+  }
+}
+```
+
+## `workflow/no-hardcoded-email-address`
+
+Reports a person's email address in metadata, such as in an alert copy or an escalation notification. The same reasoning as `approval-process/no-specific-user-reference` applies.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt addresses
+- `allowedDomains`: addresses in these domains are not reported
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "workflow/no-hardcoded-email-address": {
+      "severity": "warn",
+      "allowlist": [
+        "ops@example.com"
+      ],
+      "allowedDomains": [
+        "example.com"
+      ]
+    }
+  }
+}
+```
+
+## `workflow/boolean-filter-valid`
+
+Same as `list-view/boolean-filter-valid`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "workflow/boolean-filter-valid": "error"
+  }
+}
+```
 
 ## `workflow/no-workflow-rule`
 

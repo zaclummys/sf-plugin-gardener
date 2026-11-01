@@ -2,9 +2,9 @@
 
 [Back to catalog](README.md)
 
-The scope is the `-meta.xml`. See [Scope and offline analysis](/concepts/#scope-and-offline-analysis).
+Its `apiVersion` is checked by the version rules in [Project structure rules](project-structure-rules.md).
 
-Applies `api-version-consistency` and `min-api-version`.
+The scope is the `-meta.xml`. See [Scope and offline analysis](/concepts/#scope-and-offline-analysis).
 
 ## `apex-trigger/status-active`
 

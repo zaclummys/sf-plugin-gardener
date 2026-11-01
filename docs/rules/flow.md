@@ -2,7 +2,122 @@
 
 [Back to catalog](README.md)
 
-Applies `description-required`, `naming-convention`, `no-hardcoded-id` and `no-inactive-component` via the `status` element.
+## `flow/description-required`
+
+Same as `custom-object/description-required`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `minLength`: minimum description length in characters
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "flow/description-required": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "minLength": 20
+    }
+  }
+}
+```
+
+## `flow/naming-convention`
+
+Same as `custom-object/naming-convention`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `patterns`: map from metadata type to a regular expression for the name
+- `forbiddenSuffixes`: list of forbidden suffixes
+- `forbiddenPrefixes`: list of forbidden prefixes
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "flow/naming-convention": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "patterns": {
+        "CustomField": "^[A-Z][A-Za-z0-9]*__c$"
+      },
+      "forbiddenSuffixes": [
+        "_v2",
+        "_old",
+        "_del",
+        "_final"
+      ],
+      "forbiddenPrefixes": [
+        "Copy_of"
+      ]
+    }
+  }
+}
+```
+
+## `flow/no-hardcoded-id`
+
+Forbids 15 or 18 character record IDs in formulas, filters, flows and any other XML. Elements that hold an ID by definition, such as `requestSigningCertId` in SamlSsoConfig, go into a built-in list of exemptions.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `exemptElements`: names of XML elements added to the built-in list of exemptions
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "flow/no-hardcoded-id": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "exemptElements": [
+        "requestSigningCertId"
+      ]
+    }
+  }
+}
+```
+
+## `flow/no-inactive-component`
+
+Reports a versioned component with its activation flag turned off. Remove it instead of deactivating it. Applies to the `status` element.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "flow/no-inactive-component": {
+      "severity": "warn",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
 
 ## `flow/fault-path-required`
 

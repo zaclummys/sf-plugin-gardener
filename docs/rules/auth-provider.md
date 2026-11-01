@@ -2,11 +2,61 @@
 
 [Back to catalog](README.md)
 
-Applies `no-secret-in-metadata` to `consumerSecret` and `no-specific-user-reference` to `executionUser`.
+## `auth-provider/no-specific-user-reference`
+
+Same as `approval-process/no-specific-user-reference`. Applies to `executionUser`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt usernames
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "auth-provider/no-specific-user-reference": {
+      "severity": "warn",
+      "allowlist": [
+        "integration@example.com"
+      ]
+    }
+  }
+}
+```
+
+## `auth-provider/no-secret-in-metadata`
+
+Same as `connected-app/no-secret-in-metadata`. Applies to `consumerSecret`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `extraPatterns`: regular expressions added to the built-in detection ones
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "auth-provider/no-secret-in-metadata": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "extraPatterns": [
+        "acme_key_[A-Za-z0-9]{32}"
+      ]
+    }
+  }
+}
+```
 
 ## `auth-provider/endpoints-https`
 
-Applies `https-required` to the OAuth endpoints.
+Same as `custom-tab/https-required`. Applies to the OAuth endpoints.
 
 **Properties:**
 

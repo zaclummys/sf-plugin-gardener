@@ -2,7 +2,29 @@
 
 [Back to catalog](README.md)
 
-Applies `https-required` to the entries.
+## `iframe-white-list-url-settings/https-required`
+
+Same as `custom-tab/https-required`. Applies to the entries.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt URLs or hosts, such as `localhost`
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "iframe-white-list-url-settings/https-required": {
+      "severity": "error",
+      "allowlist": [
+        "http://localhost:3000"
+      ]
+    }
+  }
+}
+```
 
 ## `iframe-white-list-url-settings/allowlist-no-wildcard-domain`
 

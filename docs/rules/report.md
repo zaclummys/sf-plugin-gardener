@@ -2,7 +2,59 @@
 
 [Back to catalog](README.md)
 
-Applies `description-required`. Applies `no-hardcoded-id` to filter values.
+## `report/description-required`
+
+Same as `custom-object/description-required`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `minLength`: minimum description length in characters
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "report/description-required": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "minLength": 20
+    }
+  }
+}
+```
+
+## `report/no-hardcoded-id`
+
+Same as `flow/no-hardcoded-id`. Applies to filter values.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `exemptElements`: names of XML elements added to the built-in list of exemptions
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "report/no-hardcoded-id": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "exemptElements": [
+        "requestSigningCertId"
+      ]
+    }
+  }
+}
+```
 
 ## `report/needs-constraint`
 

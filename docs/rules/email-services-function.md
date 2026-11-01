@@ -2,7 +2,53 @@
 
 [Back to catalog](README.md)
 
-Applies `no-inactive-component`. `no-specific-user-reference` applies with an exception for `runAsUser`, which is required.
+## `email-services-function/no-inactive-component`
+
+Same as `flow/no-inactive-component`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "email-services-function/no-inactive-component": {
+      "severity": "warn",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
+
+## `email-services-function/no-specific-user-reference`
+
+Same as `approval-process/no-specific-user-reference`. `runAsUser` is exempt, because it is required.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt usernames
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "email-services-function/no-specific-user-reference": {
+      "severity": "warn",
+      "allowlist": [
+        "integration@example.com"
+      ]
+    }
+  }
+}
+```
 
 ## `email-services-function/authorized-senders-required`
 

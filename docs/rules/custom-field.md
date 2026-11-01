@@ -2,7 +2,70 @@
 
 [Back to catalog](README.md)
 
-Applies `description-required` and `naming-convention`.
+## `custom-field/description-required`
+
+Same as `custom-object/description-required`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `minLength`: minimum description length in characters
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "custom-field/description-required": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "minLength": 20
+    }
+  }
+}
+```
+
+## `custom-field/naming-convention`
+
+Same as `custom-object/naming-convention`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `patterns`: map from metadata type to a regular expression for the name
+- `forbiddenSuffixes`: list of forbidden suffixes
+- `forbiddenPrefixes`: list of forbidden prefixes
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "custom-field/naming-convention": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "patterns": {
+        "CustomField": "^[A-Z][A-Za-z0-9]*__c$"
+      },
+      "forbiddenSuffixes": [
+        "_v2",
+        "_old",
+        "_del",
+        "_final"
+      ],
+      "forbiddenPrefixes": [
+        "Copy_of"
+      ]
+    }
+  }
+}
+```
 
 ## `custom-field/help-text-recommended`
 
@@ -97,13 +160,13 @@ A formula that crosses more than N distinct relationships couples the field to s
 ```
 ## `custom-field/formula-clean`
 
-Applies `no-hardcoded-id` and `no-hardcoded-url` inside the formula text and the `defaultValue`, which is also a formula.
+Forbids record IDs and org URLs inside the formula text and the `defaultValue`, which is also a formula.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
 
-The configuration of the two applied rules still applies.
+It takes the properties of `flow/no-hardcoded-id` and `custom-tab/no-hardcoded-url`.
 
 **Example:**
 
@@ -320,7 +383,7 @@ At most one value with `default` true per value set. It is a classic agent mista
 
 ## `custom-field/no-inactive-picklist-value`
 
-Reports a value with `isActive` false, via `no-inactive-component`.
+Reports a picklist value with `isActive` false.
 
 **Properties:**
 

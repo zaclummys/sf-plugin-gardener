@@ -24,13 +24,13 @@ An exposed LWC component must declare at least one target.
 
 ## `lwc/description-required`
 
-Applies `description-required` to exposed components, and also to legacy Aura bundles and Visualforce pages kept in the project.
+Every exposed component needs a description. The same holds for legacy Aura bundles and Visualforce pages kept in the project.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
 
-The configuration of `description-required` still applies.
+It takes the same properties as `custom-object/description-required`.
 
 **Example:**
 

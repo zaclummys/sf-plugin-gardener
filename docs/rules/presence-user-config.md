@@ -2,7 +2,29 @@
 
 [Back to catalog](README.md)
 
-Applies `no-specific-user-reference` to overflow and individual assignments.
+## `presence-user-config/no-specific-user-reference`
+
+Same as `approval-process/no-specific-user-reference`. Applies to overflow and individual assignments.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt usernames
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "presence-user-config/no-specific-user-reference": {
+      "severity": "warn",
+      "allowlist": [
+        "integration@example.com"
+      ]
+    }
+  }
+}
+```
 
 ## `presence-user-config/assign-by-profile`
 

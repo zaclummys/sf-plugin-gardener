@@ -2,7 +2,29 @@
 
 [Back to catalog](README.md)
 
-Applies `no-specific-user-reference` to individual members.
+## `queue/no-specific-user-reference`
+
+Same as `approval-process/no-specific-user-reference`. Applies to individual members.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt usernames
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "queue/no-specific-user-reference": {
+      "severity": "warn",
+      "allowlist": [
+        "integration@example.com"
+      ]
+    }
+  }
+}
+```
 
 ## `queue/has-sobject`
 

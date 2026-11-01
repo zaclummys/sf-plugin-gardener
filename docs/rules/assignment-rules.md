@@ -2,9 +2,101 @@
 
 [Back to catalog](README.md)
 
-These types have no description element in the XML, so `description-required` does not apply here.
+These types have no description element in the XML.
 
-Applies `no-specific-user-reference`, `no-inactive-component`, `boolean-filter-valid` and `no-hardcoded-email-address`.
+## `assignment-rules/no-inactive-component`
+
+Same as `flow/no-inactive-component`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "assignment-rules/no-inactive-component": {
+      "severity": "warn",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
+
+## `assignment-rules/no-specific-user-reference`
+
+Same as `approval-process/no-specific-user-reference`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt usernames
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "assignment-rules/no-specific-user-reference": {
+      "severity": "warn",
+      "allowlist": [
+        "integration@example.com"
+      ]
+    }
+  }
+}
+```
+
+## `assignment-rules/no-hardcoded-email-address`
+
+Same as `workflow/no-hardcoded-email-address`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt addresses
+- `allowedDomains`: addresses in these domains are not reported
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "assignment-rules/no-hardcoded-email-address": {
+      "severity": "warn",
+      "allowlist": [
+        "ops@example.com"
+      ],
+      "allowedDomains": [
+        "example.com"
+      ]
+    }
+  }
+}
+```
+
+## `assignment-rules/boolean-filter-valid`
+
+Same as `list-view/boolean-filter-valid`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "assignment-rules/boolean-filter-valid": "error"
+  }
+}
+```
 
 ## `assignment-rules/one-active-rule-per-object`
 

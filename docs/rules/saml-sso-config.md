@@ -2,7 +2,29 @@
 
 [Back to catalog](README.md)
 
-Applies `https-required` to `loginUrl` and `logoutUrl`.
+## `saml-sso-config/https-required`
+
+Same as `custom-tab/https-required`. Applies to `loginUrl` and `logoutUrl`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt URLs or hosts, such as `localhost`
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "saml-sso-config/https-required": {
+      "severity": "error",
+      "allowlist": [
+        "http://localhost:3000"
+      ]
+    }
+  }
+}
+```
 
 ## `saml-sso-config/validation-cert-not-expired`
 

@@ -100,7 +100,7 @@ Reports `keySize` below the configured minimum.
 
 ## `certificate/no-private-key-material`
 
-Reports a PEM private key block in a certificate file or in a markup file, such as XML, JSON or YAML, extending `no-secret-in-metadata` beyond XML. Source code files are not scanned.
+Reports a PEM private key block in a certificate file or in a markup file, such as XML, JSON or YAML, extending the secret rules beyond XML. Source code files are not scanned.
 
 **Properties:**
 

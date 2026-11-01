@@ -54,7 +54,7 @@ Add a `rules` entry to the configuration. A severity alone is enough for most ru
 {
   "extends": ["recommended"],
   "rules": {
-    "description-required": "warn"
+    "custom-object/description-required": "warn"
   }
 }
 ```

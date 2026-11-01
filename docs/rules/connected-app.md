@@ -2,29 +2,37 @@
 
 [Back to catalog](README.md)
 
-## `connected-app/secrets`
+## `connected-app/no-secret-in-metadata`
 
-Applies `no-secret-in-metadata` with special attention to connected apps.
+Forbids a password, token, API key or client secret in any versioned XML.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-
-The configuration of `no-secret-in-metadata` still applies.
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `extraPatterns`: regular expressions added to the built-in detection ones
 
 **Example:**
 
 ```json
 {
   "rules": {
-    "connected-app/secrets": "error"
+    "connected-app/no-secret-in-metadata": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "extraPatterns": [
+        "acme_key_[A-Za-z0-9]{32}"
+      ]
+    }
   }
 }
 ```
 
 ## `connected-app/callback-https-required`
 
-Applies `https-required` to the connected app callback URL.
+Same as `custom-tab/https-required`. Applies to the callback URL.
 
 **Properties:**
 

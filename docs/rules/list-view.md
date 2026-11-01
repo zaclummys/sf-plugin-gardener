@@ -2,7 +2,80 @@
 
 [Back to catalog](README.md)
 
-Applies `no-hardcoded-id` to filter values. Applies `boolean-filter-valid` to the `booleanFilter` and `filters` pair.
+## `list-view/no-hardcoded-id`
+
+Same as `flow/no-hardcoded-id`. Applies to filter values.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `exemptElements`: names of XML elements added to the built-in list of exemptions
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "list-view/no-hardcoded-id": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "exemptElements": [
+        "requestSigningCertId"
+      ]
+    }
+  }
+}
+```
+
+## `list-view/boolean-filter-valid`
+
+The `booleanFilter` must reference all the declared `criteriaItems` indexes and only them. It is a typical agent mistake when adding or removing a criterion.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+
+**Example:**
+
+The filter below declares three criteria and the `booleanFilter` references only two.
+
+```xml
+<filters>
+  <field>Status</field>
+  <operation>equals</operation>
+  <value>Open</value>
+</filters>
+<filters>
+  <field>Priority</field>
+  <operation>equals</operation>
+  <value>High</value>
+</filters>
+<filters>
+  <field>Type</field>
+  <operation>equals</operation>
+  <value>Bug</value>
+</filters>
+<booleanFilter>1 AND 2</booleanFilter>
+```
+
+The fix is to reference index 3.
+
+```xml
+<booleanFilter>1 AND 2 AND 3</booleanFilter>
+```
+
+Configuration:
+
+```json
+{
+  "rules": {
+    "list-view/boolean-filter-valid": "error"
+  }
+}
+```
 
 ## `list-view/no-everything-visible-listview`
 

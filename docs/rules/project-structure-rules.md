@@ -98,13 +98,13 @@ Types that support decomposition, such as objects and permission sets in recent 
 
 ## `project/no-org-specific-login-url`
 
-Applies `no-hardcoded-url` to the `sfdcLoginUrl` of `sfdx-project.json`.
+Forbids an org URL in the `sfdcLoginUrl` of `sfdx-project.json`.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
 
-The configuration of `no-hardcoded-url` still applies.
+It takes the same properties as `custom-tab/no-hardcoded-url`.
 
 **Example:**
 
@@ -225,6 +225,165 @@ A deploy whose zip exceeds N megabytes. The linter estimates the compressed size
     "project/max-size": {
       "severity": "error",
       "max": 39
+    }
+  }
+}
+```
+
+## `project/api-version-consistency`
+
+All `*-meta.xml` files must declare the same apiVersion, aligned with the `sourceApiVersion` of `sfdx-project.json`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `expectedVersion`: required version, with `sourceApiVersion` as the default value
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "project/api-version-consistency": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "expectedVersion": "60.0"
+    }
+  }
+}
+```
+
+## `project/min-api-version`
+
+Reports apiVersion below the configured minimum.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `minVersion`: minimum accepted version
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "project/min-api-version": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "minVersion": "60.0"
+    }
+  }
+}
+```
+
+## `project/max-api-version`
+
+An apiVersion above the configured maximum fails at deploy, because the file version cannot be higher than that of the target org. Agents copy versions from newer projects. Complements `project/min-api-version`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `maxVersion`: maximum accepted version, required because the linter does not query the org
+
+**Reference:** [Salesforce documentation](https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_intro.htm)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "project/max-api-version": {
+      "severity": "error",
+      "maxVersion": "62.0"
+    }
+  }
+}
+```
+
+## `project/description-max-length`
+
+Description above the character limit of its type, a limit the platform enforces at deploy. Complements the `description-required` rule of each type, which requires the minimum length.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `limits`: map from metadata type to the maximum number, in number of characters
+
+**Reference:** [Salesforce documentation](https://developer.salesforce.com/docs/platform/salesforce-app-limits-cheatsheet/guide/salesforce-app-limits-platform-metadata.html)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "project/description-max-length": {
+      "severity": "error",
+      "limits": {
+        "CustomObject": 1000,
+        "CustomField": 1000
+      }
+    }
+  }
+}
+```
+
+## `project/max-api-name-length`
+
+API name above the character limit of its type, a limit the platform enforces at deploy.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `limits`: map from metadata type to the maximum number, in number of characters
+
+**Reference:** [Salesforce documentation](https://developer.salesforce.com/docs/platform/salesforce-app-limits-cheatsheet/guide/salesforce-app-limits-platform-metadata.html)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "project/max-api-name-length": {
+      "severity": "error",
+      "limits": {
+        "CustomObject": 40,
+        "CustomField": 40
+      }
+    }
+  }
+}
+```
+
+## `project/max-file-lines`
+
+Metadata file above the line limit of its type. A small file fits in the AI context window and reduces merge conflicts between concurrent sessions. A profile with thousands of lines indicates a full retrieve, and the giant diff hides real changes.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `limits`: map from metadata type to the maximum number, in number of lines
+- `allowlist`: exempt files, such as a legacy profile not yet split
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "project/max-file-lines": {
+      "severity": "warn",
+      "limits": {
+        "Profile": 5000,
+        "Flow": 1500
+      },
+      "allowlist": [
+        "force-app/main/default/profiles/Admin.profile-meta.xml"
+      ]
     }
   }
 }
