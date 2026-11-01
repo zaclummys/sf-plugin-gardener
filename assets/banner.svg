@@ -71,8 +71,6 @@
     <circle cx="486" cy="78" r="1.1" opacity="0.45"/>
     <circle cx="612" cy="104" r="1.3" opacity="0.5"/>
   </g>
-  <path d="M470 50 L560 22" stroke="#fef3c7" stroke-width="1.6" stroke-linecap="round" opacity="0.5"/>
-  <path d="M520 36 L560 22" stroke="#fef3c7" stroke-width="2.4" stroke-linecap="round" opacity="0.9"/>
 
   <circle cx="1180" cy="68" r="90" fill="url(#moonGlow)"/>
   <circle cx="1180" cy="68" r="34" fill="#fef3c7" mask="url(#crescent)"/>
@@ -94,22 +92,6 @@
     <use href="#bloom" x="832" y="338" color="#6ee7b7" transform="translate(832 338) scale(1.1) translate(-832 -338)"/>
     <use href="#sprout" x="1064" y="338" color="#34d399" transform="translate(1064 338) scale(1.35) translate(-1064 -338)"/>
     <use href="#sprout" x="1180" y="338" color="#86efac" transform="translate(1180 338) scale(0.85) translate(-1180 -338)"/>
-  </g>
-
-  <g transform="translate(948 338)">
-    <path d="M0 0 L-24 -58 L-8 -26 L-14 -78 L4 -32 L14 -70 L12 -26 L34 -58 L16 0 Z" fill="#fb7185" stroke="#be123c" stroke-width="2" stroke-linejoin="round"/>
-    <path d="M-34 -2 L-34 -46" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
-    <circle cx="-34" cy="-56" r="11" fill="#be123c" stroke="#fff1f2" stroke-width="2"/>
-    <text x="-34" y="-51" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="800" fill="#fff1f2">!</text>
-    <g>
-      <circle cx="-2" cy="-24" r="6" fill="#fff1f2"/>
-      <circle cx="14" cy="-24" r="6" fill="#fff1f2"/>
-      <circle cx="-3" cy="-23" r="2.6" fill="#4c0519"/>
-      <circle cx="13" cy="-23" r="2.6" fill="#4c0519"/>
-      <path d="M-6 -10 C0 -15 10 -15 16 -10" fill="none" stroke="#4c0519" stroke-width="2.4" stroke-linecap="round"/>
-      <path d="M-9 -29 L0 -34 M19 -29 L10 -34" stroke="#4c0519" stroke-width="2.2" stroke-linecap="round"/>
-      <path d="M30 -44 C34 -38 36 -34 33 -31 C30 -28 25 -31 27 -36 Z" fill="#7dd3fc" transform="translate(4 -6)"/>
-    </g>
   </g>
 
   <g transform="translate(950 186) rotate(4)">
@@ -167,11 +149,9 @@
   </g>
 
   <g font-family="'Avenir Next Rounded', 'Arial Rounded MT Bold', Nunito, Quicksand, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
-    <text x="64" y="150" font-size="108" font-weight="800" fill="#f0fdf4" letter-spacing="-2">Gardener</text>
-    <text x="68" y="204" font-size="29" font-weight="600" fill="#6ee7b7">Prune the weeds out of</text>
-    <text x="68" y="240" font-size="29" font-weight="600" fill="#6ee7b7">your Salesforce metadata.</text>
+    <text x="64" y="168" font-size="108" font-weight="800" fill="#f0fdf4" letter-spacing="-2">Gardener</text>
+    <text x="68" y="222" font-size="29" font-weight="600" fill="#6ee7b7">Prune the weeds out of</text>
+    <text x="68" y="258" font-size="29" font-weight="600" fill="#6ee7b7">your Salesforce metadata.</text>
   </g>
-  <rect x="68" y="264" width="296" height="44" rx="22" fill="#34d399" fill-opacity="0.14" stroke="#34d399" stroke-opacity="0.7" stroke-width="1.5"/>
-  <text x="216" y="292.5" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="19" fill="#a7f3d0">✓ 0 errors, 0 warnings</text>
-  <text x="68" y="344" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" fill="#fbbf24">sf-plugin-gardener</text>
+  <text x="68" y="306" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" fill="#fbbf24">sf-plugin-gardener</text>
 </svg>
