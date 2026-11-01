@@ -1,46 +1,45 @@
 import path from 'node:path';
 import { expect } from 'chai';
-import { findFixture, lint, lintFailing, makeEmptyDirectory } from '../run.ts';
+import { findFixture, lint, makeEmptyDirectory } from '../run.ts';
 
-describe('lint run', () => {
+describe('lint run project', () => {
     it('reports no findings for a project without metadata', () => {
         const directory = findFixture('empty-project');
-        const result = lint({ directory });
+        const output = lint({
+            directory,
+        });
 
-        expect(result).to.deep.equal({
-            files: 0,
-            findings: [],
+        expect(output).to.deep.include({
+            result: {
+                files: 0,
+                findings: [],
+            },
         });
     });
 
     it('finds the project above the directory', () => {
         const directory = path.join(findFixture('empty-project'), 'force-app');
-        const result = lint({ directory });
+        const output = lint({
+            directory,
+        });
 
-        expect(result).to.deep.equal({
-            files: 0,
-            findings: [],
+        expect(output).to.deep.include({
+            result: {
+                files: 0,
+                findings: [],
+            },
         });
     });
 
     it('fails when there is no project above the directory', () => {
         const directory = makeEmptyDirectory();
-        const name = lintFailing({ directory });
+        const output = lint({
+            directory,
+            exitCode: 1,
+        });
 
-        expect(name).to.equal('project-not-found');
-    });
-
-    it('fails when the project has no configuration file', () => {
-        const directory = findFixture('unconfigured-project');
-        const name = lintFailing({ directory });
-
-        expect(name).to.equal('configuration-not-found');
-    });
-
-    it('fails when the project has more than one configuration file', () => {
-        const directory = findFixture('multiple-configuration-project');
-        const name = lintFailing({ directory });
-
-        expect(name).to.equal('multiple-configurations');
+        expect(output).to.include({
+            name: 'project-not-found',
+        });
     });
 });

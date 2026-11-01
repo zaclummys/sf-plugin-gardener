@@ -27,37 +27,13 @@ type LintOptions = {
 };
 
 /**
- * Runs `sf lint run` and returns the result of its JSON output.
+ * Runs `sf lint run` and returns its JSON output.
  *
  * @param directory The directory to lint.
  * @param strict Treats warnings as errors.
  * @param exitCode The exit code the command must end with. Defaults to 0.
  */
 export function lint(options: LintOptions) {
-    const output = execLint(options);
-    const json = output.jsonOutput;
-
-    return json?.result;
-}
-
-/**
- * Runs `sf lint run`, expects it to fail and returns the name of the error.
- *
- * @param directory The directory to lint.
- * @param strict Treats warnings as errors.
- * @param exitCode The exit code the command must end with. Defaults to 1.
- */
-export function lintFailing(options: LintOptions) {
-    const output = execLint({
-        exitCode: 1,
-        ...options,
-    });
-    const json = output.jsonOutput;
-
-    return json?.name;
-}
-
-function execLint(options: LintOptions) {
     const args = [
         'lint',
         'run',
@@ -70,10 +46,18 @@ function execLint(options: LintOptions) {
         args.push('--strict');
     }
 
-    return execCmd<LintRunResult>(args.join(' '), {
+    const output = execCmd<LintRunResult>(args.join(' '), {
         ensureExitCode: options.exitCode ?? 0,
         cwd: tmpdir(),
     });
+
+    const json = output.jsonOutput;
+
+    if (!json) {
+        throw new Error('The command did not print a JSON output.');
+    }
+
+    return json;
 }
 
 /** Creates an empty temporary directory, with no project in it or above it. */
