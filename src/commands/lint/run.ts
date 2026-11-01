@@ -1,4 +1,4 @@
-import { Messages } from '@salesforce/core';
+import { Messages, SfError, SfProject } from '@salesforce/core';
 import { Flags, SfCommand } from '@salesforce/sf-plugins-core';
 
 
@@ -6,7 +6,6 @@ Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-plugin-gardener', 'lint.run');
 
 export type LintRunResult = {
-    projects: number;
     files: number;
     findings: unknown[];
 };
@@ -27,8 +26,17 @@ export default class Run extends SfCommand<LintRunResult> {
     };
 
     public async run(): Promise<LintRunResult> {
-        await this.parse(Run);
+        const { flags } = await this.parse(Run);
 
-        throw new Error('Not implemented.');
+        try {
+            await SfProject.resolveProjectPath(flags.directory);
+        } catch {
+            throw new SfError(messages.getMessage('error.projectNotFound', [flags.directory]), 'ProjectNotFoundError');
+        }
+
+        return {
+            files: 0,
+            findings: [],
+        };
     }
 }

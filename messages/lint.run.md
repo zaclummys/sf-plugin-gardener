@@ -4,11 +4,11 @@ Lint the metadata of a Salesforce DX project.
 
 # description
 
-Reads the configuration of each project under the directory and runs its rules on the metadata files. Works offline and never connects to an org.
+Reads the configuration of the project in the directory and runs its rules on the metadata files. Works offline and never connects to an org.
 
 # flags.directory.summary
 
-Directory to lint. Every project under it is linted.
+Directory of the project to lint.
 
 # flags.strict.summary
 
@@ -17,6 +17,10 @@ Treat warnings as errors.
 # summary.counts
 
 %s errors, %s warnings.
+
+# error.projectNotFound
+
+No Salesforce DX project found in %s or in any directory above it.
 
 # error.failed
 
