@@ -1,20 +1,35 @@
 import { readFileSync } from "node:fs"
+import { EleventyHtmlBasePlugin } from "@11ty/eleventy"
 import markdownItAnchor from "markdown-it-anchor"
 
-export default function (eleventyConfig) {
-    eleventyConfig.addTransform("markdownLinks", function (content) {
-        if (!this.page.outputPath?.endsWith(".html")) {
-            return content
+const markdownLink = /^([^":#/]+)\.md(#.*)?$/
+
+/** Point a link to another rule page at its URL. The base plugin then adds the path prefix. */
+function rewriteMarkdownLinks(state) {
+    for (const token of state.tokens) {
+        for (const child of token.children ?? []) {
+            const match = child.type === "link_open" ? markdownLink.exec(child.attrGet("href")) : null
+
+            if (match != null) {
+                const [
+                    , name,
+                    anchor = "",
+                ] = match
+                const path = name === "README" ? "/rules/" : `/rules/${name}/`
+
+                child.attrSet("href", path + anchor)
+            }
         }
+    }
+}
 
-        return content.replace(
-            /href="([^":#/]+)\.md(#[^"]*)?"/g,
-            (_match, name, anchor = "") => `href="${name === "README" ? "/rules/" : `/rules/${name}/`}${anchor}"`,
-        )
-    })
+export default function (eleventyConfig) {
+    eleventyConfig.addPlugin(EleventyHtmlBasePlugin)
 
-    eleventyConfig.amendLibrary("md", (md) =>
-        md.use(markdownItAnchor, {
+    eleventyConfig.amendLibrary("md", (md) => {
+        md.core.ruler.push("markdownLinks", rewriteMarkdownLinks)
+
+        return md.use(markdownItAnchor, {
             slugify: (title) =>
                 title
                     .trim()
@@ -22,8 +37,8 @@ export default function (eleventyConfig) {
                     .replace(/\//g, "-")
                     .replace(/[^\p{L}\p{N}\s_-]/gu, "")
                     .replace(/\s/g, "-"),
-        }),
-    )
+        })
+    })
 
     eleventyConfig.addCollection("catalog", (collection) => {
         const summary = readFileSync("docs/rules/README.md", "utf8")
@@ -37,6 +52,7 @@ export default function (eleventyConfig) {
     })
 
     return {
+        pathPrefix: process.env.PATH_PREFIX ?? "/",
         dir: {
             input: "docs",
             includes: "layouts",
