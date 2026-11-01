@@ -29,4 +29,18 @@ describe('lint run', () => {
 
         expect(name).to.equal('ProjectNotFoundError');
     });
+
+    it('fails when the project has no configuration file', () => {
+        const directory = findFixture('unconfigured-project');
+        const name = lintFailing({ directory });
+
+        expect(name).to.equal('ConfigurationNotFoundError');
+    });
+
+    it('fails when the project has more than one configuration file', () => {
+        const directory = findFixture('multiple-configuration-project');
+        const name = lintFailing({ directory });
+
+        expect(name).to.equal('MultipleConfigurationsError');
+    });
 });
