@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">Gardener</title>
+  <defs>
+    <filter id="glow" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="256" height="256" rx="56" fill="#0c2a33"/>
+  <g transform="translate(128 126.9) scale(1.15) translate(-11 69)">
+    <g filter="url(#glow)">
+      <path d="M0 0 C-2 -32 0 -62 3 -92" fill="none" stroke="#6ee7b7" stroke-width="8" stroke-linecap="round"/>
+      <path d="M1 -58 C-30 -60 -52 -82 -54 -112 C-20 -110 -2 -90 1 -58 Z" fill="#34d399"/>
+      <path d="M3 -86 C12 -120 42 -138 76 -136 C74 -102 44 -84 3 -86 Z" fill="#6ee7b7"/>
+    </g>
+    <path d="M-4.2 -63.2 Q-24.7 -84.4 -46.3 -105 M10.6 -90.9 Q41.9 -109.9 67.8 -129.2" fill="none" stroke="#0c2a33" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  </g>
+</svg>

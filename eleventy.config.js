@@ -25,6 +25,7 @@ function rewriteMarkdownLinks(state) {
 
 export default function (eleventyConfig) {
     eleventyConfig.addPlugin(EleventyHtmlBasePlugin)
+    eleventyConfig.addPassthroughCopy({ "assets/logo.svg": "logo.svg" })
 
     eleventyConfig.amendLibrary("md", (md) => {
         md.core.ruler.push("markdownLinks", rewriteMarkdownLinks)
