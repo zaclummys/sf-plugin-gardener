@@ -69,7 +69,7 @@ The API name must follow the pattern configured for the type. Suffixes such as `
 
 ## `custom-object/sharing-model-explicit`
 
-The object must declare `sharingModel` explicitly in the XML.
+The object must declare `sharingModel` explicitly in the XML. The same holds for `externalSharingModel`, which controls external user access.
 
 **Properties:**
 
@@ -109,24 +109,6 @@ A permissive value such as `ReadWrite` in `sharingModel` or `externalSharingMode
         "ReadWrite"
       ]
     }
-  }
-}
-```
-
-## `custom-object/external-sharing-model-explicit`
-
-Same requirement as `custom-object/sharing-model-explicit` for `externalSharingModel`, which controls external user access.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "custom-object/external-sharing-model-explicit": "error"
   }
 }
 ```

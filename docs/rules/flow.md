@@ -2,6 +2,30 @@
 
 [Back to catalog](README.md)
 
+## `flow/no-workflow-rule`
+
+Same as `workflow/no-workflow-rule`. Applies to a flow with `processType` equal to `Workflow` or `CustomEvent`, which is Process Builder.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "flow/no-workflow-rule": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
+
 ## `flow/description-required`
 
 Same as `custom-object/description-required`.
@@ -623,30 +647,6 @@ A chain of flows that call subflows beyond depth N hides the real behavior of th
     "flow/max-subflow-depth": {
       "severity": "warn",
       "max": 3
-    }
-  }
-}
-```
-
-## `flow/no-process-builder`
-
-Forbids Process Builder processes for the same reason as `workflow/no-workflow-rule`. The detection looks at Flow files with `processType` equal to `Workflow` or `CustomEvent`, because Process Builder lives in the Flow type.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "flow/no-process-builder": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
     }
   }
 }

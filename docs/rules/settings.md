@@ -4,6 +4,30 @@
 
 `*.settings-meta.xml` files have whole-org scope, so deploying them overwrites global configuration.
 
+## `settings/no-specific-user-reference`
+
+Same as `approval-process/no-specific-user-reference`. Applies to the default owner of a case.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt usernames
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "settings/no-specific-user-reference": {
+      "severity": "warn",
+      "allowlist": [
+        "integration@example.com"
+      ]
+    }
+  }
+}
+```
+
 ## `settings/type-allowlist`
 
 Only the settings types listed in the configuration may be in the repository. An agent that does a broad retrieve and commits `Security.settings` by accident is an incident waiting for a deploy.
@@ -100,30 +124,6 @@ Reports email-to-case addresses outside the configured domain, because an enviro
       "severity": "warn",
       "allowedDomains": [
         "example.com"
-      ]
-    }
-  }
-}
-```
-
-## `settings/case-default-owner-queue`
-
-Reports a case default owner of type user, because the assignment fallback then points to a specific person.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "settings/case-default-owner-queue": {
-      "severity": "warn",
-      "allowlist": [
-        "Case"
       ]
     }
   }

@@ -2,9 +2,33 @@
 
 [Back to catalog](README.md)
 
+## `approval-process/entry-criteria-required`
+
+Same as `flow/entry-criteria-required`. A process without `entryCriteria` accepts any record of the object.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "approval-process/entry-criteria-required": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
+
 ## `approval-process/description-required`
 
-Same as `custom-object/description-required`.
+Same as `custom-object/description-required`. Applies to the process and to each step, which is where the logic the reviewer needs to understand lives.
 
 **Properties:**
 
@@ -90,50 +114,6 @@ Same as `list-view/boolean-filter-valid`.
 {
   "rules": {
     "approval-process/boolean-filter-valid": "error"
-  }
-}
-```
-
-## `approval-process/entry-criteria-required`
-
-A process without `entryCriteria` accepts any record of the object, for the same reason as `flow/entry-criteria-required`.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "approval-process/entry-criteria-required": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
-    }
-  }
-}
-```
-
-## `approval-process/step-description-required`
-
-Each step must have a description, because the step is where the logic the reviewer needs to understand lives.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-
-It takes the same properties as `approval-process/description-required`.
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "approval-process/step-description-required": "error"
   }
 }
 ```

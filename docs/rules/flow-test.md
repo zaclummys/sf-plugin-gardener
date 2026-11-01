@@ -2,6 +2,37 @@
 
 [Back to catalog](README.md)
 
+## `flow-test/error-message-quality`
+
+Same as `validation-rule/error-message-quality`. Applies to the `errorMessage` of an assertion.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `minLength`: minimum message length in characters
+- `genericMessages`: forbidden generic texts
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "flow-test/error-message-quality": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "minLength": 30,
+      "genericMessages": [
+        "Invalid value",
+        "Error"
+      ]
+    }
+  }
+}
+```
+
 ## `flow-test/description-required`
 
 Same as `custom-object/description-required`.
@@ -42,26 +73,6 @@ Reports a test with no assertion, because it always passes and gives the agent f
 {
   "rules": {
     "flow-test/assertion-required": "error"
-  }
-}
-```
-
-## `flow-test/assertion-message`
-
-Reports an assertion without `errorMessage`, via `validation-rule/error-message-quality`.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-
-The configuration of `validation-rule/error-message-quality` still applies.
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "flow-test/assertion-message": "warn"
   }
 }
 ```

@@ -2,6 +2,117 @@
 
 [Back to catalog](README.md)
 
+## `custom-field/no-hardcoded-id`
+
+Same as `flow/no-hardcoded-id`. Applies to the formula text and to the `defaultValue`, which is also a formula.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `exemptElements`: names of XML elements added to the built-in list of exemptions
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "custom-field/no-hardcoded-id": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "exemptElements": [
+        "requestSigningCertId"
+      ]
+    }
+  }
+}
+```
+
+## `custom-field/no-hardcoded-url`
+
+Same as `custom-tab/no-hardcoded-url`. Applies to the formula text and to the `defaultValue`, which is also a formula.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `forbiddenHostPatterns`: forbidden host patterns, with `*.my.salesforce.com` included by default
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "custom-field/no-hardcoded-url": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "forbiddenHostPatterns": [
+        "*.my.salesforce.com"
+      ]
+    }
+  }
+}
+```
+
+## `custom-field/error-message-quality`
+
+Same as `validation-rule/error-message-quality`. Applies to the `errorMessage` of an active lookup filter.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `minLength`: minimum message length in characters
+- `genericMessages`: forbidden generic texts
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "custom-field/error-message-quality": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "minLength": 30,
+      "genericMessages": [
+        "Invalid value",
+        "Error"
+      ]
+    }
+  }
+}
+```
+
+## `custom-field/no-inactive-component`
+
+Same as `flow/no-inactive-component`. Applies to picklist values, through `isActive`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "custom-field/no-inactive-component": {
+      "severity": "warn",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
+
 ## `custom-field/description-required`
 
 Same as `custom-object/description-required`.
@@ -158,26 +269,6 @@ A formula that crosses more than N distinct relationships couples the field to s
   }
 }
 ```
-## `custom-field/formula-clean`
-
-Forbids record IDs and org URLs inside the formula text and the `defaultValue`, which is also a formula.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-
-It takes the properties of `flow/no-hardcoded-id` and `custom-tab/no-hardcoded-url`.
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "custom-field/formula-clean": "error"
-  }
-}
-```
-
 ## `custom-field/picklist-restricted`
 
 A picklist must restrict values to the defined list.
@@ -381,30 +472,6 @@ At most one value with `default` true per value set. It is a classic agent mista
 }
 ```
 
-## `custom-field/no-inactive-picklist-value`
-
-Reports a picklist value with `isActive` false.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "custom-field/no-inactive-picklist-value": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
-    }
-  }
-}
-```
-
 ## `custom-field/restrict-delete-explicit`
 
 Reports a lookup without a declared `deleteConstraint`, because the silent `SetNull` default erases the reference when the parent is deleted.
@@ -419,26 +486,6 @@ Reports a lookup without a declared `deleteConstraint`, because the silent `SetN
 {
   "rules": {
     "custom-field/restrict-delete-explicit": "warn"
-  }
-}
-```
-
-## `custom-field/lookup-filter-error-message-quality`
-
-Applies `validation-rule/error-message-quality` to the `errorMessage` of an active lookup filter.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-
-The configuration of `validation-rule/error-message-quality` still applies.
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "custom-field/lookup-filter-error-message-quality": "error"
   }
 }
 ```

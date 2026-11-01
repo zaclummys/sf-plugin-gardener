@@ -2,6 +2,30 @@
 
 [Back to catalog](README.md)
 
+## `email-template/no-inactive-component`
+
+Same as `flow/no-inactive-component`. Applies to the `available` element.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "email-template/no-inactive-component": {
+      "severity": "warn",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
+
 ## `email-template/description-required`
 
 Same as `custom-object/description-required`.
@@ -23,30 +47,6 @@ Same as `custom-object/description-required`.
         "Example_Component"
       ],
       "minLength": 20
-    }
-  }
-}
-```
-
-## `email-template/no-unavailable-template`
-
-Reports a versioned template with `available` false.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "email-template/no-unavailable-template": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
     }
   }
 }

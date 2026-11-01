@@ -2,6 +2,30 @@
 
 [Back to catalog](README.md)
 
+## `auth-provider/https-required`
+
+Same as `custom-tab/https-required`. Applies to the OAuth endpoints.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt URLs or hosts, such as `localhost`
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "auth-provider/https-required": {
+      "severity": "error",
+      "allowlist": [
+        "http://localhost:3000"
+      ]
+    }
+  }
+}
+```
+
 ## `auth-provider/no-specific-user-reference`
 
 Same as `approval-process/no-specific-user-reference`. Applies to `executionUser`.
@@ -48,30 +72,6 @@ Same as `connected-app/no-secret-in-metadata`. Applies to `consumerSecret`.
       ],
       "extraPatterns": [
         "acme_key_[A-Za-z0-9]{32}"
-      ]
-    }
-  }
-}
-```
-
-## `auth-provider/endpoints-https`
-
-Same as `custom-tab/https-required`. Applies to the OAuth endpoints.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "auth-provider/endpoints-https": {
-      "severity": "error",
-      "allowlist": [
-        "http://localhost:3000"
       ]
     }
   }

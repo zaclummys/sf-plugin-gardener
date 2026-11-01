@@ -2,6 +2,30 @@
 
 [Back to catalog](README.md)
 
+## `saml-sso-config/not-expired`
+
+Same as `certificate/not-expired`. Applies to the X.509 inside `validationCert`, decoded offline.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "saml-sso-config/not-expired": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
+
 ## `saml-sso-config/https-required`
 
 Same as `custom-tab/https-required`. Applies to `loginUrl` and `logoutUrl`.
@@ -20,30 +44,6 @@ Same as `custom-tab/https-required`. Applies to `loginUrl` and `logoutUrl`.
       "severity": "error",
       "allowlist": [
         "http://localhost:3000"
-      ]
-    }
-  }
-}
-```
-
-## `saml-sso-config/validation-cert-not-expired`
-
-Decodes the X.509 inside `validationCert` and applies the same offline validity check as `certificate/not-expired`.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "saml-sso-config/validation-cert-not-expired": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
       ]
     }
   }

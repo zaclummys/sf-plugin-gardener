@@ -2,7 +2,7 @@
 
 [Back to catalog](README.md)
 
-Applies `custom-field/single-default-picklist-value` and `custom-field/no-inactive-picklist-value` to the values.
+Applies `custom-field/single-default-picklist-value` to the values.
 
 ## `global-value-set/description-required`
 

@@ -2,6 +2,30 @@
 
 [Back to catalog](README.md)
 
+## `external-service-registration/prefer-named-credential`
+
+Same as `remote-site-setting/prefer-named-credential`. Reports a registration without a named credential.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "external-service-registration/prefer-named-credential": {
+      "severity": "warn",
+      "allowlist": [
+        "Example_Component"
+      ]
+    }
+  }
+}
+```
+
 ## `external-service-registration/description-required`
 
 Same as `custom-object/description-required`.
@@ -50,30 +74,6 @@ Same as `connected-app/no-secret-in-metadata`. Pays attention to the `securitySc
       ],
       "extraPatterns": [
         "acme_key_[A-Za-z0-9]{32}"
-      ]
-    }
-  }
-}
-```
-
-## `external-service-registration/named-credential-required`
-
-Reports a registration without a named credential, extending `remote-site-setting/prefer-named-credential`.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "external-service-registration/named-credential-required": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
       ]
     }
   }

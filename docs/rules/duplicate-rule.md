@@ -2,6 +2,37 @@
 
 [Back to catalog](README.md)
 
+## `duplicate-rule/error-message-quality`
+
+Same as `validation-rule/error-message-quality`. Applies to the alert text of an alert operation.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `minLength`: minimum message length in characters
+- `genericMessages`: forbidden generic texts
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "duplicate-rule/error-message-quality": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "minLength": 30,
+      "genericMessages": [
+        "Invalid value",
+        "Error"
+      ]
+    }
+  }
+}
+```
+
 ## `duplicate-rule/description-required`
 
 Same as `custom-object/description-required`.
@@ -90,26 +121,6 @@ Same as `list-view/boolean-filter-valid`.
         "Example_Component"
       ]
     }
-  }
-}
-```
-
-## `duplicate-rule/alert-text-required`
-
-Reports a rule with an alert operation without `alertText`, via `validation-rule/error-message-quality`.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-
-The configuration of `validation-rule/error-message-quality` still applies.
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "duplicate-rule/alert-text-required": "warn"
   }
 }
 ```

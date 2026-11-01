@@ -4,6 +4,34 @@
 
 These rules look at the project as a whole instead of a specific type.
 
+## `project/no-hardcoded-url`
+
+Same as `custom-tab/no-hardcoded-url`. Applies to the `sfdcLoginUrl` of `sfdx-project.json`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `forbiddenHostPatterns`: forbidden host patterns, with `*.my.salesforce.com` included by default
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "project/no-hardcoded-url": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "forbiddenHostPatterns": [
+        "*.my.salesforce.com"
+      ]
+    }
+  }
+}
+```
+
 ## `project/no-duplicate-metadata`
 
 The same component cannot be defined in two files of the project.
@@ -92,26 +120,6 @@ Types that support decomposition, such as objects and permission sets in recent 
         "PermissionSet"
       ]
     }
-  }
-}
-```
-
-## `project/no-org-specific-login-url`
-
-Forbids an org URL in the `sfdcLoginUrl` of `sfdx-project.json`.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-
-It takes the same properties as `custom-tab/no-hardcoded-url`.
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "project/no-org-specific-login-url": "error"
   }
 }
 ```

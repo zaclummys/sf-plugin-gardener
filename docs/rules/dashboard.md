@@ -2,6 +2,30 @@
 
 [Back to catalog](README.md)
 
+## `dashboard/no-specific-user-reference`
+
+Same as `approval-process/no-specific-user-reference`. Applies to `runningUser`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: exempt usernames
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "dashboard/no-specific-user-reference": {
+      "severity": "warn",
+      "allowlist": [
+        "integration@example.com"
+      ]
+    }
+  }
+}
+```
+
 ## `dashboard/description-required`
 
 Same as `custom-object/description-required`.
@@ -23,30 +47,6 @@ Same as `custom-object/description-required`.
         "Example_Component"
       ],
       "minLength": 20
-    }
-  }
-}
-```
-
-## `dashboard/no-specific-running-user`
-
-Reports a dashboard whose `runningUser` is a specific user.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "dashboard/no-specific-running-user": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
     }
   }
 }

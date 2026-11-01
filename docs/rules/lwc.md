@@ -4,6 +4,32 @@
 
 The scope is the bundle metadata file. See [Scope and offline analysis](/concepts/#scope-and-offline-analysis).
 
+## `lwc/description-required`
+
+Same as `custom-object/description-required`. Applies to exposed components, and also to legacy Aura bundles and Visualforce pages kept in the project.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+- `allowlist`: [exempt components](README.md#common-configuration)
+- `minLength`: minimum description length in characters
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "lwc/description-required": {
+      "severity": "error",
+      "allowlist": [
+        "Example_Component"
+      ],
+      "minLength": 20
+    }
+  }
+}
+```
+
 ## `lwc/targets-required`
 
 An exposed LWC component must declare at least one target.
@@ -18,26 +44,6 @@ An exposed LWC component must declare at least one target.
 {
   "rules": {
     "lwc/targets-required": "error"
-  }
-}
-```
-
-## `lwc/description-required`
-
-Every exposed component needs a description. The same holds for legacy Aura bundles and Visualforce pages kept in the project.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-
-It takes the same properties as `custom-object/description-required`.
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "lwc/description-required": "error"
   }
 }
 ```

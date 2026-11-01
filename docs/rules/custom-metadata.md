@@ -2,6 +2,24 @@
 
 [Back to catalog](README.md)
 
+## `custom-metadata/protected-only-with-namespace`
+
+Same as `custom-label/protected-only-with-namespace`.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "custom-metadata/protected-only-with-namespace": "warn"
+  }
+}
+```
+
 ## `custom-metadata/description-required`
 
 Same as `custom-object/description-required`.
@@ -105,24 +123,6 @@ Every field of the `__mdt` type must appear in the `values` of each record, even
         "Example_Component"
       ]
     }
-  }
-}
-```
-
-## `custom-metadata/protected-only-with-namespace`
-
-Same logic as `custom-label/protected-only-with-namespace`.
-
-**Properties:**
-
-- `severity`: [rule level](README.md#common-configuration)
-
-**Example:**
-
-```json
-{
-  "rules": {
-    "custom-metadata/protected-only-with-namespace": "error"
   }
 }
 ```
