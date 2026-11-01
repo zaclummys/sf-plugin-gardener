@@ -75,11 +75,11 @@
   <circle cx="1180" cy="68" r="90" fill="url(#moonGlow)"/>
   <circle cx="1180" cy="68" r="34" fill="#fef3c7" mask="url(#crescent)"/>
 
-  <path d="M380 400 L380 326 C520 262 700 270 880 302 C1020 326 1160 286 1280 276 L1280 400 Z" fill="#0f3b36"/>
-  <path d="M380 326 C520 262 700 270 880 302 C1020 326 1160 286 1280 276" fill="none" stroke="#5eead4" stroke-opacity="0.22" stroke-width="2"/>
-  <path d="M0 400 L0 352 C220 316 420 346 640 340 C880 334 1080 312 1280 334 L1280 400 Z" fill="#0a2926"/>
-  <path d="M640 340 C880 334 1080 312 1280 334" fill="none" stroke="#5eead4" stroke-opacity="0.25" stroke-width="2"/>
-  <path d="M0 400 L0 372 C260 352 520 376 780 366 C980 358 1140 366 1280 358 L1280 400 Z" fill="#071d1b"/>
+  <path d="M0 400 L0 346 C160 344 300 318 460 300 C600 284 720 276 880 302 C1020 326 1160 286 1280 276 L1280 400 Z" fill="#0f3b36"/>
+  <path d="M0 346 C160 344 300 318 460 300 C600 284 720 276 880 302 C1020 326 1160 286 1280 276" fill="none" stroke="#1f6158" stroke-width="2"/>
+  <path d="M0 400 L0 354 C220 350 440 340 640 330 C800 324 920 334 1060 328 C1160 324 1220 330 1280 332 L1280 400 Z" fill="#0a2926"/>
+  <path d="M0 354 C220 350 440 340 640 330 C800 324 920 334 1060 328 C1160 324 1220 330 1280 332" fill="none" stroke="#17483f" stroke-width="2"/>
+  <path d="M0 400 L0 360 C260 352 520 352 780 349 C980 347 1140 349 1280 347 L1280 400 Z" fill="#071d1b"/>
 
   <g stroke="#0a2926" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9">
     <path d="M690 340 l-6 -14 M698 340 l4 -16 M706 340 l10 -10"/>
@@ -89,25 +89,9 @@
 
   <g filter="url(#glow)">
     <use href="#sprout" x="716" y="338" color="#34d399"/>
-    <use href="#bloom" x="832" y="338" color="#6ee7b7" transform="translate(832 338) scale(1.1) translate(-832 -338)"/>
-    <use href="#sprout" x="1064" y="338" color="#34d399" transform="translate(1064 338) scale(1.35) translate(-1064 -338)"/>
-    <use href="#sprout" x="1180" y="338" color="#86efac" transform="translate(1180 338) scale(0.85) translate(-1180 -338)"/>
-  </g>
-
-  <g transform="translate(950 186) rotate(4)">
-    <path d="M7 -2 L-7 4 L-21 78 L-10 82 Z" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.4" stroke-linejoin="round"/>
-    <path d="M-7 -2 L7 4 L21 78 L10 82 Z" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.4" stroke-linejoin="round"/>
-    <path d="M-3 12 L-14 70 M3 12 L14 70" stroke="#fff" stroke-opacity="0.7" stroke-width="1.6" stroke-linecap="round"/>
-    <path d="M-3 -4 L-17 -30 M3 -4 L17 -30" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
-    <circle cx="-24" cy="-44" r="15" fill="none" stroke="#fbbf24" stroke-width="7"/>
-    <circle cx="24" cy="-44" r="15" fill="none" stroke="#f59e0b" stroke-width="7"/>
-    <circle cx="0" cy="1" r="9" fill="#f59e0b"/>
-    <circle cx="0" cy="1" r="3.2" fill="#7c2d12"/>
-  </g>
-  <g fill="#fde68a" filter="url(#glow)">
-    <path d="M948 254 l3 -9 l3 9 l9 3 l-9 3 l-3 9 l-3 -9 l-9 -3 Z" transform="translate(4 8)"/>
-    <circle cx="922" cy="238" r="2"/>
-    <circle cx="986" cy="244" r="2"/>
+    <use href="#bloom" x="860" y="338" color="#6ee7b7" transform="translate(860 338) scale(1.1) translate(-860 -338)"/>
+    <use href="#sprout" x="1004" y="338" color="#34d399" transform="translate(1004 338) scale(1.35) translate(-1004 -338)"/>
+    <use href="#sprout" x="1148" y="338" color="#86efac" transform="translate(1148 338) scale(0.85) translate(-1148 -338)"/>
   </g>
 
   <g>
@@ -118,7 +102,7 @@
     <circle cx="1240" cy="344" r="2.8" fill="#fef3c7"/>
   </g>
 
-  <g transform="translate(1122 338)">
+  <g transform="translate(1076 338)">
     <path d="M-16 0 C-14 -8 -4 -12 6 -10 L22 -10 C26 -10 26 -4 22 -2 L10 0 Z" fill="#fef3c7"/>
     <path d="M18 -10 L24 -22 M22 -10 L30 -18" stroke="#fef3c7" stroke-width="2" stroke-linecap="round"/>
     <circle cx="0" cy="-12" r="11" fill="#d97706"/>
@@ -127,14 +111,14 @@
   </g>
 
   <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="700" fill="#fffbeb" text-anchor="middle">
-    <use href="#sign" x="716" y="348"/>
-    <text x="716" y="362.5">&lt;Flow&gt;</text>
-    <use href="#sign" x="832" y="348"/>
-    <text x="832" y="362.5">&lt;Layout&gt;</text>
-    <use href="#sign" x="1064" y="348"/>
-    <text x="1064" y="362.5">&lt;Object&gt;</text>
-    <use href="#sign" x="1180" y="348"/>
-    <text x="1180" y="362.5">&lt;Field&gt;</text>
+    <use href="#sign" x="716" y="354"/>
+    <text x="716" y="368.5">&lt;Flow&gt;</text>
+    <use href="#sign" x="860" y="354"/>
+    <text x="860" y="368.5">&lt;Layout&gt;</text>
+    <use href="#sign" x="1004" y="354"/>
+    <text x="1004" y="368.5">&lt;Object&gt;</text>
+    <use href="#sign" x="1148" y="354"/>
+    <text x="1148" y="368.5">&lt;Field&gt;</text>
   </g>
 
   <g filter="url(#glow)" fill="#fbbf24">
