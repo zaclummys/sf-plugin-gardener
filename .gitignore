@@ -1,0 +1,12 @@
+node_modules/
+lib/
+site/
+tmp/
+coverage/
+.unit-coverage/
+.wireit/
+.eslintcache
+*.tsbuildinfo
+.env
+.DS_Store
+example/

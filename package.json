@@ -1,0 +1,139 @@
+{
+    "name": "sf-plugin-gardener",
+    "description": "Gardener lints the metadata of Salesforce DX projects, as a Salesforce CLI plugin.",
+    "version": "0.0.0",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zaclummys/sf-plugin-gardener.git"
+    },
+    "dependencies": {
+        "@oclif/core": "^5",
+        "@salesforce/core": "^9",
+        "@salesforce/sf-plugins-core": "^13",
+        "@salesforce/source-deploy-retrieve": "^13",
+        "@xmldom/xmldom": "^0.9",
+        "minimatch": "^10",
+        "zod": "^4"
+    },
+    "devDependencies": {
+        "@11ty/eleventy": "^3.1.7",
+        "@eslint/js": "^10.0.1",
+        "@oclif/plugin-help": "^7.0.6",
+        "@stylistic/eslint-plugin": "^5.10.0",
+        "@types/chai": "^5",
+        "@types/mocha": "^10",
+        "@types/node": "^22",
+        "c8": "^10",
+        "chai": "^6",
+        "eslint": "^10.14.0",
+        "globals": "^17.14.0",
+        "markdown-it-anchor": "^10.0.0",
+        "mocha": "^11",
+        "ts-node": "^10",
+        "typescript": "^5",
+        "typescript-eslint": "^8",
+        "wireit": "^0"
+    },
+    "engines": {
+        "node": ">=22.13.0"
+    },
+    "files": [
+        "/lib",
+        "/messages"
+    ],
+    "keywords": [
+        "salesforce",
+        "sf-plugin",
+        "sfdx-plugin",
+        "lint",
+        "linter",
+        "gardener",
+        "metadata"
+    ],
+    "license": "BSD-3-Clause",
+    "oclif": {
+        "commands": "./lib/commands",
+        "bin": "sf",
+        "topicSeparator": " ",
+        "devPlugins": [
+            "@oclif/plugin-help"
+        ],
+        "topics": {
+            "lint": {
+                "description": "Lint the metadata of a Salesforce DX project."
+            }
+        },
+        "flexibleTaxonomy": true
+    },
+    "scripts": {
+        "build": "wireit",
+        "clean": "rm -rf lib tmp *.tsbuildinfo .eslintcache .wireit",
+        "compile": "wireit",
+        "docs:build": "eleventy",
+        "docs:dev": "eleventy --serve",
+        "lint": "wireit",
+        "prepack": "npm run compile",
+        "test": "wireit",
+        "test:unit": "wireit"
+    },
+    "wireit": {
+        "build": {
+            "dependencies": [
+                "compile",
+                "lint"
+            ]
+        },
+        "compile": {
+            "command": "tsc -p . --pretty --incremental",
+            "files": [
+                "src/**/*.ts",
+                "**/tsconfig.json",
+                "messages/**"
+            ],
+            "output": [
+                "lib/**",
+                "*.tsbuildinfo"
+            ],
+            "clean": "if-file-deleted"
+        },
+        "lint": {
+            "command": "eslint . --color --cache --cache-location .eslintcache",
+            "files": [
+                "src/**/*.ts",
+                "test/**/*.ts",
+                "bin/**",
+                "messages/**",
+                "eslint.config.js",
+                "eleventy.config.js",
+                "package.json",
+                "**/tsconfig.json"
+            ],
+            "output": []
+        },
+        "test:unit": {
+            "command": "mocha --config .mocharc.unit.json",
+            "dependencies": [
+                "compile"
+            ],
+            "env": {
+                "FORCE_COLOR": "0",
+                "NO_COLOR": "1",
+                "TZ": "UTC"
+            },
+            "files": [
+                "test/unit/**",
+                "test/tsconfig.json",
+                ".mocharc.unit.json"
+            ],
+            "output": []
+        },
+        "test": {
+            "dependencies": [
+                "test:unit"
+            ]
+        }
+    },
+    "exports": "./lib/index.js",
+    "type": "module",
+    "author": "Isaac Ferreira"
+}
