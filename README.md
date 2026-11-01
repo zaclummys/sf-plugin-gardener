@@ -12,7 +12,7 @@ Gardener is under development and is not published yet. The rules catalog and th
 
 ## Documentation
 
-The documentation lives in [docs](docs) and is built with Eleventy. To read it locally:
+The documentation is published at https://zaclummys.github.io/sf-plugin-gardener/. Its source lives in [docs](docs) and is built with Eleventy. To read it locally:
 
 ```sh
 npm install

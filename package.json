@@ -2,6 +2,7 @@
     "name": "sf-plugin-gardener",
     "description": "Gardener lints the metadata of Salesforce DX projects, as a Salesforce CLI plugin.",
     "version": "0.0.0",
+    "homepage": "https://zaclummys.github.io/sf-plugin-gardener/",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/zaclummys/sf-plugin-gardener.git"
