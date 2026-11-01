@@ -32,6 +32,10 @@ Prefira os pacotes oficiais da Salesforce, publicados no npm sob `@salesforce` e
 
 Use a versão mais recente de tudo. Marque apenas o major, como `^5` e não `^5.1.11`. Isso vale para pacotes, actions e runtimes.
 
+## Erros
+
+Nunca lance erro em `src/core/` nem em `src/services/`. Quem lança é o comando.
+
 ## Nome de função
 
 Todo nome de função e de método começa com um verbo.
@@ -42,7 +46,7 @@ Documente com JSDoc e uma descrição bem simples. Quando a função recebe um �
 
 ## TDD
 
-Escreva o teste e pare no vermelho. Só implemente o código depois que eu revisar o teste.
+Escreva o teste e pare no vermelho. Só implemente o código depois que eu revisar o teste. Antes de começar o green, commite o red.
 
 ## Commit
 
