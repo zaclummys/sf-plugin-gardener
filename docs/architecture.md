@@ -15,10 +15,10 @@ The plugin is a Salesforce CLI plugin built on oclif. It is layered so every com
 
 Every run is the same five stages: **discover**, **parse**, **index**, **run rules** and **report**.
 
-1. Discover the projects and load the configuration of each one.
+1. Discover the project and load its configuration.
 2. Parse each file into a plain tree that keeps the line and column of every element.
 3. Index the components of every file.
-4. Run the rules. File rules run once per file. Project rules run once per project and query the index.
+4. Run the rules. File rules run once per file. Project rules run once and query the index.
 5. Report the findings.
 
 Two phases are needed because rules such as `project/no-duplicate-metadata` and `project/max-files` need the whole project, which ESLint does not have to deal with.

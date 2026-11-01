@@ -14,7 +14,7 @@ Gardener is under development and is not published yet. The design and the rules
 
 The documentation is published at https://zaclummys.github.io/sf-plugin-gardener/.
 
-- [Core concepts](https://zaclummys.github.io/sf-plugin-gardener/concepts/): scope, projects and how the analysis works.
+- [Core concepts](https://zaclummys.github.io/sf-plugin-gardener/concepts/): scope, the project and how the analysis works.
 - [Configure](https://zaclummys.github.io/sf-plugin-gardener/configuration/): the configuration file and how rules are enabled.
 - [Presets](https://zaclummys.github.io/sf-plugin-gardener/presets/): the rules enabled by `recommended`.
 - [Rules](https://zaclummys.github.io/sf-plugin-gardener/rules/): every rule, grouped by metadata type.

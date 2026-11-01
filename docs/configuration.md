@@ -1,6 +1,6 @@
 # Configure
 
-Each project has its own configuration, in the project directory next to `sfdx-project.json`. See [Multiple projects per repository](/concepts/#multiple-projects-per-repository) for how projects are found.
+The configuration is in the project directory, next to `sfdx-project.json`. See [One project per run](/concepts/#one-project-per-run) for how the project is found.
 
 The properties every rule accepts are described in [Common configuration](/rules/#common-configuration). The properties of each rule are described on the rule itself.
 

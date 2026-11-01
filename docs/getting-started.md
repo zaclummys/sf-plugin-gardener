@@ -18,7 +18,7 @@ sf lint run --help
 
 ## Configure a project
 
-A project is a [Salesforce DX project](/concepts/#multiple-projects-per-repository), a directory with an `sfdx-project.json`. Create the configuration file in that directory, next to `sfdx-project.json`. The file is named `sf-plugin-gardener.config.json` or `sf-plugin-gardener.config.js`.
+A project is a [Salesforce DX project](/concepts/#one-project-per-run), a directory with an `sfdx-project.json`. Create the configuration file in that directory, next to `sfdx-project.json`. The file is named `sf-plugin-gardener.config.json` or `sf-plugin-gardener.config.js`.
 
 No rule is enabled by default, so the first configuration enables the `recommended` [preset](/presets/):
 
@@ -40,7 +40,7 @@ The command lists each finding with its file, line, severity, message and rule n
 
 These flags change the run:
 
-- `--directory` lints another directory. Every project under it is linted.
+- `--directory` lints the project in another directory.
 - `--strict` treats warnings as errors.
 - `--json` prints the result as JSON, for a script or an AI agent to read.
 
