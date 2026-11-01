@@ -359,6 +359,8 @@ A rule name has the form `type/rule`, where `type` is the kebab-case name of the
 
 Each type is a single metadata type of the Metadata API, and a file never groups several types. When the same rule applies to more than one type, each type gets its own copy of the rule, and the copies after the first say "Same as" and point to the first.
 
+Each rule shows a status. A rule is implemented when its file exists in `src/rules`, and planned otherwise.
+
 Rules that do not belong to a type live in Cross-cutting rules or in Project structure rules. A new rule goes into the file of the type it measures. The file is created only if the type does not exist yet.
 
 ## Common configuration

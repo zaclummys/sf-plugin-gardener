@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs"
+import { existsSync, readFileSync } from "node:fs"
 import { EleventyHtmlBasePlugin } from "@11ty/eleventy"
 import markdownItAnchor from "markdown-it-anchor"
 
@@ -23,6 +23,42 @@ function rewriteMarkdownLinks(state) {
     }
 }
 
+const ruleName = /^([a-z0-9-]+\/)?[a-z0-9-]+$/
+
+/** Where the code of a rule lives. A rule without a prefix is cross-cutting. */
+function ruleFile(name) {
+    const [
+        namespace,
+        rule = null,
+    ] = name.split("/")
+
+    return rule == null ? `src/rules/cross-cutting/${name}.ts` : `src/rules/${namespace}/${rule}.ts`
+}
+
+/** The status of a rule: implemented when its file exists, planned otherwise. */
+function statusToken(state, name) {
+    const implemented = existsSync(ruleFile(name))
+    const token = new state.Token("html_inline", "", 0)
+
+    token.content = implemented
+        ? '<span class="status status-implemented">Implemented</span>'
+        : '<span class="status status-planned">Planned</span>'
+
+    return token
+}
+
+/** Put the status beside the name in each rule heading. */
+function addRuleStatus(state) {
+    state.tokens.forEach((token, index) => {
+        const inline = token.type === "heading_open" && token.tag === "h2" ? state.tokens[index + 1] : null
+        const code = inline?.children?.[0]
+
+        if (code?.type === "code_inline" && ruleName.test(code.content)) {
+            inline.children.push(statusToken(state, code.content))
+        }
+    })
+}
+
 export default function (eleventyConfig) {
     eleventyConfig.addPlugin(EleventyHtmlBasePlugin)
     eleventyConfig.addPassthroughCopy({ "assets/logo.svg": "logo.svg" })
@@ -33,6 +69,7 @@ export default function (eleventyConfig) {
 
     eleventyConfig.amendLibrary("md", (md) => {
         md.core.ruler.push("markdownLinks", rewriteMarkdownLinks)
+        md.core.ruler.push("ruleStatus", addRuleStatus)
 
         return md.use(markdownItAnchor, {
             slugify: (title) =>
