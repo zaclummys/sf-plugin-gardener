@@ -2,28 +2,14 @@ import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { z } from 'zod';
-import { Configuration, type Project, type Rule, type Severity } from '../core/index.js';
+import { Configuration, type Project, type Rule } from '../core/index.js';
 import { presets } from '../presets/index.js';
-import { MaxFilesRule } from '../rules/project/max-files.js';
 import type { ConfigurationFinder, ConfigurationFindOutput } from '../services/adapters/index.js';
-
-/** The entry of a rule in the configuration file. */
-type RuleEntry = {
-    severity: Severity;
-    [property: string]: unknown;
-};
-
-/** Builds a rule from its entry in the configuration file. */
-type RuleFactory = (entry: RuleEntry) => Rule;
+import { ruleSchemas } from './rules/index.js';
 
 const schema = z.object({
     extends: z.array(z.string()).default([]),
-    rules: z.record(z.string(), z.looseObject({
-        severity: z.enum([
-            'error',
-            'warn',
-        ]),
-    })).default({}),
+    rules: z.record(z.string(), z.unknown()).default({}),
 });
 
 type ConfigurationParseOutput =
@@ -52,28 +38,28 @@ type PresetResolveOutput =
     };
 
 class ConfigurationParser {
-    private readonly ruleFactories: Map<string, RuleFactory>;
+    private readonly ruleSchemas: Map<string, z.ZodType<Rule>>;
     private readonly presets: Map<string, Rule[]>;
 
     /**
-     * @param ruleFactories The rules that exist, by name, with the way to build each one.
+     * @param ruleSchemas The schemas of the rules that exist, by name. Each one builds its rule.
      * @param presets The presets that exist, by name, with the rules of each one.
      */
     public constructor({
-        ruleFactories, presets,
+        ruleSchemas, presets,
     }: {
-        ruleFactories: Map<string, RuleFactory>;
+        ruleSchemas: Map<string, z.ZodType<Rule>>;
         presets: Map<string, Rule[]>;
     }) {
-        this.ruleFactories = ruleFactories;
+        this.ruleSchemas = ruleSchemas;
         this.presets = presets;
     }
 
     /**
-     * Builds a configuration from the configurationParseOutput content of its file. The rules of the presets
+     * Builds a configuration from the parsed content of its file. The rules of the presets
      * it extends come first, and a rule of its own replaces the one of a preset with the same name.
      *
-     * @param content The configurationParseOutput content of the configuration file.
+     * @param content The parsed content of the configuration file.
      */
     public parse(content: unknown): ConfigurationParseOutput {
         const file = schema.safeParse(content);
@@ -96,6 +82,14 @@ class ConfigurationParser {
         }
 
         const projectRules = this.buildProjectRules(file.data.rules);
+
+        if (!projectRules) {
+            return {
+                success: false,
+                error: 'invalid-configuration',
+            };
+        }
+
         const rules = ConfigurationParser.mergeByName([
             ...presetResolveOutput.rules,
             ...projectRules,
@@ -131,16 +125,24 @@ class ConfigurationParser {
         };
     }
 
-    private buildProjectRules(entries: Record<string, RuleEntry>): Rule[] {
+    private buildProjectRules(entries: Record<string, unknown>): Rule[] | null {
         const rules: Rule[] = [];
 
         for (const [
             name,
-            create,
-        ] of this.ruleFactories) {
-            if (Object.hasOwn(entries, name)) {
-                rules.push(create(entries[name]));
+            ruleSchema,
+        ] of this.ruleSchemas) {
+            if (!Object.hasOwn(entries, name)) {
+                continue;
             }
+
+            const rule = ruleSchema.safeParse(entries[name]);
+
+            if (!rule.success) {
+                return null;
+            }
+
+            rules.push(rule.data);
         }
 
         return rules;
@@ -156,16 +158,6 @@ class ConfigurationParser {
         return [...byName.values()];
     }
 }
-
-const ruleFactories = new Map<string, RuleFactory>([
-    [
-        'project/max-files',
-        (entry) => new MaxFilesRule({
-            severity: entry.severity,
-            max: Number(entry.max),
-        }),
-    ],
-]);
 
 /** Parses JSON text, and gives null for text that is not valid JSON. */
 function parseJson(text: string): unknown {
@@ -217,7 +209,7 @@ export class FileConfigurationFinder implements ConfigurationFinder {
     private static parse(text: string): ConfigurationParseOutput {
         const content = parseJson(text);
         const configurationParser = new ConfigurationParser({
-            ruleFactories,
+            ruleSchemas,
             presets,
         });
 
