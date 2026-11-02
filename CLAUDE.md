@@ -56,6 +56,10 @@ Todo método que não usa `this` é `static`, exceto os dos adaptadores, que sã
 
 Documente com JSDoc e uma descrição bem simples. Quando a função recebe um único objeto anônimo, use `@param` com o nome da propriedade e não referencie o objeto.
 
+## Um aspecto por teste
+
+Cada teste verifica um aspecto só. Um fixture contém apenas o que esse aspecto exige.
+
 ## TDD
 
 Escreva o teste e pare no vermelho. Só implemente o código depois que eu revisar o teste. Antes de começar o green, commite o red.
