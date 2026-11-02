@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { Configuration, type ConfigurationParseResult, type Project } from '../core/index.js';
-import type { ConfigurationFinder, ConfigurationSearch } from '../services/adapters/index.js';
+import type { ConfigurationFinder, ConfigurationFindResult } from '../services/adapters/index.js';
 
 export class FileConfigurationFinder implements ConfigurationFinder {
     /**
@@ -17,7 +17,7 @@ export class FileConfigurationFinder implements ConfigurationFinder {
     }: {
         project: Project;
         fileName: string;
-    }): Promise<ConfigurationSearch> {
+    }): Promise<ConfigurationFindResult> {
         const file = path.join(project.getDirectory(), fileName);
 
         if (!existsSync(file)) {

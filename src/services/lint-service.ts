@@ -1,4 +1,4 @@
-import type { ConfigurationFinder, ConfigurationSearch, ProjectLocator } from './adapters/index.js';
+import type { ConfigurationFinder, ConfigurationFindResult, ProjectLocateResult, ProjectLocator } from './adapters/index.js';
 
 const configurationFileName = 'sf-plugin-gardener.config.json';
 
@@ -7,17 +7,13 @@ export type LintResult = {
     findings: unknown[];
 };
 
-export type LintOutcome =
+export type LintServiceResult =
     | {
         success: true;
         result: LintResult;
     }
-    | {
-        success: false;
-        error: 'project-not-found';
-        directory: string;
-    }
-    | Exclude<ConfigurationSearch, { success: true }>;
+    | Exclude<ProjectLocateResult, { success: true }>
+    | Exclude<ConfigurationFindResult, { success: true }>;
 
 export class LintService {
     private readonly projectLocator: ProjectLocator;
@@ -42,16 +38,14 @@ export class LintService {
      *
      * @param directory The directory to start from.
      */
-    public async run({ directory }: { directory: string }): Promise<LintOutcome> {
-        const project = await this.projectLocator.locate(directory);
+    public async run({ directory }: { directory: string }): Promise<LintServiceResult> {
+        const location = await this.projectLocator.locate(directory);
 
-        if (!project) {
-            return {
-                success: false,
-                error: 'project-not-found',
-                directory,
-            };
+        if (!location.success) {
+            return location;
         }
+
+        const project = location.project;
 
         const search = await this.configurationFinder.find({
             project,

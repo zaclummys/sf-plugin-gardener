@@ -26,6 +26,10 @@ No Salesforce DX project found in %s or in any directory above it.
 
 No configuration file found in %s. Create sf-plugin-gardener.config.json next to sfdx-project.json.
 
+# error.packageDirectoryNotFound
+
+The package directory %s does not exist.
+
 # error.presetNotFound
 
 The preset %s does not exist.

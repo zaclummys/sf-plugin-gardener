@@ -1,6 +1,6 @@
 import type { Configuration, Project } from '../../core/index.js';
 
-export type ConfigurationSearch =
+export type ConfigurationFindResult =
     | {
         success: true;
         configuration: Configuration;
@@ -32,5 +32,5 @@ export type ConfigurationFinder = {
     find(options: {
         project: Project;
         fileName: string;
-    }): Promise<ConfigurationSearch>;
+    }): Promise<ConfigurationFindResult>;
 };

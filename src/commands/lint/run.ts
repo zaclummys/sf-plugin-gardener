@@ -46,6 +46,11 @@ export default class Run extends SfCommand<LintRunResult> {
                         messages.getMessage('error.projectNotFound', [outcome.directory]),
                         outcome.error,
                     );
+                case 'package-directory-not-found':
+                    throw new SfError(
+                        messages.getMessage('error.packageDirectoryNotFound', [outcome.directory]),
+                        outcome.error,
+                    );
                 case 'configuration-not-found':
                     throw new SfError(
                         messages.getMessage('error.configurationNotFound', [outcome.directory]),
