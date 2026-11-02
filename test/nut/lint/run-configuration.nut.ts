@@ -25,4 +25,16 @@ describe('lint run configuration', () => {
             name: 'invalid-configuration',
         });
     });
+
+    it('fails when the configuration file is not a JSON object', () => {
+        const directory = findFixture('array-configuration-project');
+        const output = lint({
+            directory,
+            exitCode: 1,
+        });
+
+        expect(output).to.include({
+            name: 'invalid-configuration',
+        });
+    });
 });

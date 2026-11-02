@@ -132,7 +132,7 @@
             "output": []
         },
         "test:nut": {
-            "command": "mocha --config .mocharc.nut.json",
+            "command": "c8 --config .c8rc.nut.json mocha --config .mocharc.nut.json",
             "dependencies": [
                 "compile"
             ],
@@ -145,7 +145,8 @@
                 "test/nut/**",
                 "test/fixtures/**",
                 "test/tsconfig.json",
-                ".mocharc.nut.json"
+                ".mocharc.nut.json",
+                ".c8rc.nut.json"
             ],
             "output": []
         },
