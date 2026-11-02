@@ -72,6 +72,10 @@ Documente com JSDoc e uma descrição bem simples. Quando a função recebe um �
 
 Cada teste verifica um aspecto só. Um fixture contém apenas o que esse aspecto exige.
 
+## Fixtures
+
+Valide cada fixture que tem metadado com `sf project deploy start --dry-run --source-dir force-app --target-org linter-scratch`, dentro do diretório dele. Um fixture só vale se o dry run passar.
+
 ## TDD
 
 Escreva o teste e pare no vermelho. Só implemente o código depois que eu revisar o teste. Antes de começar o green, commite o red.
