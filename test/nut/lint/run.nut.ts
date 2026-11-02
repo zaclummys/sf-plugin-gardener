@@ -1,11 +1,11 @@
 import path from 'node:path';
 import { expect } from 'chai';
-import { findFixture, lint, makeEmptyDirectory } from '../run.ts';
+import { findFixture, execLintJson, makeEmptyDirectory } from '../run.ts';
 
 describe('lint run project', () => {
     it('reports no findings for a project without metadata', () => {
         const directory = findFixture('empty-project');
-        const output = lint({
+        const output = execLintJson({
             directory,
         });
 
@@ -19,7 +19,7 @@ describe('lint run project', () => {
 
     it('finds the project above the directory', () => {
         const directory = path.join(findFixture('empty-project'), 'force-app');
-        const output = lint({
+        const output = execLintJson({
             directory,
         });
 
@@ -33,7 +33,7 @@ describe('lint run project', () => {
 
     it('fails when there is no project above the directory', () => {
         const directory = makeEmptyDirectory();
-        const output = lint({
+        const output = execLintJson({
             directory,
             exitCode: 1,
         });
@@ -45,7 +45,7 @@ describe('lint run project', () => {
 
     it('counts only the metadata files that are linted', () => {
         const directory = findFixture('metadata-project');
-        const output = lint({
+        const output = execLintJson({
             directory,
         });
 
@@ -59,7 +59,7 @@ describe('lint run project', () => {
 
     it('fails when a package directory does not exist', () => {
         const directory = findFixture('missing-package-directory-project');
-        const output = lint({
+        const output = execLintJson({
             directory,
             exitCode: 1,
         });

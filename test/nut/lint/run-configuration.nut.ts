@@ -1,10 +1,10 @@
 import { expect } from 'chai';
-import { findFixture, lint } from '../run.ts';
+import { findFixture, execLintJson } from '../run.ts';
 
 describe('lint run configuration', () => {
     it('fails when the project has no configuration file', () => {
         const directory = findFixture('unconfigured-project');
-        const output = lint({
+        const output = execLintJson({
             directory,
             exitCode: 1,
         });
@@ -16,7 +16,7 @@ describe('lint run configuration', () => {
 
     it('fails when the configuration file is not valid JSON', () => {
         const directory = findFixture('invalid-configuration-project');
-        const output = lint({
+        const output = execLintJson({
             directory,
             exitCode: 1,
         });
@@ -28,7 +28,7 @@ describe('lint run configuration', () => {
 
     it('fails when the configuration file is not a JSON object', () => {
         const directory = findFixture('array-configuration-project');
-        const output = lint({
+        const output = execLintJson({
             directory,
             exitCode: 1,
         });
@@ -40,7 +40,7 @@ describe('lint run configuration', () => {
 
     it('fails when the rules of the configuration are not an object', () => {
         const directory = findFixture('invalid-rules-project');
-        const output = lint({
+        const output = execLintJson({
             directory,
             exitCode: 1,
         });

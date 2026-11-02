@@ -26,6 +26,25 @@ type LintOptions = {
     exitCode?: number | 'nonZero';
 };
 
+function execLint(options: LintOptions, flags: string[]) {
+    const args = [
+        'lint',
+        'run',
+        '--directory',
+        `"${options.directory}"`,
+        ...flags,
+    ];
+
+    if (options.strict) {
+        args.push('--strict');
+    }
+
+    return execCmd<LintRunResult>(args.join(' '), {
+        ensureExitCode: options.exitCode ?? 0,
+        cwd: tmpdir(),
+    });
+}
+
 /**
  * Runs `sf lint run` and returns its JSON output.
  *
@@ -33,24 +52,8 @@ type LintOptions = {
  * @param strict Treats warnings as errors.
  * @param exitCode The exit code the command must end with. Defaults to 0.
  */
-export function lint(options: LintOptions) {
-    const args = [
-        'lint',
-        'run',
-        '--directory',
-        `"${options.directory}"`,
-        '--json',
-    ];
-
-    if (options.strict) {
-        args.push('--strict');
-    }
-
-    const output = execCmd<LintRunResult>(args.join(' '), {
-        ensureExitCode: options.exitCode ?? 0,
-        cwd: tmpdir(),
-    });
-
+export function execLintJson(options: LintOptions) {
+    const output = execLint(options, ['--json']);
     const json = output.jsonOutput;
 
     if (!json) {
@@ -58,6 +61,19 @@ export function lint(options: LintOptions) {
     }
 
     return json;
+}
+
+/**
+ * Runs `sf lint run` and returns what it prints in the human format.
+ *
+ * @param directory The directory to lint.
+ * @param strict Treats warnings as errors.
+ * @param exitCode The exit code the command must end with. Defaults to 0.
+ */
+export function execLintText(options: LintOptions) {
+    const output = execLint(options, []);
+
+    return output.shellOutput.stdout;
 }
 
 /** Creates an empty temporary directory, with no project in it or above it. */
