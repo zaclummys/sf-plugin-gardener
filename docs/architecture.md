@@ -5,10 +5,10 @@ The plugin is a Salesforce CLI plugin built on oclif. It is layered so every com
 ## Layers
 
 - **Commands** (`src/commands/lint/`): oclif only. They parse flags, build the service, render the output and set the exit code.
-- **Services** (`src/services/`): one per command. Each is a class whose constructor takes its dependencies, while the inputs of a run are the parameters of `run()`.
+- **Services** (`src/services/`): one per command. Each is a class whose constructor takes its dependencies, while the inputs of a run are the parameters of `run()`. The contracts of the adapters live in `src/services/adapters/`, and a service never imports `src/adapters/`.
 - **Core** (`src/core/`): the reusable building blocks, such as the findings, the configuration contract, the registry of metadata types and the index. It is pure and imports nothing from `@salesforce/*`, so each piece is testable on its own.
 - **Rules** (`src/rules/<type>/`): one file per rule, in a directory named after the metadata type. The directory is the namespace in the rule name.
-- **Adapters** (`src/adapters/`): the readers of XML, JSON and YAML, the loader of the configuration file and the file system. See [Core concepts](/concepts/#scope-and-offline-analysis) for what the linter may read.
+- **Adapters** (`src/adapters/`): the implementations of the contracts in `src/services/adapters/`, such as the readers of XML, JSON and YAML, the loader of the configuration file and the file system. See [Core concepts](/concepts/#scope-and-offline-analysis) for what the linter may read.
 - **UI** (`src/ui/`): the human format of the output and the only place that knows about colour.
 
 ## Pipeline
