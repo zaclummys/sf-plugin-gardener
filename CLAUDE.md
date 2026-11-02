@@ -24,6 +24,10 @@ Atribua o resultado de `new` a uma variável antes de chamar um método nele.
 
 Atribua o valor de um `await` a uma variável antes de ler uma propriedade dele.
 
+## Cadeia de métodos
+
+Atribua o resultado de uma cadeia de chamadas a uma variável antes de ler uma propriedade dele.
+
 ## Idioma
 
 Todo código fica em inglês. Isso inclui identificadores, nomes de coleção e variáveis de template.
@@ -39,6 +43,10 @@ Use a versão mais recente de tudo. Marque apenas o major, como `^5` e não `^5.
 ## Erros
 
 Nunca lance erro em `src/core/` nem em `src/services/`. Quem lança é o comando.
+
+## Tipo de resultado
+
+Todo tipo que tem `success` termina com `Result`, como `ProjectLocateResult`.
 
 ## Nome de função
 
