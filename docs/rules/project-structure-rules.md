@@ -221,7 +221,7 @@ A deploy whose zip exceeds N megabytes. The linter estimates the compressed size
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `max`: N, zip size in megabytes. Required
+- `maxInMegabytes`: N, zip size in megabytes. Required
 
 **Reference:** [Salesforce documentation](https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_deploy.htm)
 
@@ -232,7 +232,7 @@ A deploy whose zip exceeds N megabytes. The linter estimates the compressed size
   "rules": {
     "project/max-size": {
       "severity": "error",
-      "max": 39
+      "maxInMegabytes": 39
     }
   }
 }

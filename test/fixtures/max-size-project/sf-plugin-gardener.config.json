@@ -1,0 +1,8 @@
+{
+    "rules": {
+        "project/max-size": {
+            "severity": "error",
+            "maxInMegabytes": 0.00001
+        }
+    }
+}
