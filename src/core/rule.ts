@@ -37,6 +37,27 @@ export abstract class Rule {
             rule: this.name,
             severity: this.severity,
             message,
+            file: null,
+        });
+    }
+
+    /**
+     * Builds a finding of this rule about a file, with the severity that the configuration gave it.
+     *
+     * @param message The message of the finding.
+     * @param file The path of the file, relative to the project.
+     */
+    protected reportFile({
+        message, file,
+    }: {
+        message: string;
+        file: string;
+    }): Finding {
+        return new Finding({
+            rule: this.name,
+            severity: this.severity,
+            message,
+            file,
         });
     }
 }

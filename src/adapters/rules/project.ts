@@ -1,7 +1,9 @@
 import { z } from 'zod';
 import type { Rule } from '../../core/index.js';
 import { MaxFilesRule } from '../../rules/project/max-files.js';
+import { MaxApiVersionRule } from '../../rules/project/max-api-version.js';
 import { MaxSizeRule } from '../../rules/project/max-size.js';
+import { MinApiVersionRule } from '../../rules/project/min-api-version.js';
 
 const maxFiles = z.object({
     severity: z.enum([
@@ -19,6 +21,22 @@ const maxSize = z.object({
     maxInMegabytes: z.number(),
 }).transform((properties) => new MaxSizeRule(properties));
 
+const minApiVersion = z.object({
+    severity: z.enum([
+        'error',
+        'warn',
+    ]),
+    minVersion: z.string(),
+}).transform((properties) => new MinApiVersionRule(properties));
+
+const maxApiVersion = z.object({
+    severity: z.enum([
+        'error',
+        'warn',
+    ]),
+    maxVersion: z.string(),
+}).transform((properties) => new MaxApiVersionRule(properties));
+
 /** The rules of the project namespace, by their full name. Each one is the schema that reads its entry and builds the rule. */
 export const projectRules = new Map<string, z.ZodType<Rule>>([
     [
@@ -28,5 +46,13 @@ export const projectRules = new Map<string, z.ZodType<Rule>>([
     [
         'project/max-size',
         maxSize,
+    ],
+    [
+        'project/min-api-version',
+        minApiVersion,
+    ],
+    [
+        'project/max-api-version',
+        maxApiVersion,
     ],
 ]);

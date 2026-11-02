@@ -14,6 +14,7 @@ export type LintRunResult = {
         rule: string;
         severity: Severity;
         message: string;
+        file?: string;
     }[];
 };
 
@@ -101,11 +102,18 @@ export default class Run extends SfCommand<LintRunResult> {
             process.exitCode = 1;
         }
 
-        const findings = result.listFindings().map((finding) => ({
-            rule: finding.getRule(),
-            severity: finding.getSeverity(),
-            message: finding.getMessage(),
-        }));
+        const findings = result.listFindings().map((finding) => {
+            const file = finding.getFile();
+
+            return {
+                rule: finding.getRule(),
+                severity: finding.getSeverity(),
+                message: finding.getMessage(),
+                ...file ? {
+                    file,
+                } : {},
+            };
+        });
 
         return {
             files: result.countFiles(),

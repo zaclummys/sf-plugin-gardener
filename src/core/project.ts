@@ -23,6 +23,11 @@ export class Project {
         return this.directory;
     }
 
+    /** Lists the metadata files that are linted. */
+    public listFiles(): ProjectFile[] {
+        return this.files;
+    }
+
     /** Counts the metadata files that are linted. */
     public countFiles(): number {
         return this.files.length;

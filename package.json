@@ -12,6 +12,7 @@
         "@salesforce/core": "^9",
         "@salesforce/sf-plugins-core": "^13",
         "@salesforce/source-deploy-retrieve": "^13",
+        "@salesforce/ts-types": "^3",
         "@xmldom/xmldom": "^0.9",
         "minimatch": "^11",
         "zod": "^4"

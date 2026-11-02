@@ -1,8 +1,10 @@
 import { existsSync } from 'node:fs';
-import { readdir, stat } from 'node:fs/promises';
+import { stat } from 'node:fs/promises';
 import path from 'node:path';
 import { SfProject } from '@salesforce/core';
-import { metadataTypes, Project, ProjectFile } from '../core/index.js';
+import { MetadataResolver, type SourceComponent } from '@salesforce/source-deploy-retrieve';
+import { getString } from '@salesforce/ts-types';
+import { Project, ProjectFile } from '../core/index.js';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {
@@ -11,6 +13,34 @@ async function resolveSfProject(directory: string): Promise<SfProject | null> {
     } catch {
         return null;
     }
+}
+
+type XmlComponent = SourceComponent & { xml: string };
+
+function hasXml(component: SourceComponent): component is XmlComponent {
+    return component.xml != null;
+}
+
+async function buildProjectFile({
+    component, projectDirectory,
+}: {
+    component: XmlComponent;
+    projectDirectory: string;
+}): Promise<ProjectFile> {
+    const paths = [
+        component.xml,
+        ...component.walkContent(),
+    ];
+    const stats = await Promise.all(paths.map((file) => stat(file)));
+    const size = stats.reduce((total, fileStat) => total + fileStat.size, 0);
+    const xml = component.parseXmlSync();
+    const apiVersion = getString(xml, `${component.type.name}.apiVersion`) ?? null;
+
+    return new ProjectFile({
+        path: path.relative(projectDirectory, component.xml),
+        size,
+        apiVersion,
+    });
 }
 
 export class SfProjectLocator implements ProjectLocator {
@@ -50,21 +80,16 @@ export class SfProjectLocator implements ProjectLocator {
                 };
             }
 
-            const entries = await readdir(fullPath, {
-                recursive: true,
-                withFileTypes: true,
-            });
-            const paths = entries
-                .filter((entry) => entry.isFile())
-                .map((entry) => path.join(entry.parentPath, entry.name))
-                .filter((file) => metadataTypes.some((type) => type.matches(file)));
+            const resolver = new MetadataResolver();
+            const components = resolver.getComponentsFromPath(fullPath).filter(hasXml);
 
-            for (const file of paths) {
-                const fileStat = await stat(file);
+            for (const component of components) {
+                const file = await buildProjectFile({
+                    component,
+                    projectDirectory,
+                });
 
-                files.push(new ProjectFile({
-                    size: fileStat.size,
-                }));
+                files.push(file);
             }
         }
 

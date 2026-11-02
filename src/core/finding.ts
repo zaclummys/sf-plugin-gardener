@@ -4,17 +4,20 @@ export class Finding {
     private readonly rule: string;
     private readonly severity: Severity;
     private readonly message: string;
+    private readonly file: string | null;
 
     public constructor({
-        rule, severity, message,
+        rule, severity, message, file,
     }: {
         rule: string;
         severity: Severity;
         message: string;
+        file: string | null;
     }) {
         this.rule = rule;
         this.severity = severity;
         this.message = message;
+        this.file = file;
     }
 
     /** Tells whether the finding is an error. */
@@ -40,5 +43,10 @@ export class Finding {
     /** Returns the message of the finding. */
     public getMessage(): string {
         return this.message;
+    }
+
+    /** Returns the path of the file of the finding, or null when the finding is about the project as a whole. */
+    public getFile(): string | null {
+        return this.file;
     }
 }
