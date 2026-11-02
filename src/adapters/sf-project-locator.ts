@@ -3,7 +3,7 @@ import { readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { SfProject } from '@salesforce/core';
 import { Project } from '../core/index.js';
-import type { ProjectLocateResult, ProjectLocator } from '../services/adapters/index.js';
+import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {
     try {
@@ -20,7 +20,7 @@ export class SfProjectLocator implements ProjectLocator {
      * @param directory The directory to start from. The search goes up from it.
      * @returns The project, or the reason it could not be found or read.
      */
-    public async locate(directory: string): Promise<ProjectLocateResult> {
+    public async locate(directory: string): Promise<ProjectLocateOutput> {
         const sfProject = await resolveSfProject(directory);
 
         if (!sfProject) {
@@ -35,6 +35,7 @@ export class SfProjectLocator implements ProjectLocator {
         const projectJson = sfProject
             .getSfProjectJson()
             .getContents();
+
         const packageDirectories = projectJson.packageDirectories;
         const files: string[] = [];
 

@@ -1,4 +1,7 @@
-export { Configuration, type ConfigurationParseResult } from './configuration.js';
+export { ConfigurationParser, type ConfigurationParseOutput } from './configuration-parser.js';
+export { Configuration } from './configuration.js';
+export { Finding, type Severity } from './finding.js';
 export { MetadataType } from './metadata-type.js';
 export { metadataTypes } from './metadata-types.js';
 export { Project } from './project.js';
+export { Rule, type RuleEntry, type RuleFactory } from './rule.js';

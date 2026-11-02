@@ -1,1 +1,2 @@
-export { LintService, type LintServiceResult, type LintResult } from './lint-service.js';
+export { LintResult } from './lint-result.js';
+export { LintService, type LintServiceOutput } from './lint-service.js';

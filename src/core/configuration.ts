@@ -1,70 +1,22 @@
-import { z } from 'zod';
-import { presets } from './presets/index.js';
-
-const schema = z.object({
-    extends: z.array(z.string()).default([]),
-    rules: z.record(z.string(), z.unknown()).default({}),
-});
-
-export type ConfigurationParseResult =
-    | {
-        success: true;
-        configuration: Configuration;
-    }
-    | {
-        success: false;
-        error: 'invalid-configuration';
-    }
-    | {
-        success: false;
-        error: 'preset-not-found';
-        preset: string;
-    };
+import type { Finding } from './finding.js';
+import type { Project } from './project.js';
+import type { Rule } from './rule.js';
 
 export class Configuration {
-    public readonly rules: Record<string, unknown>;
+    private readonly rules: Rule[];
 
-    private constructor(rules: Record<string, unknown>) {
+    public constructor({ rules }: { rules: Rule[] }) {
         this.rules = rules;
     }
 
     /**
-     * Builds a configuration from the parsed content of its file. The presets it extends
-     * are applied first, and its own rules after them.
+     * Checks a project with the rules that the configuration enables.
      *
-     * @param content The parsed content of the configuration file.
+     * @param project The project to check.
      */
-    public static parse(content: unknown): ConfigurationParseResult {
-        const result = schema.safeParse(content);
-
-        if (!result.success) {
-            return {
-                success: false,
-                error: 'invalid-configuration',
-            };
-        }
-
-        const rules: Record<string, unknown> = {};
-
-        for (const name of result.data.extends) {
-            const preset = presets.get(name);
-
-            if (!preset) {
-                return {
-                    success: false,
-                    error: 'preset-not-found',
-                    preset: name,
-                };
-            }
-
-            Object.assign(rules, preset);
-        }
-
-        Object.assign(rules, result.data.rules);
-
-        return {
-            success: true,
-            configuration: new Configuration(rules),
-        };
+    public check({ project }: { project: Project }): Finding[] {
+        return this.rules.flatMap((rule) => rule.check({
+            project,
+        }));
     }
 }

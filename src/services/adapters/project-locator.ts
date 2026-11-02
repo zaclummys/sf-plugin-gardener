@@ -1,6 +1,6 @@
 import type { Project } from '../../core/index.js';
 
-export type ProjectLocateResult =
+export type ProjectLocateOutput =
     | {
         success: true;
         project: Project;
@@ -23,5 +23,5 @@ export type ProjectLocator = {
      * @param directory The directory to start from. The search goes up from it.
      * @returns The project, or the reason it could not be found or read.
      */
-    locate(directory: string): Promise<ProjectLocateResult>;
+    locate(directory: string): Promise<ProjectLocateOutput>;
 };

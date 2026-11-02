@@ -1,0 +1,8 @@
+{
+    "rules": {
+        "project/max-files": {
+            "severity": "error",
+            "max": 2
+        }
+    }
+}

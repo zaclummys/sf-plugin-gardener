@@ -1,1 +1,3 @@
-export const recommended: Record<string, unknown> = {};
+import type { Rule } from '../core/index.js';
+
+export const recommended: Rule[] = [];

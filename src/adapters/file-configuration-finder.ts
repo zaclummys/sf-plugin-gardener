@@ -1,12 +1,23 @@
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { Configuration, type ConfigurationParseResult, type Project } from '../core/index.js';
-import type { ConfigurationFinder, ConfigurationFindResult } from '../services/adapters/index.js';
+import { ConfigurationParser, type ConfigurationParseOutput, type Project } from '../core/index.js';
+import { presets } from '../presets/index.js';
+import { ruleFactories } from '../rules/index.js';
+import type { ConfigurationFinder, ConfigurationFindOutput } from '../services/adapters/index.js';
+
+/** Parses JSON text, and gives null for text that is not valid JSON. */
+function parseJson(text: string): unknown {
+    try {
+        return JSON.parse(text);
+    } catch {
+        return null;
+    }
+}
 
 export class FileConfigurationFinder implements ConfigurationFinder {
     /**
-     * Finds the configuration of a project.
+     * Finds the configuration of a project, read from its file.
      *
      * @param project The project to look in.
      * @param fileName The name of the configuration file.
@@ -17,7 +28,7 @@ export class FileConfigurationFinder implements ConfigurationFinder {
     }: {
         project: Project;
         fileName: string;
-    }): Promise<ConfigurationFindResult> {
+    }): Promise<ConfigurationFindOutput> {
         const file = path.join(project.getDirectory(), fileName);
 
         if (!existsSync(file)) {
@@ -29,30 +40,26 @@ export class FileConfigurationFinder implements ConfigurationFinder {
         }
 
         const text = await readFile(file, 'utf8');
+        const parsed = FileConfigurationFinder.parse(text);
 
-        const outcome = FileConfigurationFinder.parse(text);
-
-        if (!outcome.success && outcome.error === 'invalid-configuration') {
+        if (!parsed.success && parsed.error === 'invalid-configuration') {
             return {
                 success: false,
-                error: outcome.error,
+                error: parsed.error,
                 file,
             };
         }
 
-        return outcome;
+        return parsed;
     }
 
-    private static parse(text: string): ConfigurationParseResult {
-        try {
-            const content: unknown = JSON.parse(text);
+    private static parse(text: string): ConfigurationParseOutput {
+        const content = parseJson(text);
+        const configurationParser = new ConfigurationParser({
+            ruleFactories,
+            presets,
+        });
 
-            return Configuration.parse(content);
-        } catch {
-            return {
-                success: false,
-                error: 'invalid-configuration',
-            };
-        }
+        return configurationParser.parse(content);
     }
 }

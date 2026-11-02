@@ -1,19 +1,15 @@
-import type { ConfigurationFinder, ConfigurationFindResult, ProjectLocateResult, ProjectLocator } from './adapters/index.js';
+import { LintResult } from './lint-result.js';
+import type { ConfigurationFinder, ConfigurationFindOutput, ProjectLocateOutput, ProjectLocator } from './adapters/index.js';
 
 const configurationFileName = 'sf-plugin-gardener.config.json';
 
-export type LintResult = {
-    files: number;
-    findings: unknown[];
-};
-
-export type LintServiceResult =
+export type LintServiceOutput =
     | {
         success: true;
         result: LintResult;
     }
-    | Exclude<ProjectLocateResult, { success: true }>
-    | Exclude<ConfigurationFindResult, { success: true }>;
+    | Exclude<ProjectLocateOutput, { success: true }>
+    | Exclude<ConfigurationFindOutput, { success: true }>;
 
 export class LintService {
     private readonly projectLocator: ProjectLocator;
@@ -38,7 +34,7 @@ export class LintService {
      *
      * @param directory The directory to start from.
      */
-    public async run({ directory }: { directory: string }): Promise<LintServiceResult> {
+    public async run({ directory }: { directory: string }): Promise<LintServiceOutput> {
         const location = await this.projectLocator.locate(directory);
 
         if (!location.success) {
@@ -56,12 +52,17 @@ export class LintService {
             return search;
         }
 
+        const configuration = search.configuration;
+        const findings = configuration.check({
+            project,
+        });
+
         return {
             success: true,
-            result: {
+            result: new LintResult({
                 files: project.countFiles(),
-                findings: [],
-            },
+                findings,
+            }),
         };
     }
 }

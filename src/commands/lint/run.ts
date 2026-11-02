@@ -1,13 +1,63 @@
 import { Messages, SfError } from '@salesforce/core';
 import { Flags, SfCommand } from '@salesforce/sf-plugins-core';
 import { FileConfigurationFinder, SfProjectLocator } from '../../adapters/index.js';
-import { LintService, type LintResult } from '../../services/index.js';
+import type { Severity } from '../../core/index.js';
+import { LintService, type LintServiceOutput } from '../../services/index.js';
 
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-plugin-gardener', 'lint.run');
 
-export type LintRunResult = LintResult;
+export type LintRunResult = {
+    files: number;
+    findings: {
+        rule: string;
+        severity: Severity;
+        message: string;
+    }[];
+};
+
+type LintFailure = Exclude<LintServiceOutput, { success: true }>;
+
+function buildLintService(): LintService {
+    const projectLocator = new SfProjectLocator();
+    const configurationFinder = new FileConfigurationFinder();
+
+    return new LintService({
+        projectLocator,
+        configurationFinder,
+    });
+}
+
+function createError(failure: LintFailure): SfError {
+    switch (failure.error) {
+        case 'project-not-found':
+            return new SfError(
+                messages.getMessage('error.projectNotFound', [failure.directory]),
+                failure.error,
+            );
+        case 'package-directory-not-found':
+            return new SfError(
+                messages.getMessage('error.packageDirectoryNotFound', [failure.directory]),
+                failure.error,
+            );
+        case 'configuration-not-found':
+            return new SfError(
+                messages.getMessage('error.configurationNotFound', [failure.directory]),
+                failure.error,
+            );
+        case 'preset-not-found':
+            return new SfError(
+                messages.getMessage('error.presetNotFound', [failure.preset]),
+                failure.error,
+            );
+        case 'invalid-configuration':
+            return new SfError(
+                messages.getMessage('error.invalidConfiguration', [failure.file]),
+                failure.error,
+            );
+    }
+}
 
 export default class Run extends SfCommand<LintRunResult> {
     public static readonly summary = messages.getMessage('summary');
@@ -29,51 +79,36 @@ export default class Run extends SfCommand<LintRunResult> {
     public async run(): Promise<LintRunResult> {
         const { flags } = await this.parse(Run);
 
-        const projectLocator = new SfProjectLocator();
-        const configurationFinder = new FileConfigurationFinder();
-        const service = new LintService({
-            projectLocator,
-            configurationFinder,
-        });
+        const service = buildLintService();
         const outcome = await service.run({
             directory: flags.directory,
         });
 
         if (!outcome.success) {
-            switch (outcome.error) {
-                case 'project-not-found':
-                    throw new SfError(
-                        messages.getMessage('error.projectNotFound', [outcome.directory]),
-                        outcome.error,
-                    );
-                case 'package-directory-not-found':
-                    throw new SfError(
-                        messages.getMessage('error.packageDirectoryNotFound', [outcome.directory]),
-                        outcome.error,
-                    );
-                case 'configuration-not-found':
-                    throw new SfError(
-                        messages.getMessage('error.configurationNotFound', [outcome.directory]),
-                        outcome.error,
-                    );
-                case 'preset-not-found':
-                    throw new SfError(
-                        messages.getMessage('error.presetNotFound', [outcome.preset]),
-                        outcome.error,
-                    );
-                case 'invalid-configuration':
-                    throw new SfError(
-                        messages.getMessage('error.invalidConfiguration', [outcome.file]),
-                        outcome.error,
-                    );
-            }
+            throw createError(outcome);
         }
 
+        const result = outcome.result;
+        const errors = result.countErrors();
+
         this.log(messages.getMessage('summary.counts', [
-            '0',
-            '0',
+            String(errors),
+            String(result.countWarnings()),
         ]));
 
-        return outcome.result;
+        if (errors > 0) {
+            throw new SfError(messages.getMessage('error.failed'), 'lint-failed');
+        }
+
+        const findings = result.listFindings().map((finding) => ({
+            rule: finding.getRule(),
+            severity: finding.getSeverity(),
+            message: finding.getMessage(),
+        }));
+
+        return {
+            files: result.countFiles(),
+            findings,
+        };
     }
 }
