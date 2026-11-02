@@ -59,8 +59,6 @@ export default class Run extends SfCommand<LintRunResult> {
                     messages.getMessage('error.invalidConfiguration', [outcome.file]),
                     outcome.error,
                 );
-            default:
-                throw new SfError(messages.getMessage('error.unknown'), 'unknown');
         }
     }
 }

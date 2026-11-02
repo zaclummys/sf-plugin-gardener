@@ -30,10 +30,6 @@ No configuration file found in %s. Create sf-plugin-gardener.config.json next to
 
 The configuration file %s is not valid JSON.
 
-# error.unknown
-
-Lint failed for an unknown reason.
-
 # error.failed
 
 Lint found problems. See the output above.
