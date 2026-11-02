@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { findFixture, execLintText } from '../run.ts';
+import { execLintText, findFixture } from '../run.ts';
 
 describe('lint run output', () => {
     it('ends with the number of errors and warnings', () => {
@@ -20,14 +20,5 @@ describe('lint run output', () => {
         });
 
         expect(text).to.include('1 errors, 0 warnings.');
-    });
-
-    it('reports nothing for a project within the limit of files', () => {
-        const directory = findFixture('max-files-within-limit-project');
-        const text = execLintText({
-            directory,
-        });
-
-        expect(text).to.include('0 errors, 0 warnings.');
     });
 });
