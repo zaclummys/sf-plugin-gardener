@@ -38,10 +38,6 @@ The preset %s does not exist.
 
 The configuration file %s is not valid.
 
-# error.failed
-
-Lint found problems. See the output above.
-
 # examples
 
 - Lint the project in the current directory:

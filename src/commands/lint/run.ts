@@ -98,7 +98,7 @@ export default class Run extends SfCommand<LintRunResult> {
         ]));
 
         if (result.hasFailed(flags.strict)) {
-            throw new SfError(messages.getMessage('error.failed'), 'lint-failed');
+            process.exitCode = 1;
         }
 
         const findings = result.listFindings().map((finding) => ({
