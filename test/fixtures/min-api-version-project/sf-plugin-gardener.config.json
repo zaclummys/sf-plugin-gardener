@@ -1,0 +1,8 @@
+{
+    "rules": {
+        "project/min-api-version": {
+            "severity": "error",
+            "minVersion": "65.0"
+        }
+    }
+}
