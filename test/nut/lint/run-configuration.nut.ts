@@ -49,4 +49,16 @@ describe('lint run configuration', () => {
             name: 'invalid-configuration',
         });
     });
+
+    it('fails when the configuration extends a preset that does not exist', () => {
+        const directory = findFixture('unknown-preset-project');
+        const output = lint({
+            directory,
+            exitCode: 1,
+        });
+
+        expect(output).to.include({
+            name: 'preset-not-found',
+        });
+    });
 });
