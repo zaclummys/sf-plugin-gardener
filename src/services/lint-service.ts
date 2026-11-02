@@ -1,5 +1,7 @@
 import type { ConfigurationFinder, ProjectLocator } from '../adapters/index.js';
-import type { Configuration, Project } from '../core/index.js';
+import type { Project } from '../core/index.js';
+
+const configurationFileName = 'sf-plugin-gardener.config.json';
 
 export type LintResult = {
     files: number;
@@ -23,8 +25,8 @@ export type LintOutcome =
     }
     | {
         success: false;
-        error: 'multiple-configurations';
-        configurations: Configuration[];
+        error: 'invalid-configuration';
+        file: string;
     };
 
 export class LintService {
@@ -33,7 +35,7 @@ export class LintService {
 
     /**
      * @param projectLocator Finds the project of a directory.
-     * @param configurationFinder Finds the configurations of a project.
+     * @param configurationFinder Finds the configuration of a project.
      */
     public constructor({
         projectLocator, configurationFinder,
@@ -61,9 +63,12 @@ export class LintService {
             };
         }
 
-        const configurations = this.configurationFinder.find(project);
+        const search = await this.configurationFinder.find({
+            project,
+            fileName: configurationFileName,
+        });
 
-        if (configurations.length === 0) {
+        if (!search.exists) {
             return {
                 success: false,
                 error: 'configuration-not-found',
@@ -71,11 +76,11 @@ export class LintService {
             };
         }
 
-        if (configurations.length > 1) {
+        if (!search.configuration) {
             return {
                 success: false,
-                error: 'multiple-configurations',
-                configurations,
+                error: 'invalid-configuration',
+                file: search.file,
             };
         }
 

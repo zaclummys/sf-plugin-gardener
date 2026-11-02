@@ -35,7 +35,6 @@ export default class Run extends SfCommand<LintRunResult> {
             projectLocator,
             configurationFinder,
         });
-
         const outcome = await service.run({
             directory: flags.directory,
         });
@@ -55,9 +54,9 @@ export default class Run extends SfCommand<LintRunResult> {
                     messages.getMessage('error.configurationNotFound', [outcome.project.getDirectory()]),
                     outcome.error,
                 );
-            case 'multiple-configurations':
+            case 'invalid-configuration':
                 throw new SfError(
-                    messages.getMessage('error.multipleConfigurations', [outcome.configurations.map((configuration) => configuration.getFile()).join(', ')]),
+                    messages.getMessage('error.invalidConfiguration', [outcome.file]),
                     outcome.error,
                 );
             default:

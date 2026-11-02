@@ -18,7 +18,7 @@ sf lint run --help
 
 ## Configure a project
 
-A project is a [Salesforce DX project](/concepts/#one-project-per-run), a directory with an `sfdx-project.json`. Create the configuration file in that directory, next to `sfdx-project.json`. The file is named `sf-plugin-gardener.config.json` or `sf-plugin-gardener.config.js`.
+A project is a [Salesforce DX project](/concepts/#one-project-per-run), a directory with an `sfdx-project.json`. Create the configuration file in that directory, next to `sfdx-project.json`. The file is named `sf-plugin-gardener.config.json`.
 
 No rule is enabled by default, so the first configuration enables the `recommended` [preset](/presets/):
 

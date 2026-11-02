@@ -24,11 +24,11 @@ No Salesforce DX project found in %s or in any directory above it.
 
 # error.configurationNotFound
 
-No configuration file found in %s. Create sf-plugin-gardener.config.json or sf-plugin-gardener.config.js next to sfdx-project.json.
+No configuration file found in %s. Create sf-plugin-gardener.config.json next to sfdx-project.json.
 
-# error.multipleConfigurations
+# error.invalidConfiguration
 
-More than one configuration file found: %s. Keep only one.
+The configuration file %s is not valid JSON.
 
 # error.unknown
 

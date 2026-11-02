@@ -1,12 +1,12 @@
 export class Configuration {
-    private readonly file: string;
+    private readonly content: unknown;
 
-    public constructor(file: string) {
-        this.file = file;
+    public constructor(content: unknown) {
+        this.content = content;
     }
 
-    /** Returns the path of the configuration file. */
-    public getFile(): string {
-        return this.file;
+    /** Returns the content of the configuration. */
+    public getContent(): unknown {
+        return this.content;
     }
 }

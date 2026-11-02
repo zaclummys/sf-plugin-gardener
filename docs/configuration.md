@@ -6,7 +6,7 @@ The properties every rule accepts are described in [Common configuration](/rules
 
 ## Configuration file
 
-The configuration file is either a JavaScript module that exports the configuration or a JSON file. The rule that the linter does not read source code applies to the files it analyzes, and not to its own configuration. A directory that holds more than one configuration file is an error, and the linter does not choose between them. The file is named `sf-plugin-gardener.config.js` or `sf-plugin-gardener.config.json`. A project without a configuration file is an error, and the linter asks for one to be created. It does not run with no rules.
+The configuration file is a JSON file named `sf-plugin-gardener.config.json`. A project without a configuration file is an error, and the linter asks for one to be created. It does not run with no rules.
 
 ## Rules
 
