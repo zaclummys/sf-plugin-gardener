@@ -28,7 +28,7 @@ No configuration file found in %s. Create sf-plugin-gardener.config.json next to
 
 # error.invalidConfiguration
 
-The configuration file %s is not valid JSON.
+The configuration file %s is not valid.
 
 # error.failed
 

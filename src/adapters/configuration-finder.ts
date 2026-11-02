@@ -46,11 +46,7 @@ export class ConfigurationFinder {
         try {
             const content: unknown = JSON.parse(text);
 
-            if (typeof content !== 'object' || content == null || Array.isArray(content)) {
-                return null;
-            }
-
-            return new Configuration(content);
+            return Configuration.from(content);
         } catch {
             return null;
         }
