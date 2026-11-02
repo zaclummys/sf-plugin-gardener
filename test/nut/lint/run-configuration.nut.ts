@@ -49,4 +49,16 @@ describe('lint run configuration', () => {
             name: 'invalid-configuration',
         });
     });
+
+    it('fails when a rule is missing a property that it requires', () => {
+        const directory = findFixture('invalid-max-files-project');
+        const output = execLintJson({
+            directory,
+            exitCode: 1,
+        });
+
+        expect(output).to.include({
+            name: 'invalid-configuration',
+        });
+    });
 });
