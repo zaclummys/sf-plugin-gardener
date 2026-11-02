@@ -80,15 +80,15 @@ export default class Run extends SfCommand<LintRunResult> {
         const { flags } = await this.parse(Run);
 
         const service = buildLintService();
-        const outcome = await service.run({
+        const lintServiceOutput = await service.run({
             directory: flags.directory,
         });
 
-        if (!outcome.success) {
-            throw createError(outcome);
+        if (!lintServiceOutput.success) {
+            throw createError(lintServiceOutput);
         }
 
-        const result = outcome.result;
+        const result = lintServiceOutput.result;
         const errors = result.countErrors();
 
         this.log(messages.getMessage('summary.counts', [

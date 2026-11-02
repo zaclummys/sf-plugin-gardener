@@ -35,24 +35,24 @@ export class LintService {
      * @param directory The directory to start from.
      */
     public async run({ directory }: { directory: string }): Promise<LintServiceOutput> {
-        const location = await this.projectLocator.locate(directory);
+        const projectLocateOutput = await this.projectLocator.locate(directory);
 
-        if (!location.success) {
-            return location;
+        if (!projectLocateOutput.success) {
+            return projectLocateOutput;
         }
 
-        const project = location.project;
+        const project = projectLocateOutput.project;
 
-        const search = await this.configurationFinder.find({
+        const configurationFindOutput = await this.configurationFinder.find({
             project,
             fileName: configurationFileName,
         });
 
-        if (!search.success) {
-            return search;
+        if (!configurationFindOutput.success) {
+            return configurationFindOutput;
         }
 
-        const configuration = search.configuration;
+        const configuration = configurationFindOutput.configuration;
         const findings = configuration.check({
             project,
         });

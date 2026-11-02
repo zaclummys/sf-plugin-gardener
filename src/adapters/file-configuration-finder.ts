@@ -70,10 +70,10 @@ class ConfigurationParser {
     }
 
     /**
-     * Builds a configuration from the parsed content of its file. The rules of the presets
+     * Builds a configuration from the configurationParseOutput content of its file. The rules of the presets
      * it extends come first, and a rule of its own replaces the one of a preset with the same name.
      *
-     * @param content The parsed content of the configuration file.
+     * @param content The configurationParseOutput content of the configuration file.
      */
     public parse(content: unknown): ConfigurationParseOutput {
         const file = schema.safeParse(content);
@@ -85,19 +85,19 @@ class ConfigurationParser {
             };
         }
 
-        const presets = this.resolvePresets(file.data.extends);
+        const presetResolveOutput = this.resolvePresets(file.data.extends);
 
-        if (!presets.success) {
+        if (!presetResolveOutput.success) {
             return {
                 success: false,
                 error: 'preset-not-found',
-                preset: presets.preset,
+                preset: presetResolveOutput.preset,
             };
         }
 
         const projectRules = this.buildProjectRules(file.data.rules);
         const rules = ConfigurationParser.mergeByName([
-            ...presets.rules,
+            ...presetResolveOutput.rules,
             ...projectRules,
         ]);
 
@@ -201,17 +201,17 @@ export class FileConfigurationFinder implements ConfigurationFinder {
         }
 
         const text = await readFile(file, 'utf8');
-        const parsed = FileConfigurationFinder.parse(text);
+        const configurationParseOutput = FileConfigurationFinder.parse(text);
 
-        if (!parsed.success && parsed.error === 'invalid-configuration') {
+        if (!configurationParseOutput.success && configurationParseOutput.error === 'invalid-configuration') {
             return {
                 success: false,
-                error: parsed.error,
+                error: configurationParseOutput.error,
                 file,
             };
         }
 
-        return parsed;
+        return configurationParseOutput;
     }
 
     private static parse(text: string): ConfigurationParseOutput {
