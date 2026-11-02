@@ -44,9 +44,9 @@ Use a versão mais recente de tudo. Marque apenas o major, como `^5` e não `^5.
 
 Nunca lance erro em `src/core/` nem em `src/services/`. Quem lança é o comando.
 
-## Tipo de resultado
+## Tipo de saída
 
-Todo tipo que tem `success` termina com `Result`, como `ProjectLocateResult`.
+Todo tipo que tem `success` termina com `Output`, como `ProjectLocateOutput`.
 
 ## Nome de função
 

@@ -192,7 +192,7 @@ Ignoring an entire metadata directory requires an allowlist, because it hides dr
 
 ## `project/max-files`
 
-A deploy with more than N files. The linter counts the files under the project directory.
+A deploy with more than N files. The linter counts the metadata files that it analyzes in the package directories of the project.
 
 **Properties:**
 
