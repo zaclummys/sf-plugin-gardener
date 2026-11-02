@@ -65,7 +65,7 @@ export class LintService {
         return {
             success: true,
             result: {
-                files: 0,
+                files: project.countFiles(),
                 findings: [],
             },
         };
