@@ -1,6 +1,6 @@
 import { Messages, SfError } from '@salesforce/core';
 import { Flags, SfCommand } from '@salesforce/sf-plugins-core';
-import { ConfigurationFinder, ProjectLocator } from '../../adapters/index.js';
+import { FileConfigurationFinder, SfProjectLocator } from '../../adapters/index.js';
 import { LintService, type LintResult } from '../../services/index.js';
 
 
@@ -29,8 +29,8 @@ export default class Run extends SfCommand<LintRunResult> {
     public async run(): Promise<LintRunResult> {
         const { flags } = await this.parse(Run);
 
-        const projectLocator = new ProjectLocator();
-        const configurationFinder = new ConfigurationFinder();
+        const projectLocator = new SfProjectLocator();
+        const configurationFinder = new FileConfigurationFinder();
         const service = new LintService({
             projectLocator,
             configurationFinder,
@@ -51,7 +51,12 @@ export default class Run extends SfCommand<LintRunResult> {
                 );
             case 'configuration-not-found':
                 throw new SfError(
-                    messages.getMessage('error.configurationNotFound', [outcome.project.getDirectory()]),
+                    messages.getMessage('error.configurationNotFound', [outcome.directory]),
+                    outcome.error,
+                );
+            case 'preset-not-found':
+                throw new SfError(
+                    messages.getMessage('error.presetNotFound', [outcome.preset]),
                     outcome.error,
                 );
             case 'invalid-configuration':

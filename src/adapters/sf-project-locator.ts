@@ -1,7 +1,8 @@
 import { SfProject } from '@salesforce/core';
 import { Project } from '../core/index.js';
+import type { ProjectLocator } from '../services/adapters/index.js';
 
-export class ProjectLocator {
+export class SfProjectLocator implements ProjectLocator {
     /**
      * Finds the project that holds the directory.
      *

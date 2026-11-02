@@ -1,2 +1,2 @@
-export { ConfigurationFinder, type ConfigurationSearch } from './configuration-finder.js';
-export { ProjectLocator } from './project-locator.js';
+export { FileConfigurationFinder } from './file-configuration-finder.js';
+export { SfProjectLocator } from './sf-project-locator.js';

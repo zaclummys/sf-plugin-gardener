@@ -1,21 +1,16 @@
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { Configuration, type Project } from '../core/index.js';
+import { Configuration, type ConfigurationParseResult, type Project } from '../core/index.js';
+import type { ConfigurationFinder, ConfigurationSearch } from '../services/adapters/index.js';
 
-export type ConfigurationSearch = {
-    file: string;
-    exists: boolean;
-    configuration: Configuration | null;
-};
-
-export class ConfigurationFinder {
+export class FileConfigurationFinder implements ConfigurationFinder {
     /**
      * Finds the configuration of a project.
      *
      * @param project The project to look in.
      * @param fileName The name of the configuration file.
-     * @returns The configuration file, whether it exists, and the configuration read from it when it is valid.
+     * @returns The configuration, or the reason it could not be found or read.
      */
     public async find({
         project, fileName,
@@ -27,28 +22,37 @@ export class ConfigurationFinder {
 
         if (!existsSync(file)) {
             return {
-                file,
-                exists: false,
-                configuration: null,
+                success: false,
+                error: 'configuration-not-found',
+                directory: project.getDirectory(),
             };
         }
 
         const text = await readFile(file, 'utf8');
 
+        const outcome = FileConfigurationFinder.parse(text);
+
+        if (outcome.success || outcome.error === 'preset-not-found') {
+            return outcome;
+        }
+
         return {
+            success: false,
+            error: outcome.error,
             file,
-            exists: true,
-            configuration: ConfigurationFinder.parse(text),
         };
     }
 
-    private static parse(text: string): Configuration | null {
+    private static parse(text: string): ConfigurationParseResult {
         try {
             const content: unknown = JSON.parse(text);
 
-            return Configuration.from(content);
+            return Configuration.parse(content);
         } catch {
-            return null;
+            return {
+                success: false,
+                error: 'invalid-configuration',
+            };
         }
     }
 }

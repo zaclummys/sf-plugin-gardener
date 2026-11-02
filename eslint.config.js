@@ -384,6 +384,13 @@ export default defineConfig([
                         },
                         {
                             group: [
+                                "../adapters",
+                                "../adapters/**",
+                            ],
+                            message: "services/ must not import the adapters layer: its ports live in services/adapters.",
+                        },
+                        {
+                            group: [
                                 "**/adapters/*",
                                 "!**/adapters/index.js",
                             ],
