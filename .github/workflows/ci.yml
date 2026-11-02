@@ -31,6 +31,9 @@ jobs:
           node-version: "24"
           cache: npm
       - run: npm ci
+      - run: npm install --global @salesforce/cli
+      - run: npm run compile
+      - run: sf plugins link .
       - run: npm run test:nut
       - uses: codecov/codecov-action@v7
         with:
