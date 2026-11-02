@@ -42,4 +42,18 @@ describe('lint run project', () => {
             name: 'project-not-found',
         });
     });
+
+    it('counts only the metadata files that are linted', () => {
+        const directory = findFixture('metadata-project');
+        const output = lint({
+            directory,
+        });
+
+        expect(output).to.deep.include({
+            result: {
+                files: 1,
+                findings: [],
+            },
+        });
+    });
 });
