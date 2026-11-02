@@ -69,6 +69,11 @@ export default class Run extends SfCommand<LintRunResult> {
             }
         }
 
+        this.log(messages.getMessage('summary.counts', [
+            '0',
+            '0',
+        ]));
+
         return outcome.result;
     }
 }
