@@ -33,6 +33,15 @@ export class LintResult {
         return warnings.length;
     }
 
+    /**
+     * Tells whether the lint failed. An error fails it, and so does a warning when it is strict.
+     *
+     * @param strict Treats warnings as errors.
+     */
+    public hasFailed(strict: boolean): boolean {
+        return this.countErrors() > 0 || (strict && this.countWarnings() > 0);
+    }
+
     /** Lists the findings. */
     public listFindings(): Finding[] {
         return this.findings;

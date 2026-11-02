@@ -97,7 +97,7 @@ export default class Run extends SfCommand<LintRunResult> {
             String(warnings),
         ]));
 
-        if (errors > 0 || (flags.strict && warnings > 0)) {
+        if (result.hasFailed(flags.strict)) {
             throw new SfError(messages.getMessage('error.failed'), 'lint-failed');
         }
 
