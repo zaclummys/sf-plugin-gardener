@@ -216,12 +216,12 @@ A deploy with more than N files. The linter counts the metadata files that it an
 
 ## `project/max-size`
 
-A deploy whose zip exceeds N megabytes. The linter estimates the compressed size from the files, so the result is approximate.
+A deploy whose metadata files exceed N megabytes. The linter sums the size of the metadata files that it analyzes in the package directories of the project.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `maxInMegabytes`: N, zip size in megabytes. Required
+- `maxInMegabytes`: N, size of the files in megabytes. Required
 
 **Reference:** [Salesforce documentation](https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_deploy.htm)
 

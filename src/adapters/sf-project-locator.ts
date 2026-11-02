@@ -1,8 +1,8 @@
 import { existsSync } from 'node:fs';
-import { readdir } from 'node:fs/promises';
+import { readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { SfProject } from '@salesforce/core';
-import { Project } from '../core/index.js';
+import { metadataTypes, Project, ProjectFile } from '../core/index.js';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {
@@ -37,7 +37,7 @@ export class SfProjectLocator implements ProjectLocator {
             .getContents();
 
         const packageDirectories = projectJson.packageDirectories;
-        const files: string[] = [];
+        const files: ProjectFile[] = [];
 
         for (const packageDirectory of packageDirectories) {
             const fullPath = path.resolve(projectDirectory, packageDirectory.path);
@@ -56,9 +56,16 @@ export class SfProjectLocator implements ProjectLocator {
             });
             const paths = entries
                 .filter((entry) => entry.isFile())
-                .map((entry) => path.join(entry.parentPath, entry.name));
+                .map((entry) => path.join(entry.parentPath, entry.name))
+                .filter((file) => metadataTypes.some((type) => type.matches(file)));
 
-            files.push(...paths);
+            for (const file of paths) {
+                const fileStat = await stat(file);
+
+                files.push(new ProjectFile({
+                    size: fileStat.size,
+                }));
+            }
         }
 
         return {

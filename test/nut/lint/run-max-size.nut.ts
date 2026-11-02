@@ -12,4 +12,13 @@ describe('lint run project/max-size', () => {
 
         expect(text).to.include('1 errors, 0 warnings.');
     });
+
+    it('reports nothing when the project is within the size limit', () => {
+        const directory = findFixture('max-size-within-limit-project');
+        const text = execLintText({
+            directory,
+        });
+
+        expect(text).to.include('0 errors, 0 warnings.');
+    });
 });
