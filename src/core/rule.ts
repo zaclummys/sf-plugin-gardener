@@ -1,15 +1,6 @@
 import { Finding, type Severity } from './finding.js';
 import type { Project } from './project.js';
 
-/** The entry of a rule in the configuration file. */
-export type RuleEntry = {
-    severity: Severity;
-    [property: string]: unknown;
-};
-
-/** Builds a rule from its entry in the configuration file. */
-export type RuleFactory = (entry: RuleEntry) => Rule;
-
 export abstract class Rule {
     private readonly name: string;
     private readonly severity: Severity;
