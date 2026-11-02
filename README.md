@@ -2,6 +2,8 @@
 
 # Gardener
 
+[![Coverage](https://codecov.io/gh/zaclummys/sf-plugin-gardener/branch/main/graph/badge.svg)](https://app.codecov.io/gh/zaclummys/sf-plugin-gardener/tree/main)
+
 Gardener is a Salesforce CLI plugin that lints the metadata of Salesforce DX projects.
 
 It reads the metadata files of a project and reports what fails at deploy, exposes data or breaks a platform limit. It works offline, never connects to an org and never parses source code. [Core concepts](https://zaclummys.github.io/sf-plugin-gardener/concepts/) explains what is in scope.
