@@ -90,13 +90,14 @@ export default class Run extends SfCommand<LintRunResult> {
 
         const result = lintServiceOutput.result;
         const errors = result.countErrors();
+        const warnings = result.countWarnings();
 
         this.log(messages.getMessage('summary.counts', [
             String(errors),
-            String(result.countWarnings()),
+            String(warnings),
         ]));
 
-        if (errors > 0) {
+        if (errors > 0 || (flags.strict && warnings > 0)) {
             throw new SfError(messages.getMessage('error.failed'), 'lint-failed');
         }
 
