@@ -39,31 +39,31 @@ export default class Run extends SfCommand<LintRunResult> {
             directory: flags.directory,
         });
 
-        if (outcome.success) {
-            return outcome.result;
+        if (!outcome.success) {
+            switch (outcome.error) {
+                case 'project-not-found':
+                    throw new SfError(
+                        messages.getMessage('error.projectNotFound', [outcome.directory]),
+                        outcome.error,
+                    );
+                case 'configuration-not-found':
+                    throw new SfError(
+                        messages.getMessage('error.configurationNotFound', [outcome.directory]),
+                        outcome.error,
+                    );
+                case 'preset-not-found':
+                    throw new SfError(
+                        messages.getMessage('error.presetNotFound', [outcome.preset]),
+                        outcome.error,
+                    );
+                case 'invalid-configuration':
+                    throw new SfError(
+                        messages.getMessage('error.invalidConfiguration', [outcome.file]),
+                        outcome.error,
+                    );
+            }
         }
 
-        switch (outcome.error) {
-            case 'project-not-found':
-                throw new SfError(
-                    messages.getMessage('error.projectNotFound', [outcome.directory]),
-                    outcome.error,
-                );
-            case 'configuration-not-found':
-                throw new SfError(
-                    messages.getMessage('error.configurationNotFound', [outcome.directory]),
-                    outcome.error,
-                );
-            case 'preset-not-found':
-                throw new SfError(
-                    messages.getMessage('error.presetNotFound', [outcome.preset]),
-                    outcome.error,
-                );
-            case 'invalid-configuration':
-                throw new SfError(
-                    messages.getMessage('error.invalidConfiguration', [outcome.file]),
-                    outcome.error,
-                );
-        }
+        return outcome.result;
     }
 }

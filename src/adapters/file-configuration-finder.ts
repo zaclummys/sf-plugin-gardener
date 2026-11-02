@@ -32,15 +32,15 @@ export class FileConfigurationFinder implements ConfigurationFinder {
 
         const outcome = FileConfigurationFinder.parse(text);
 
-        if (outcome.success || outcome.error === 'preset-not-found') {
-            return outcome;
+        if (!outcome.success && outcome.error === 'invalid-configuration') {
+            return {
+                success: false,
+                error: outcome.error,
+                file,
+            };
         }
 
-        return {
-            success: false,
-            error: outcome.error,
-            file,
-        };
+        return outcome;
     }
 
     private static parse(text: string): ConfigurationParseResult {
