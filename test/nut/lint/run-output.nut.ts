@@ -10,4 +10,14 @@ describe('lint run output', () => {
 
         expect(text).to.include('0 errors, 0 warnings.');
     });
+
+    it('counts the errors that the rules report', () => {
+        const directory = findFixture('max-files-project');
+        const text = execLintText({
+            directory,
+            exitCode: 1,
+        });
+
+        expect(text).to.include('1 errors, 0 warnings.');
+    });
 });
