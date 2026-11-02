@@ -38,8 +38,17 @@ describe('lint run api version', () => {
         ]);
     });
 
-    it('reports nothing for a file that declares no apiVersion', () => {
-        const directory = findFixture('without-api-version-project');
+    it('reports nothing for a file that declares no apiVersion, with a minimum', () => {
+        const directory = findFixture('min-without-api-version-project');
+        const output = execLintJson({
+            directory,
+        });
+
+        expect(output.result.findings).to.deep.equal([]);
+    });
+
+    it('reports nothing for a file that declares no apiVersion, with a maximum', () => {
+        const directory = findFixture('max-without-api-version-project');
         const output = execLintJson({
             directory,
         });

@@ -4,7 +4,7 @@ import path from 'node:path';
 import { SfProject } from '@salesforce/core';
 import { MetadataResolver, type SourceComponent } from '@salesforce/source-deploy-retrieve';
 import { getString } from '@salesforce/ts-types';
-import { Project, ProjectFile } from '../core/index.js';
+import { ApiVersion, Project, ProjectFile } from '../core/index.js';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {
@@ -34,7 +34,8 @@ async function buildProjectFile({
     const stats = await Promise.all(paths.map((file) => stat(file)));
     const size = stats.reduce((total, fileStat) => total + fileStat.size, 0);
     const xml = component.parseXmlSync();
-    const apiVersion = getString(xml, `${component.type.name}.apiVersion`) ?? null;
+    const apiVersionText = getString(xml, `${component.type.name}.apiVersion`);
+    const apiVersion = apiVersionText ? ApiVersion.fromString(apiVersionText) : null;
 
     return new ProjectFile({
         path: path.relative(projectDirectory, component.xml),

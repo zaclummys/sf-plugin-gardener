@@ -1,0 +1,8 @@
+{
+    "rules": {
+        "project/max-api-version": {
+            "severity": "error",
+            "maxVersion": "63.0"
+        }
+    }
+}

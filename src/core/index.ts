@@ -1,3 +1,4 @@
+export { ApiVersion } from './api-version.js';
 export { Configuration } from './configuration.js';
 export { Finding, type Severity } from './finding.js';
 export { ProjectFile } from './project-file.js';

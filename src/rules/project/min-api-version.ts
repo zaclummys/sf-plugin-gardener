@@ -1,13 +1,13 @@
-import { Rule, type Finding, type Project, type Severity } from '../../core/index.js';
+import { Rule, type ApiVersion, type Finding, type Project, type Severity } from '../../core/index.js';
 
 export class MinApiVersionRule extends Rule {
-    private readonly minVersion: string;
+    private readonly minVersion: ApiVersion;
 
     public constructor({
         severity, minVersion,
     }: {
         severity: Severity;
-        minVersion: string;
+        minVersion: ApiVersion;
     }) {
         super({
             name: 'project/min-api-version',
@@ -18,10 +18,11 @@ export class MinApiVersionRule extends Rule {
     }
 
     public check({ project }: { project: Project }): Finding[] {
-        const files = project.listFiles().filter((file) => file.hasApiVersionBelow(this.minVersion));
+        const versionedFiles = project.listFiles().filter((file) => file.hasApiVersion());
+        const files = versionedFiles.filter((file) => file.hasApiVersionBelow(this.minVersion));
 
         return files.map((file) => this.reportFile({
-            message: `The apiVersion ${String(file.getApiVersion())} is below the minimum ${this.minVersion}.`,
+            message: `The apiVersion ${file.getApiVersion()?.toString()} is below the minimum ${this.minVersion.toString()}.`,
             file: file.getPath(),
         }));
     }

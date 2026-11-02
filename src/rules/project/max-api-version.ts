@@ -1,13 +1,13 @@
-import { Rule, type Finding, type Project, type Severity } from '../../core/index.js';
+import { Rule, type ApiVersion, type Finding, type Project, type Severity } from '../../core/index.js';
 
 export class MaxApiVersionRule extends Rule {
-    private readonly maxVersion: string;
+    private readonly maxVersion: ApiVersion;
 
     public constructor({
         severity, maxVersion,
     }: {
         severity: Severity;
-        maxVersion: string;
+        maxVersion: ApiVersion;
     }) {
         super({
             name: 'project/max-api-version',
@@ -18,10 +18,11 @@ export class MaxApiVersionRule extends Rule {
     }
 
     public check({ project }: { project: Project }): Finding[] {
-        const files = project.listFiles().filter((file) => file.hasApiVersionAbove(this.maxVersion));
+        const versionedFiles = project.listFiles().filter((file) => file.hasApiVersion());
+        const files = versionedFiles.filter((file) => file.hasApiVersionAbove(this.maxVersion));
 
         return files.map((file) => this.reportFile({
-            message: `The apiVersion ${String(file.getApiVersion())} is above the maximum ${this.maxVersion}.`,
+            message: `The apiVersion ${String(file.getApiVersion())} is above the maximum ${this.maxVersion.toString()}.`,
             file: file.getPath(),
         }));
     }

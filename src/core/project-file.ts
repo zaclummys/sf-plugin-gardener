@@ -1,7 +1,9 @@
+import type { ApiVersion } from './api-version.js';
+
 export class ProjectFile {
     private readonly path: string;
     private readonly size: number;
-    private readonly apiVersion: string | null;
+    private readonly apiVersion: ApiVersion | null;
 
     /**
      * @param path The path of the file, relative to the project.
@@ -13,7 +15,7 @@ export class ProjectFile {
     }: {
         path: string;
         size: number;
-        apiVersion: string | null;
+        apiVersion: ApiVersion | null;
     }) {
         this.path = path;
         this.size = size;
@@ -31,8 +33,13 @@ export class ProjectFile {
     }
 
     /** Returns the apiVersion that the file declares, or null when it declares none. */
-    public getApiVersion(): string | null {
+    public getApiVersion(): ApiVersion | null {
         return this.apiVersion;
+    }
+
+    /** Tells whether the file declares an apiVersion. */
+    public hasApiVersion(): boolean {
+        return this.apiVersion !== null;
     }
 
     /**
@@ -40,8 +47,8 @@ export class ProjectFile {
      *
      * @param version The version to compare with.
      */
-    public hasApiVersionBelow(version: string): boolean {
-        return this.apiVersion !== null && Number(this.apiVersion) < Number(version);
+    public hasApiVersionBelow(version: ApiVersion): boolean {
+        return this.apiVersion?.isBelow(version) === true;
     }
 
     /**
@@ -49,7 +56,7 @@ export class ProjectFile {
      *
      * @param version The version to compare with.
      */
-    public hasApiVersionAbove(version: string): boolean {
-        return this.apiVersion !== null && Number(this.apiVersion) > Number(version);
+    public hasApiVersionAbove(version: ApiVersion): boolean {
+        return this.apiVersion?.isAbove(version) === true;
     }
 }

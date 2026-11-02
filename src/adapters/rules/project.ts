@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import type { Rule } from '../../core/index.js';
 import { MaxFilesRule } from '../../rules/project/max-files.js';
+import { ApiVersion } from '../../core/index.js';
 import { MaxApiVersionRule } from '../../rules/project/max-api-version.js';
 import { MaxSizeRule } from '../../rules/project/max-size.js';
 import { MinApiVersionRule } from '../../rules/project/min-api-version.js';
@@ -21,12 +22,16 @@ const maxSize = z.object({
     maxInMegabytes: z.number(),
 }).transform((properties) => new MaxSizeRule(properties));
 
+const apiVersion = z.string()
+    .regex(/^\d+(\.\d+)?$/)
+    .transform((text) => ApiVersion.fromString(text));
+
 const minApiVersion = z.object({
     severity: z.enum([
         'error',
         'warn',
     ]),
-    minVersion: z.string(),
+    minVersion: apiVersion,
 }).transform((properties) => new MinApiVersionRule(properties));
 
 const maxApiVersion = z.object({
@@ -34,7 +39,7 @@ const maxApiVersion = z.object({
         'error',
         'warn',
     ]),
-    maxVersion: z.string(),
+    maxVersion: apiVersion,
 }).transform((properties) => new MaxApiVersionRule(properties));
 
 /** The rules of the project namespace, by their full name. Each one is the schema that reads its entry and builds the rule. */
