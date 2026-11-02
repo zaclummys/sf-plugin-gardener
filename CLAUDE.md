@@ -4,6 +4,10 @@
 
 Use `!x` ou `== null`. Nunca use `=== undefined` nem `!== undefined`.
 
+## Ausência de valor
+
+Quando não há valor, retorne `null`. Nunca retorne `undefined`.
+
 ## Promises
 
 Prefira `async/await`. Nunca use `.then()`.
@@ -39,6 +43,10 @@ Nunca lance erro em `src/core/` nem em `src/services/`. Quem lança é o comando
 ## Nome de função
 
 Todo nome de função e de método começa com um verbo.
+
+## Método estático
+
+Todo método que não usa `this` é `static`, exceto os dos adaptadores, que são injetados no serviço.
 
 ## JSDoc
 
