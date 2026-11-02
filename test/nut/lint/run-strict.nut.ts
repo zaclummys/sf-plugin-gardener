@@ -7,6 +7,7 @@ describe('lint run strict', () => {
         const text = execLintText({
             directory,
             strict: true,
+        }, {
             exitCode: 1,
         });
 

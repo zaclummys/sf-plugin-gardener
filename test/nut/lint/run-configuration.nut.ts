@@ -6,6 +6,7 @@ describe('lint run configuration', () => {
         const directory = findFixture('unconfigured-project');
         const output = execLintJson({
             directory,
+        }, {
             exitCode: 1,
         });
 
@@ -18,6 +19,7 @@ describe('lint run configuration', () => {
         const directory = findFixture('invalid-configuration-project');
         const output = execLintJson({
             directory,
+        }, {
             exitCode: 1,
         });
 
@@ -30,6 +32,7 @@ describe('lint run configuration', () => {
         const directory = findFixture('array-configuration-project');
         const output = execLintJson({
             directory,
+        }, {
             exitCode: 1,
         });
 
@@ -42,6 +45,7 @@ describe('lint run configuration', () => {
         const directory = findFixture('invalid-rules-project');
         const output = execLintJson({
             directory,
+        }, {
             exitCode: 1,
         });
 
@@ -54,6 +58,7 @@ describe('lint run configuration', () => {
         const directory = findFixture('invalid-max-files-project');
         const output = execLintJson({
             directory,
+        }, {
             exitCode: 1,
         });
 

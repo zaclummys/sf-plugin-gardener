@@ -23,10 +23,13 @@ type LintRunResult = {
 type LintOptions = {
     directory: string;
     strict?: boolean;
+};
+
+type LintExpectation = {
     exitCode?: number | 'nonZero';
 };
 
-function execLint(options: LintOptions, flags: string[]) {
+function execLint(options: LintOptions, expectation: LintExpectation, flags: string[]) {
     const args = [
         'lint',
         'run',
@@ -40,7 +43,7 @@ function execLint(options: LintOptions, flags: string[]) {
     }
 
     return execCmd<LintRunResult>(args.join(' '), {
-        ensureExitCode: options.exitCode ?? 0,
+        ensureExitCode: expectation.exitCode ?? 0,
         cwd: tmpdir(),
     });
 }
@@ -48,12 +51,12 @@ function execLint(options: LintOptions, flags: string[]) {
 /**
  * Runs `sf lint run` and returns its JSON output.
  *
- * @param directory The directory to lint.
- * @param strict Treats warnings as errors.
- * @param exitCode The exit code the command must end with. Defaults to 0.
+ * @param options.directory The directory to lint.
+ * @param options.strict Treats warnings as errors.
+ * @param expectation.exitCode The exit code the command must end with. Defaults to 0.
  */
-export function execLintJson(options: LintOptions) {
-    const output = execLint(options, ['--json']);
+export function execLintJson(options: LintOptions, expectation: LintExpectation = {}) {
+    const output = execLint(options, expectation, ['--json']);
     const json = output.jsonOutput;
 
     if (!json) {
@@ -66,12 +69,12 @@ export function execLintJson(options: LintOptions) {
 /**
  * Runs `sf lint run` and returns what it prints in the human format.
  *
- * @param directory The directory to lint.
- * @param strict Treats warnings as errors.
- * @param exitCode The exit code the command must end with. Defaults to 0.
+ * @param options.directory The directory to lint.
+ * @param options.strict Treats warnings as errors.
+ * @param expectation.exitCode The exit code the command must end with. Defaults to 0.
  */
-export function execLintText(options: LintOptions) {
-    const output = execLint(options, []);
+export function execLintText(options: LintOptions, expectation: LintExpectation = {}) {
+    const output = execLint(options, expectation, []);
 
     return output.shellOutput.stdout;
 }

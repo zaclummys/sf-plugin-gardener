@@ -6,6 +6,7 @@ describe('lint run presets', () => {
         const directory = findFixture('unknown-preset-project');
         const output = execLintJson({
             directory,
+        }, {
             exitCode: 1,
         });
 

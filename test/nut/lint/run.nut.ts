@@ -35,6 +35,7 @@ describe('lint run project', () => {
         const directory = makeEmptyDirectory();
         const output = execLintJson({
             directory,
+        }, {
             exitCode: 1,
         });
 
@@ -61,6 +62,7 @@ describe('lint run project', () => {
         const directory = findFixture('missing-package-directory-project');
         const output = execLintJson({
             directory,
+        }, {
             exitCode: 1,
         });
 

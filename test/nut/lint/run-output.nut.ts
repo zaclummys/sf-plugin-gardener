@@ -15,6 +15,7 @@ describe('lint run output', () => {
         const directory = findFixture('max-files-project');
         const text = execLintText({
             directory,
+        }, {
             exitCode: 1,
         });
 
