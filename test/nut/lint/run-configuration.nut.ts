@@ -37,4 +37,16 @@ describe('lint run configuration', () => {
             name: 'invalid-configuration',
         });
     });
+
+    it('fails when the rules of the configuration are not an object', () => {
+        const directory = findFixture('invalid-rules-project');
+        const output = lint({
+            directory,
+            exitCode: 1,
+        });
+
+        expect(output).to.include({
+            name: 'invalid-configuration',
+        });
+    });
 });
