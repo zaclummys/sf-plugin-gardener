@@ -56,4 +56,16 @@ describe('lint run project', () => {
             },
         });
     });
+
+    it('fails when a package directory does not exist', () => {
+        const directory = findFixture('missing-package-directory-project');
+        const output = lint({
+            directory,
+            exitCode: 1,
+        });
+
+        expect(output).to.include({
+            name: 'package-directory-not-found',
+        });
+    });
 });
