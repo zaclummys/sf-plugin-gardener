@@ -44,6 +44,10 @@ Nunca lance erro em `src/core/` nem em `src/services/`. Quem lança é o comando
 
 Todo nome de função e de método começa com um verbo.
 
+## Retorno de sucesso
+
+O `return` do caso de sucesso fica por último na função. Dentro de `try/catch` ele pode ficar no `try`.
+
 ## Método estático
 
 Todo método que não usa `this` é `static`, exceto os dos adaptadores, que são injetados no serviço.
