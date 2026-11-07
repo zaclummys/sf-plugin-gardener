@@ -14,6 +14,11 @@ export class CustomFields {
         return this.fields.filter((field) => field.isUndescribed());
     }
 
+    /** Lists the custom fields that are picklists not restricted to their values. */
+    public listUnrestrictedPicklists(): CustomField[] {
+        return this.fields.filter((field) => field.isUnrestrictedPicklist());
+    }
+
     /** Lists the custom fields that declare no securityClassification. */
     public listWithoutSecurityClassification(): CustomField[] {
         return this.fields.filter((field) => field.lacksSecurityClassification());

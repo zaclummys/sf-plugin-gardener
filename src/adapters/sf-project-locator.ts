@@ -67,6 +67,8 @@ function buildCustomField({
         description: xml.CustomField.description ?? null,
         securityClassification: xml.CustomField.securityClassification ?? null,
         complianceGroup: xml.CustomField.complianceGroup ?? null,
+        type: xml.CustomField.type ?? null,
+        restricted: xml.CustomField.valueSet?.restricted?.toString() ?? null,
     });
 }
 
