@@ -52,6 +52,10 @@ Todo tipo que tem `success` termina com `Output`, como `ProjectLocateOutput`.
 
 Todo nome de função e de método começa com um verbo.
 
+## Obsessão por primitivos
+
+Não use primitivo, `Map` nem `Array` para representar um conceito do domínio. Crie uma classe que o modele. A classe guarda a validação e os métodos do conceito.
+
 ## Let
 
 Evite `let`. Prefira `const`, e extraia uma função quando a atribuição depender de um `try/catch`.
@@ -83,6 +87,10 @@ Escreva o teste e pare no vermelho. Só implemente o código depois que eu revis
 ## Commit
 
 Só commite quando eu pedir naquela mensagem. Um pedido anterior não vale para as mudanças seguintes.
+
+## Etapas
+
+Nunca faça uma tarefa inteira num único comando de `Bash` ou script de `python`. Quebre em etapas pequenas, uma chamada por etapa. Assim uma falha não desfaz o resto e eu acompanho o progresso.
 
 # Convenções da documentação
 
