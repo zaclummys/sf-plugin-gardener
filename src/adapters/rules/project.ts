@@ -24,7 +24,7 @@ const maxSize = z.object({
 
 const apiVersion = z.string()
     .regex(/^\d+(\.\d+)?$/)
-    .transform((text) => ApiVersion.fromString(text));
+    .transform((text) => ApiVersion.from(text));
 
 const minApiVersion = z.object({
     severity: z.enum([

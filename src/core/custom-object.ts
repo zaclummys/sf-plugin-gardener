@@ -1,5 +1,5 @@
-import type { DeploymentStatus } from './deployment-status.js';
-import type { SharingModel } from './sharing-model.js';
+import { DeploymentStatus } from './deployment-status.js';
+import { SharingModel } from './sharing-model.js';
 import type { SharingModels } from './sharing-models.js';
 
 export class CustomObject {
@@ -11,21 +11,21 @@ export class CustomObject {
     /**
      * @param name The full name of the object, such as Sample__c.
      * @param path The path of the object file, relative to the project.
-     * @param deploymentStatus The deploymentStatus that the object declares, or null when it declares none.
-     * @param sharingModel The sharingModel that the object declares, or null when it declares none.
+     * @param deploymentStatus The deploymentStatus that the object declares, if any.
+     * @param sharingModel The sharingModel that the object declares, if any.
      */
     public constructor({
         name, path, deploymentStatus, sharingModel,
     }: {
         name: string;
         path: string;
-        deploymentStatus: DeploymentStatus | null;
-        sharingModel: SharingModel | null;
+        deploymentStatus: string | null;
+        sharingModel: string | null;
     }) {
         this.name = name;
         this.path = path;
-        this.deploymentStatus = deploymentStatus;
-        this.sharingModel = sharingModel;
+        this.deploymentStatus = DeploymentStatus.from(deploymentStatus);
+        this.sharingModel = SharingModel.from(sharingModel);
     }
 
     /** Returns the full name of the object, such as Sample__c. */

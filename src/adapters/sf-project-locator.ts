@@ -5,7 +5,7 @@ import { SfProject } from '@salesforce/core';
 import { MetadataResolver, type SourceComponent } from '@salesforce/source-deploy-retrieve';
 import { getString } from '@salesforce/ts-types';
 import type { CustomField as CustomFieldMetadata, CustomObject as CustomObjectMetadata } from '@salesforce/types/metadata';
-import { ApiVersion, CustomField, CustomFields, CustomObject, CustomObjects, DeploymentStatus, Description, Project, ProjectFile, SharingModel } from '../core/index.js';
+import { ApiVersion, CustomField, CustomFields, CustomObject, CustomObjects, Project, ProjectFile } from '../core/index.js';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {
@@ -36,7 +36,7 @@ async function buildProjectFile({
     const size = stats.reduce((total, fileStat) => total + fileStat.size, 0);
     const xml = component.parseXmlSync();
     const apiVersionText = getString(xml, `${component.type.name}.apiVersion`);
-    const apiVersion = apiVersionText ? ApiVersion.fromString(apiVersionText) : null;
+    const apiVersion = ApiVersion.from(apiVersionText ?? null);
 
     return new ProjectFile({
         path: path.relative(projectDirectory, component.xml),
@@ -60,15 +60,13 @@ function buildCustomField({
     projectDirectory: string;
 }): CustomField {
     const xml = component.parseXmlSync<{ CustomField: CustomFieldMetadata }>();
-    const descriptionText = xml.CustomField.description;
-    const description = descriptionText ? new Description(descriptionText) : null;
 
     return new CustomField({
         name: component.fullName,
         path: path.relative(projectDirectory, component.xml),
-        description,
-        securityClassified: Boolean(xml.CustomField.securityClassification),
-        complianceGrouped: Boolean(xml.CustomField.complianceGroup),
+        description: xml.CustomField.description ?? null,
+        securityClassification: xml.CustomField.securityClassification ?? null,
+        complianceGroup: xml.CustomField.complianceGroup ?? null,
     });
 }
 
@@ -79,16 +77,12 @@ function buildCustomObject({
     projectDirectory: string;
 }): CustomObject {
     const xml = component.parseXmlSync<{ CustomObject: CustomObjectMetadata }>();
-    const deploymentStatusText = xml.CustomObject.deploymentStatus;
-    const deploymentStatus = deploymentStatusText ? new DeploymentStatus(deploymentStatusText) : null;
-    const sharingModelText = xml.CustomObject.sharingModel;
-    const sharingModel = sharingModelText ? new SharingModel(sharingModelText) : null;
 
     return new CustomObject({
         name: component.fullName,
         path: path.relative(projectDirectory, component.xml),
-        deploymentStatus,
-        sharingModel,
+        deploymentStatus: xml.CustomObject.deploymentStatus ?? null,
+        sharingModel: xml.CustomObject.sharingModel ?? null,
     });
 }
 

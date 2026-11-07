@@ -1,4 +1,4 @@
-import type { Description } from './description.js';
+import { Description } from './description.js';
 import type { DescriptionLength } from './description-length.js';
 
 export class CustomField {
@@ -11,24 +11,24 @@ export class CustomField {
     /**
      * @param name The full name of the field, such as Sample__c.Code__c.
      * @param path The path of the field file, relative to the project.
-     * @param description The description that the field declares, or null when it declares none.
-     * @param securityClassified Whether the field declares a securityClassification.
-     * @param complianceGrouped Whether the field declares a complianceGroup.
+     * @param description The description that the field declares, if any.
+     * @param securityClassification The securityClassification that the field declares, if any.
+     * @param complianceGroup The complianceGroup that the field declares, if any.
      */
     public constructor({
-        name, path, description, securityClassified, complianceGrouped,
+        name, path, description, securityClassification, complianceGroup,
     }: {
         name: string;
         path: string;
-        description: Description | null;
-        securityClassified: boolean;
-        complianceGrouped: boolean;
+        description: string | null;
+        securityClassification: string | null;
+        complianceGroup: string | null;
     }) {
         this.name = name;
         this.path = path;
-        this.description = description;
-        this.securityClassified = securityClassified;
-        this.complianceGrouped = complianceGrouped;
+        this.description = Description.from(description);
+        this.securityClassified = securityClassification != null;
+        this.complianceGrouped = complianceGroup != null;
     }
 
     /** Returns the full name of the field, such as Sample__c.Code__c. */
