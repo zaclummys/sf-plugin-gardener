@@ -1,0 +1,10 @@
+{
+    "rules": {
+        "custom-object/no-public-sharing-model": {
+            "severity": "error",
+            "publicModels": [
+                "ReadWrite"
+            ]
+        }
+    }
+}
