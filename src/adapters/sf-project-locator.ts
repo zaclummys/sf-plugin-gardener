@@ -4,7 +4,7 @@ import path from 'node:path';
 import { SfProject } from '@salesforce/core';
 import { MetadataResolver, type SourceComponent } from '@salesforce/source-deploy-retrieve';
 import { getString } from '@salesforce/ts-types';
-import { ApiVersion, Project, ProjectFile } from '../core/index.js';
+import { ApiVersion, CustomObject, CustomObjects, DeploymentStatus, Project, ProjectFile } from '../core/index.js';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {
@@ -44,6 +44,27 @@ async function buildProjectFile({
     });
 }
 
+function isCustomObject(component: SourceComponent): boolean {
+    return component.type.name === 'CustomObject';
+}
+
+function buildCustomObject({
+    component, projectDirectory,
+}: {
+    component: XmlComponent;
+    projectDirectory: string;
+}): CustomObject {
+    const xml = component.parseXmlSync();
+    const deploymentStatusText = getString(xml, 'CustomObject.deploymentStatus');
+    const deploymentStatus = deploymentStatusText ? new DeploymentStatus(deploymentStatusText) : null;
+
+    return new CustomObject({
+        name: component.fullName,
+        path: path.relative(projectDirectory, component.xml),
+        deploymentStatus,
+    });
+}
+
 export class SfProjectLocator implements ProjectLocator {
     /**
      * Finds the project that holds the directory, with the files of its package directories.
@@ -69,6 +90,7 @@ export class SfProjectLocator implements ProjectLocator {
 
         const packageDirectories = projectJson.packageDirectories;
         const files: ProjectFile[] = [];
+        const objects: CustomObject[] = [];
 
         for (const packageDirectory of packageDirectories) {
             const fullPath = path.resolve(projectDirectory, packageDirectory.path);
@@ -92,14 +114,31 @@ export class SfProjectLocator implements ProjectLocator {
 
                 files.push(file);
             }
+
+            const objectComponents = components.filter(isCustomObject);
+
+            for (const component of objectComponents) {
+                const object = buildCustomObject({
+                    component,
+                    projectDirectory,
+                });
+
+                objects.push(object);
+            }
         }
+
+        const customObjects = new CustomObjects({
+            objects,
+        });
+        const project = new Project({
+            directory: projectDirectory,
+            files,
+            customObjects,
+        });
 
         return {
             success: true,
-            project: new Project({
-                directory: projectDirectory,
-                files,
-            }),
+            project,
         };
     }
 }
