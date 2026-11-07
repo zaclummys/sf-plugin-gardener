@@ -16,7 +16,7 @@ export class ProjectFiles {
      * @param components The components, whose roots hold the files.
      */
     public static from({ components }: { components: Components }): ProjectFiles {
-        const files = components.listRoots().map((component) => ProjectFile.from({
+        const files = components.listRoots().map((component) => new ProjectFile({
             component,
         }));
 

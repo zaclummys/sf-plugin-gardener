@@ -1,57 +1,36 @@
 import type { Component } from '@sf-plugin-gardener/core';
+import { z } from 'zod';
 import { ApiVersion } from './api-version.js';
 
 export class ProjectFile {
-    private readonly path: string;
-    private readonly size: number;
-    private readonly apiVersion: ApiVersion | null;
+    private readonly component: Component;
 
-    /**
-     * @param path The path of the file, relative to the project.
-     * @param size The size of the file, in bytes.
-     * @param apiVersion The apiVersion that the file declares, if any.
-     */
-    public constructor({
-        path, size, apiVersion,
-    }: {
-        path: string;
-        size: number;
-        apiVersion: string | null;
-    }) {
-        this.path = path;
-        this.size = size;
-        this.apiVersion = ApiVersion.from(apiVersion);
-    }
-
-    /**
-     * Builds a file from a component that is not a child of another one.
-     *
-     * @param component The component that holds the file.
-     */
-    public static from({ component }: { component: Component }): ProjectFile {
-        const content = component.getContent();
-        const root = content[component.getType()] as { apiVersion?: string };
-
-        return new ProjectFile({
-            path: component.getPath(),
-            size: component.getSize(),
-            apiVersion: root.apiVersion ?? null,
-        });
+    /** @param component The component that holds the file, which is read only when a rule asks for it. */
+    public constructor({ component }: { component: Component }) {
+        this.component = component;
     }
 
     /** Returns the path of the file, relative to the project. */
     public getPath(): string {
-        return this.path;
+        return this.component.getPath();
     }
 
-    /** Returns the size of the file, in bytes. */
+    /** Measures the size of the file, in bytes. */
     public getSize(): number {
-        return this.size;
+        return this.component.getSize();
     }
 
-    /** Returns the apiVersion that the file declares, or null when it declares none. */
+    /** Reads the apiVersion that the file declares, or null when it declares none. */
     public getApiVersion(): ApiVersion | null {
-        return this.apiVersion;
+        const type = this.component.getType();
+        const schema = z.object({
+            [type]: z.object({
+                apiVersion: z.string().nullish(),
+            }),
+        });
+        const file = schema.parse(this.component.getContent());
+
+        return ApiVersion.from(file[type].apiVersion ?? null);
     }
 
     /**
@@ -60,7 +39,7 @@ export class ProjectFile {
      * @param version The version to compare with.
      */
     public hasApiVersionBelow(version: ApiVersion): boolean {
-        return this.apiVersion?.isBelow(version) === true;
+        return this.getApiVersion()?.isBelow(version) === true;
     }
 
     /**
@@ -69,6 +48,6 @@ export class ProjectFile {
      * @param version The version to compare with.
      */
     public hasApiVersionAbove(version: ApiVersion): boolean {
-        return this.apiVersion?.isAbove(version) === true;
+        return this.getApiVersion()?.isAbove(version) === true;
     }
 }

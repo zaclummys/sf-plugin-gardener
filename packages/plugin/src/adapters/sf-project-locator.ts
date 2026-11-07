@@ -1,11 +1,11 @@
 import { existsSync } from 'node:fs';
-import { stat } from 'node:fs/promises';
 import path from 'node:path';
 import { SfProject } from '@salesforce/core';
 import { MetadataResolver, type SourceComponent } from '@salesforce/source-deploy-retrieve';
 import { Component, Components } from '@sf-plugin-gardener/core';
 import { Project } from '../services/index.js';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
+import { SourceComponentReader, type XmlComponent } from './source-component-reader.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {
     try {
@@ -15,58 +15,47 @@ async function resolveSfProject(directory: string): Promise<SfProject | null> {
     }
 }
 
-type XmlComponent = SourceComponent & { xml: string };
-
 function hasXml(component: SourceComponent): component is XmlComponent {
     return component.xml != null;
 }
 
-async function measureSize(component: XmlComponent): Promise<number> {
-    const paths = [
-        component.xml,
-        ...component.walkContent(),
-    ];
-    const stats = await Promise.all(paths.map((file) => stat(file)));
-
-    return stats.reduce((total, fileStat) => total + fileStat.size, 0);
-}
-
-async function buildComponent({
+function buildComponent({
     component, projectDirectory, child,
 }: {
     component: XmlComponent;
     projectDirectory: string;
     child: boolean;
-}): Promise<Component> {
-    const size = await measureSize(component);
+}): Component {
+    const reader = new SourceComponentReader({
+        component,
+    });
 
     return new Component({
         name: component.fullName,
         type: component.type.name,
         path: path.relative(projectDirectory, component.xml),
-        size,
         child,
-        content: component.parseXmlSync(),
+        reader,
     });
 }
 
-async function buildComponents({
+function buildComponents({
     components, projectDirectory,
 }: {
     components: XmlComponent[];
     projectDirectory: string;
-}): Promise<Components> {
+}): Components {
     const children = components.flatMap((component) => component.getChildren()).filter(hasXml);
-    const roots = await Promise.all(components.map((component) => buildComponent({
+    const roots = components.map((component) => buildComponent({
         component,
         projectDirectory,
         child: false,
-    })));
-    const nested = await Promise.all(children.map((component) => buildComponent({
+    }));
+    const nested = children.map((component) => buildComponent({
         component,
         projectDirectory,
         child: true,
-    })));
+    }));
 
     return new Components({
         components: [
@@ -112,7 +101,7 @@ export class SfProjectLocator implements ProjectLocator {
 
         const resolver = new MetadataResolver();
         const components = fullPaths.flatMap((fullPath) => resolver.getComponentsFromPath(fullPath).filter(hasXml));
-        const metadataComponents = await buildComponents({
+        const metadataComponents = buildComponents({
             components,
             projectDirectory,
         });

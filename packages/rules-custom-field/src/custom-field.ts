@@ -1,7 +1,22 @@
-import type { CustomField as CustomFieldMetadata } from '@salesforce/types/metadata';
 import type { Component } from '@sf-plugin-gardener/core';
+import { z } from 'zod';
 import { Description } from './description.js';
 import type { DescriptionLength } from './description-length.js';
+
+const fieldFile = z.object({
+    CustomField: z.object({
+        description: z.string().nullish(),
+        securityClassification: z.string().nullish(),
+        complianceGroup: z.string().nullish(),
+        type: z.string().nullish(),
+        valueSet: z.object({
+            restricted: z.union([
+                z.string(),
+                z.boolean(),
+            ]).nullish(),
+        }).nullish(),
+    }),
+});
 
 export class CustomField {
     private readonly name: string;
@@ -47,8 +62,8 @@ export class CustomField {
      * @param component The component that holds the field file.
      */
     public static from({ component }: { component: Component }): CustomField {
-        const content = component.getContent() as { CustomField: CustomFieldMetadata };
-        const metadata = content.CustomField;
+        const file = fieldFile.parse(component.getContent());
+        const metadata = file.CustomField;
 
         return new CustomField({
             name: component.getName(),

@@ -9,7 +9,6 @@
         "node": ">=22.13.0"
     },
     "dependencies": {
-        "@salesforce/types": "^1",
         "@sf-plugin-gardener/core": "^0",
         "zod": "^4"
     },

@@ -1,8 +1,15 @@
-import type { CustomObject as CustomObjectMetadata } from '@salesforce/types/metadata';
 import type { Component } from '@sf-plugin-gardener/core';
+import { z } from 'zod';
 import { DeploymentStatus } from './deployment-status.js';
 import { SharingModel } from './sharing-model.js';
 import type { SharingModels } from './sharing-models.js';
+
+const objectFile = z.object({
+    CustomObject: z.object({
+        deploymentStatus: z.string().nullish(),
+        sharingModel: z.string().nullish(),
+    }),
+});
 
 export class CustomObject {
     private readonly name: string;
@@ -36,8 +43,8 @@ export class CustomObject {
      * @param component The component that holds the object file.
      */
     public static from({ component }: { component: Component }): CustomObject {
-        const content = component.getContent() as { CustomObject: CustomObjectMetadata };
-        const metadata = content.CustomObject;
+        const file = objectFile.parse(component.getContent());
+        const metadata = file.CustomObject;
 
         return new CustomObject({
             name: component.getName(),
