@@ -4,6 +4,7 @@ import path from 'node:path';
 import { SfProject } from '@salesforce/core';
 import { MetadataResolver, type SourceComponent } from '@salesforce/source-deploy-retrieve';
 import { getString } from '@salesforce/ts-types';
+import type { CustomField as CustomFieldMetadata, CustomObject as CustomObjectMetadata } from '@salesforce/types/metadata';
 import { ApiVersion, CustomField, CustomFields, CustomObject, CustomObjects, DeploymentStatus, Description, Project, ProjectFile, SharingModel } from '../core/index.js';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
 
@@ -58,8 +59,8 @@ function buildCustomField({
     component: XmlComponent;
     projectDirectory: string;
 }): CustomField {
-    const xml = component.parseXmlSync();
-    const descriptionText = getString(xml, 'CustomField.description');
+    const xml = component.parseXmlSync<{ CustomField: CustomFieldMetadata }>();
+    const descriptionText = xml.CustomField.description;
     const description = descriptionText ? new Description(descriptionText) : null;
 
     return new CustomField({
@@ -75,10 +76,10 @@ function buildCustomObject({
     component: XmlComponent;
     projectDirectory: string;
 }): CustomObject {
-    const xml = component.parseXmlSync();
-    const deploymentStatusText = getString(xml, 'CustomObject.deploymentStatus');
+    const xml = component.parseXmlSync<{ CustomObject: CustomObjectMetadata }>();
+    const deploymentStatusText = xml.CustomObject.deploymentStatus;
     const deploymentStatus = deploymentStatusText ? new DeploymentStatus(deploymentStatusText) : null;
-    const sharingModelText = getString(xml, 'CustomObject.sharingModel');
+    const sharingModelText = xml.CustomObject.sharingModel;
     const sharingModel = sharingModelText ? new SharingModel(sharingModelText) : null;
 
     return new CustomObject({
