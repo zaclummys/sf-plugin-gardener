@@ -84,6 +84,10 @@ Valide cada fixture que tem metadado com `sf project deploy start --dry-run --so
 
 Escreva o teste e pare no vermelho. Só implemente o código depois que eu revisar o teste. Antes de começar o green, commite o red.
 
+## Testes do red
+
+No red, escreva todos os testes que o requisito pede para o que vai implementar. Não se limite a um teste.
+
 ## Commit
 
 Só commite quando eu pedir naquela mensagem. Um pedido anterior não vale para as mudanças seguintes.
