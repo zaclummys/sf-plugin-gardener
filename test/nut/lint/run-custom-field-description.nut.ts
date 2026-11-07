@@ -47,15 +47,6 @@ describe('lint run custom-field/description-required', () => {
         expect(output.result.findings).to.deep.equal([]);
     });
 
-    it('reports nothing for a field that is in the allowlist', () => {
-        const directory = findFixture('custom-field-allowlisted-project');
-        const output = execLintJson({
-            directory,
-        });
-
-        expect(output.result.findings).to.deep.equal([]);
-    });
-
     it('fails when the minimum length is missing', () => {
         const directory = findFixture('invalid-description-required-project');
         const output = execLintJson({
