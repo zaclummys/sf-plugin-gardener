@@ -1,4 +1,4 @@
-export { Component } from './component.js';
+export { Component, type ComponentReader } from './component.js';
 export { Components } from './components.js';
 export { Configuration } from './configuration.js';
 export { Finding, type Severity } from './finding.js';

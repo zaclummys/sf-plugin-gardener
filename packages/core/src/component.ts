@@ -1,35 +1,40 @@
+/** Reads what a component holds, only when a rule asks for it. */
+export interface ComponentReader {
+    /** Reads and parses the content of the component files. */
+    readContent(): unknown;
+
+    /** Measures the size of the component files, in bytes. */
+    measureSize(): number;
+}
+
 export class Component {
     private readonly name: string;
     private readonly type: string;
     private readonly path: string;
-    private readonly size: number;
     private readonly child: boolean;
-    private readonly content: Record<string, unknown>;
+    private readonly reader: ComponentReader;
 
     /**
      * @param name The full name of the component, such as Sample__c.Code__c.
      * @param type The metadata type of the component, such as CustomField.
      * @param path The path of the component file, relative to the project.
-     * @param size The size of the component files, in bytes.
      * @param child Whether the component is a child of another one, such as a field of an object.
-     * @param content The parsed content of the component file.
+     * @param reader Reads the content and measures the size of the component, when asked.
      */
     public constructor({
-        name, type, path, size, child, content,
+        name, type, path, child, reader,
     }: {
         name: string;
         type: string;
         path: string;
-        size: number;
         child: boolean;
-        content: Record<string, unknown>;
+        reader: ComponentReader;
     }) {
         this.name = name;
         this.type = type;
         this.path = path;
-        this.size = size;
         this.child = child;
-        this.content = content;
+        this.reader = reader;
     }
 
     /** Returns the full name of the component, such as Sample__c.Code__c. */
@@ -47,19 +52,19 @@ export class Component {
         return this.type;
     }
 
-    /** Returns the size of the component files, in bytes. */
-    public getSize(): number {
-        return this.size;
-    }
-
     /** Tells whether the component is a child of another one. */
     public isChild(): boolean {
         return this.child;
     }
 
-    /** Returns the parsed content of the component file. */
-    public getContent(): Record<string, unknown> {
-        return this.content;
+    /** Reads the parsed content of the component file. */
+    public getContent(): unknown {
+        return this.reader.readContent();
+    }
+
+    /** Measures the size of the component files, in bytes. */
+    public getSize(): number {
+        return this.reader.measureSize();
     }
 
     /**
