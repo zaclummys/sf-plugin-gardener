@@ -26,9 +26,7 @@ const schema = defineSeverityOnlySchema((properties) => new SeverityRule(propert
 
 function readSeverity(entry: unknown): string {
     const rule = schema.parse(entry);
-    const [finding] = rule.run({
-        components: undefined as never,
-    });
+    const [finding] = rule.run(undefined as never);
 
     return finding.getSeverity();
 }

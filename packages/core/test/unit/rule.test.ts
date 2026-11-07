@@ -9,11 +9,11 @@ class CountRule extends Rule<number> {
         });
     }
 
-    protected read({ components }: { components: Components }): number {
+    protected read(components: Components): number {
         return components.countRoots();
     }
 
-    public check({ input }: { input: number }): Finding[] {
+    public check(input: number): Finding[] {
         return [
             this.report({
                 message: `Counted ${input}.`,
@@ -48,18 +48,14 @@ describe('Rule', () => {
 
     it('checks the input that it reads from the components', () => {
         const rule = new CountRule();
-        const findings = rule.run({
-            components,
-        });
+        const findings = rule.run(components);
 
         expect(findings.at(0)?.getMessage()).to.equal('Counted 1.');
     });
 
     it('reports a finding without a file, with its name and severity', () => {
         const rule = new CountRule();
-        const findings = rule.check({
-            input: 3,
-        });
+        const findings = rule.check(3);
 
         expect(findings.at(0)).to.deep.include({
             rule: 'project/count',
@@ -71,9 +67,7 @@ describe('Rule', () => {
 
     it('reports a finding about a file', () => {
         const rule = new CountRule();
-        const findings = rule.check({
-            input: 3,
-        });
+        const findings = rule.check(3);
 
         expect(findings.at(1)).to.deep.include({
             file: 'force-app/Sample.xml',

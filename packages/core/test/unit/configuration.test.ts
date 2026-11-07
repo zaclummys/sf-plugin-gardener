@@ -9,11 +9,11 @@ class FixedRule extends Rule<null> {
         });
     }
 
-    protected read(_: { components: Components }): null {
+    protected read(_: Components): null {
         return null;
     }
 
-    public check(_: { input: null }): Finding[] {
+    public check(_: null): Finding[] {
         return [
             this.report({
                 message: this.getName(),
@@ -30,11 +30,9 @@ describe('Configuration', () => {
                 new FixedRule('second'),
             ],
         });
-        const findings = configuration.check({
-            components: new Components({
-                components: [],
-            }),
-        });
+        const findings = configuration.check(new Components({
+            components: [],
+        }));
         const messages = findings.map((finding: Finding) => finding.getMessage());
 
         expect(messages).to.deep.equal([
