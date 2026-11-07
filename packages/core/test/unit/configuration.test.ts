@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Components, Configuration, Finding, Rule } from '../../lib/index.js';
+import { ComponentFiles, Configuration, Finding, Rule } from '../../lib/index.js';
 
 class FixedRule extends Rule<null> {
     public constructor(name: string) {
@@ -9,7 +9,7 @@ class FixedRule extends Rule<null> {
         });
     }
 
-    protected read(_: Components): null {
+    protected read(_: ComponentFiles): null {
         return null;
     }
 
@@ -30,8 +30,8 @@ describe('Configuration', () => {
                 new FixedRule('second'),
             ],
         });
-        const findings = configuration.check(new Components({
-            components: [],
+        const findings = configuration.check(new ComponentFiles({
+            componentFiles: [],
         }));
         const messages = findings.map((finding: Finding) => finding.getMessage());
 

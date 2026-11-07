@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import { Component, type ComponentReader } from '../../lib/index.js';
+import { ComponentFile, type ComponentFileReader } from '../../lib/index.js';
 
-class CountingReader implements ComponentReader {
+class CountingReader implements ComponentFileReader {
     public reads = 0;
     public measures = 0;
 
@@ -20,8 +20,8 @@ class CountingReader implements ComponentReader {
     }
 }
 
-function buildComponent(reader: ComponentReader): Component {
-    return new Component({
+function buildComponentFile(reader: ComponentFileReader): ComponentFile {
+    return new ComponentFile({
         name: 'Sample__c.Code__c',
         type: 'CustomField',
         path: 'force-app/Code__c.field-meta.xml',
@@ -30,35 +30,35 @@ function buildComponent(reader: ComponentReader): Component {
     });
 }
 
-describe('Component', () => {
+describe('ComponentFile', () => {
     it('returns its name', () => {
-        expect(buildComponent(new CountingReader()).getName()).to.equal('Sample__c.Code__c');
+        expect(buildComponentFile(new CountingReader()).getName()).to.equal('Sample__c.Code__c');
     });
 
     it('returns its path', () => {
-        expect(buildComponent(new CountingReader()).getPath()).to.equal('force-app/Code__c.field-meta.xml');
+        expect(buildComponentFile(new CountingReader()).getPath()).to.equal('force-app/Code__c.field-meta.xml');
     });
 
     it('returns its type', () => {
-        expect(buildComponent(new CountingReader()).getType()).to.equal('CustomField');
+        expect(buildComponentFile(new CountingReader()).getType()).to.equal('CustomField');
     });
 
     it('tells that it is a child', () => {
-        expect(buildComponent(new CountingReader()).isChild()).to.equal(true);
+        expect(buildComponentFile(new CountingReader()).isChild()).to.equal(true);
     });
 
     it('has the type that it declares', () => {
-        expect(buildComponent(new CountingReader()).hasType('CustomField')).to.equal(true);
+        expect(buildComponentFile(new CountingReader()).hasType('CustomField')).to.equal(true);
     });
 
     it('does not have another type', () => {
-        expect(buildComponent(new CountingReader()).hasType('CustomObject')).to.equal(false);
+        expect(buildComponentFile(new CountingReader()).hasType('CustomObject')).to.equal(false);
     });
 
     it('does not read its content when it is built', () => {
         const reader = new CountingReader();
 
-        buildComponent(reader);
+        buildComponentFile(reader);
 
         expect(reader.reads).to.equal(0);
     });
@@ -66,22 +66,22 @@ describe('Component', () => {
     it('does not measure its size when it is built', () => {
         const reader = new CountingReader();
 
-        buildComponent(reader);
+        buildComponentFile(reader);
 
         expect(reader.measures).to.equal(0);
     });
 
     it('reads its content when asked', () => {
-        const component = buildComponent(new CountingReader());
+        const componentFile = buildComponentFile(new CountingReader());
 
-        expect(component.getContent()).to.deep.equal({
+        expect(componentFile.getContent()).to.deep.equal({
             CustomField: {},
         });
     });
 
     it('measures its size when asked', () => {
-        const component = buildComponent(new CountingReader());
+        const componentFile = buildComponentFile(new CountingReader());
 
-        expect(component.getSize()).to.equal(42);
+        expect(componentFile.getSize()).to.equal(42);
     });
 });

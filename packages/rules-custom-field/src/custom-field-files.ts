@@ -1,47 +1,47 @@
-import type { Components } from '@sf-plugin-gardener/core';
-import { CustomField } from './custom-field.js';
+import type { ComponentFiles } from '@sf-plugin-gardener/core';
+import { CustomFieldFile } from './custom-field-file.js';
 import type { DescriptionLength } from './description-length.js';
 
-export class CustomFields {
-    private readonly fields: CustomField[];
+export class CustomFieldFiles {
+    private readonly fields: CustomFieldFile[];
 
     /** @param fields The custom fields of the package directories that are linted. */
-    public constructor({ fields }: { fields: CustomField[] }) {
+    public constructor({ fields }: { fields: CustomFieldFile[] }) {
         this.fields = fields;
     }
 
     /**
      * Builds the custom fields of the components.
      *
-     * @param components The components, some of which hold field files.
+     * @param componentFiles The components, some of which hold field files.
      */
-    public static from({ components }: { components: Components }): CustomFields {
-        const fields = components.listOfType('CustomField').map((component) => CustomField.from({
-            component,
+    public static from({ componentFiles }: { componentFiles: ComponentFiles }): CustomFieldFiles {
+        const fields = componentFiles.listOfType('CustomField').map((componentFile) => CustomFieldFile.from({
+            componentFile,
         }));
 
-        return new CustomFields({
+        return new CustomFieldFiles({
             fields,
         });
     }
 
     /** Lists the custom fields that declare no description. */
-    public listUndescribed(): CustomField[] {
+    public listUndescribed(): CustomFieldFile[] {
         return this.fields.filter((field) => field.isUndescribed());
     }
 
     /** Lists the custom fields that are picklists not restricted to their values. */
-    public listUnrestrictedPicklists(): CustomField[] {
+    public listUnrestrictedPicklists(): CustomFieldFile[] {
         return this.fields.filter((field) => field.isUnrestrictedPicklist());
     }
 
     /** Lists the custom fields that declare no securityClassification. */
-    public listWithoutSecurityClassification(): CustomField[] {
+    public listWithoutSecurityClassification(): CustomFieldFile[] {
         return this.fields.filter((field) => field.lacksSecurityClassification());
     }
 
     /** Lists the custom fields that declare no complianceGroup. */
-    public listWithoutComplianceGroup(): CustomField[] {
+    public listWithoutComplianceGroup(): CustomFieldFile[] {
         return this.fields.filter((field) => field.lacksComplianceGroup());
     }
 
@@ -50,7 +50,7 @@ export class CustomFields {
      *
      * @param length The length to compare with.
      */
-    public listWithDescriptionShorterThan(length: DescriptionLength): CustomField[] {
+    public listWithDescriptionShorterThan(length: DescriptionLength): CustomFieldFile[] {
         return this.fields.filter((field) => field.hasDescriptionShorterThan(length));
     }
 }

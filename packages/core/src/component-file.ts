@@ -1,5 +1,5 @@
 /** Reads what a component holds, only when a rule asks for it. */
-export interface ComponentReader {
+export interface ComponentFileReader {
     /** Reads and parses the content of the component files. */
     readContent(): unknown;
 
@@ -7,12 +7,12 @@ export interface ComponentReader {
     measureSize(): number;
 }
 
-export class Component {
+export class ComponentFile {
     private readonly name: string;
     private readonly type: string;
     private readonly path: string;
     private readonly child: boolean;
-    private readonly reader: ComponentReader;
+    private readonly reader: ComponentFileReader;
 
     /**
      * @param name The full name of the component, such as Sample__c.Code__c.
@@ -28,7 +28,7 @@ export class Component {
         type: string;
         path: string;
         child: boolean;
-        reader: ComponentReader;
+        reader: ComponentFileReader;
     }) {
         this.name = name;
         this.type = type;

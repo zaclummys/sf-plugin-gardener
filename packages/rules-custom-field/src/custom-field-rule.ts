@@ -1,10 +1,10 @@
-import { Rule, type Components } from '@sf-plugin-gardener/core';
-import { CustomFields } from './custom-fields.js';
+import { Rule, type ComponentFiles } from '@sf-plugin-gardener/core';
+import { CustomFieldFiles } from './custom-field-files.js';
 
-export abstract class CustomFieldRule extends Rule<CustomFields> {
-    protected read(components: Components): CustomFields {
-        return CustomFields.from({
-            components,
+export abstract class CustomFieldRule extends Rule<CustomFieldFiles> {
+    protected read(componentFiles: ComponentFiles): CustomFieldFiles {
+        return CustomFieldFiles.from({
+            componentFiles,
         });
     }
 }

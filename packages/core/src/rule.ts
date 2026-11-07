@@ -1,5 +1,5 @@
 import { Finding, type Severity } from './finding.js';
-import type { Components } from './components.js';
+import type { ComponentFiles } from './component-files.js';
 
 export abstract class Rule<Input> {
     private readonly name: string;
@@ -23,9 +23,9 @@ export abstract class Rule<Input> {
     /**
      * Reads from the components what the rule checks.
      *
-     * @param components The components to read from.
+     * @param componentFiles The components to read from.
      */
-    protected abstract read(components: Components): Input;
+    protected abstract read(componentFiles: ComponentFiles): Input;
 
     /**
      * Checks the input and reports what the rule finds.
@@ -37,10 +37,10 @@ export abstract class Rule<Input> {
     /**
      * Reads the input from the components, checks it and reports what the rule finds.
      *
-     * @param components The components to run the rule on.
+     * @param componentFiles The components to run the rule on.
      */
-    public run(components: Components): Finding[] {
-        const input = this.read(components);
+    public run(componentFiles: ComponentFiles): Finding[] {
+        const input = this.read(componentFiles);
 
         return this.check(input);
     }

@@ -1,10 +1,10 @@
-import { Rule, type Components } from '@sf-plugin-gardener/core';
-import { CustomObjects } from './custom-objects.js';
+import { Rule, type ComponentFiles } from '@sf-plugin-gardener/core';
+import { CustomObjectFiles } from './custom-object-files.js';
 
-export abstract class CustomObjectRule extends Rule<CustomObjects> {
-    protected read(components: Components): CustomObjects {
-        return CustomObjects.from({
-            components,
+export abstract class CustomObjectRule extends Rule<CustomObjectFiles> {
+    protected read(componentFiles: ComponentFiles): CustomObjectFiles {
+        return CustomObjectFiles.from({
+            componentFiles,
         });
     }
 }

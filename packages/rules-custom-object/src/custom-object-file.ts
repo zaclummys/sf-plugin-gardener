@@ -1,4 +1,4 @@
-import type { Component } from '@sf-plugin-gardener/core';
+import type { ComponentFile } from '@sf-plugin-gardener/core';
 import { z } from 'zod';
 import { DeploymentStatus } from './deployment-status.js';
 import { SharingModel } from './sharing-model.js';
@@ -11,7 +11,7 @@ const objectFile = z.object({
     }),
 });
 
-export class CustomObject {
+export class CustomObjectFile {
     private readonly name: string;
     private readonly path: string;
     private readonly deploymentStatus: DeploymentStatus | null;
@@ -40,15 +40,15 @@ export class CustomObject {
     /**
      * Builds an object from a component of the CustomObject type.
      *
-     * @param component The component that holds the object file.
+     * @param componentFile The component that holds the object file.
      */
-    public static from({ component }: { component: Component }): CustomObject {
-        const file = objectFile.parse(component.getContent());
+    public static from({ componentFile }: { componentFile: ComponentFile }): CustomObjectFile {
+        const file = objectFile.parse(componentFile.getContent());
         const metadata = file.CustomObject;
 
-        return new CustomObject({
-            name: component.getName(),
-            path: component.getPath(),
+        return new CustomObjectFile({
+            name: componentFile.getName(),
+            path: componentFile.getPath(),
             deploymentStatus: metadata.deploymentStatus ?? null,
             sharingModel: metadata.sharingModel ?? null,
         });

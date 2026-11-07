@@ -1,4 +1,4 @@
-import type { Component } from '@sf-plugin-gardener/core';
+import type { ComponentFile } from '@sf-plugin-gardener/core';
 import { z } from 'zod';
 import { Description } from './description.js';
 import type { DescriptionLength } from './description-length.js';
@@ -18,7 +18,7 @@ const fieldFile = z.object({
     }),
 });
 
-export class CustomField {
+export class CustomFieldFile {
     private readonly name: string;
     private readonly path: string;
     private readonly description: Description | null;
@@ -59,15 +59,15 @@ export class CustomField {
     /**
      * Builds a field from a component of the CustomField type.
      *
-     * @param component The component that holds the field file.
+     * @param componentFile The component that holds the field file.
      */
-    public static from({ component }: { component: Component }): CustomField {
-        const file = fieldFile.parse(component.getContent());
+    public static from({ componentFile }: { componentFile: ComponentFile }): CustomFieldFile {
+        const file = fieldFile.parse(componentFile.getContent());
         const metadata = file.CustomField;
 
-        return new CustomField({
-            name: component.getName(),
-            path: component.getPath(),
+        return new CustomFieldFile({
+            name: componentFile.getName(),
+            path: componentFile.getPath(),
             description: metadata.description ?? null,
             securityClassification: metadata.securityClassification ?? null,
             complianceGroup: metadata.complianceGroup ?? null,

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Component, Components, Rule, type Finding } from '../../lib/index.js';
+import { ComponentFile, ComponentFiles, Rule, type Finding } from '../../lib/index.js';
 
 class CountRule extends Rule<number> {
     public constructor() {
@@ -9,8 +9,8 @@ class CountRule extends Rule<number> {
         });
     }
 
-    protected read(components: Components): number {
-        return components.countRoots();
+    protected read(componentFiles: ComponentFiles): number {
+        return componentFiles.countRoots();
     }
 
     public check(input: number): Finding[] {
@@ -26,9 +26,9 @@ class CountRule extends Rule<number> {
     }
 }
 
-const components = new Components({
-    components: [
-        new Component({
+const componentFiles = new ComponentFiles({
+    componentFiles: [
+        new ComponentFile({
             name: 'Sample__c',
             type: 'CustomObject',
             path: 'force-app/Sample__c.object-meta.xml',
@@ -50,7 +50,7 @@ describe('Rule', () => {
 
     it('checks the input that it reads from the components', () => {
         const rule = new CountRule();
-        const findings = rule.run(components);
+        const findings = rule.run(componentFiles);
 
         expect(findings.at(0)?.getMessage()).to.equal('Counted 1.');
     });

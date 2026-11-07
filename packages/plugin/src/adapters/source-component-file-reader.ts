@@ -1,10 +1,10 @@
 import { statSync } from 'node:fs';
 import type { SourceComponent } from '@salesforce/source-deploy-retrieve';
-import type { ComponentReader } from '@sf-plugin-gardener/core';
+import type { ComponentFileReader } from '@sf-plugin-gardener/core';
 
 export type XmlComponent = SourceComponent & { xml: string };
 
-export class SourceComponentReader implements ComponentReader {
+export class SourceComponentFileReader implements ComponentFileReader {
     private readonly component: XmlComponent;
 
     /** @param component The component of the Salesforce CLI that holds the files. */

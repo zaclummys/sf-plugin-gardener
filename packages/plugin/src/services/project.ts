@@ -1,21 +1,21 @@
-import type { Components } from '@sf-plugin-gardener/core';
+import type { ComponentFiles } from '@sf-plugin-gardener/core';
 
 export class Project {
     private readonly directory: string;
-    private readonly components: Components;
+    private readonly componentFiles: ComponentFiles;
 
     /**
      * @param directory The directory that holds the sfdx-project.json.
-     * @param components The components of the package directories that are linted, with the children of each one.
+     * @param componentFiles The components of the package directories that are linted, with the children of each one.
      */
     public constructor({
-        directory, components,
+        directory, componentFiles,
     }: {
         directory: string;
-        components: Components;
+        componentFiles: ComponentFiles;
     }) {
         this.directory = directory;
-        this.components = components;
+        this.componentFiles = componentFiles;
     }
 
     /** Returns the directory that holds the sfdx-project.json. */
@@ -24,7 +24,7 @@ export class Project {
     }
 
     /** Returns the components that are linted. */
-    public getComponents(): Components {
-        return this.components;
+    public getComponentFiles(): ComponentFiles {
+        return this.componentFiles;
     }
 }

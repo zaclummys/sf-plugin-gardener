@@ -1,6 +1,6 @@
 import type { Finding, Severity } from '@sf-plugin-gardener/core';
 import { CustomFieldRule } from '../custom-field-rule.js';
-import type { CustomFields } from '../custom-fields.js';
+import type { CustomFieldFiles } from '../custom-field-files.js';
 import type { DescriptionLength } from '../description-length.js';
 
 export class DescriptionRequiredRule extends CustomFieldRule {
@@ -20,12 +20,12 @@ export class DescriptionRequiredRule extends CustomFieldRule {
         this.minLength = minLength;
     }
 
-    public check(customFields: CustomFields): Finding[] {
-        const undescribed = customFields.listUndescribed().map((field) => this.reportFile({
+    public check(customFieldFiles: CustomFieldFiles): Finding[] {
+        const undescribed = customFieldFiles.listUndescribed().map((field) => this.reportFile({
             message: `The field ${field.getName()} declares no description.`,
             file: field.getPath(),
         }));
-        const short = customFields.listWithDescriptionShorterThan(this.minLength).map((field) => this.reportFile({
+        const short = customFieldFiles.listWithDescriptionShorterThan(this.minLength).map((field) => this.reportFile({
             message: `The field ${field.getName()} has a description shorter than ${this.minLength.toString()}.`,
             file: field.getPath(),
         }));

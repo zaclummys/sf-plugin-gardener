@@ -53,13 +53,13 @@ export class LintService {
         }
 
         const configuration = configurationFindOutput.configuration;
-        const components = project.getComponents();
-        const findings = configuration.check(components);
+        const componentFiles = project.getComponentFiles();
+        const findings = configuration.check(componentFiles);
 
         return {
             success: true,
             result: new LintResult({
-                files: components.countRoots(),
+                files: componentFiles.countRoots(),
                 findings,
             }),
         };

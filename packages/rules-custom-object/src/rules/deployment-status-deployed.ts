@@ -1,6 +1,6 @@
 import type { Finding, Severity } from '@sf-plugin-gardener/core';
 import { CustomObjectRule } from '../custom-object-rule.js';
-import type { CustomObjects } from '../custom-objects.js';
+import type { CustomObjectFiles } from '../custom-object-files.js';
 
 export class DeploymentStatusDeployedRule extends CustomObjectRule {
     public constructor({ severity }: { severity: Severity }) {
@@ -10,8 +10,8 @@ export class DeploymentStatusDeployedRule extends CustomObjectRule {
         });
     }
 
-    public check(customObjects: CustomObjects): Finding[] {
-        const objects = customObjects.listInDevelopment();
+    public check(customObjectFiles: CustomObjectFiles): Finding[] {
+        const objects = customObjectFiles.listInDevelopment();
 
         return objects.map((object) => this.reportFile({
             message: `The object ${object.getName()} has the deploymentStatus InDevelopment.`,

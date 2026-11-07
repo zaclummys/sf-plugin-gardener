@@ -1,4 +1,4 @@
-import type { Components } from '@sf-plugin-gardener/core';
+import type { ComponentFiles } from '@sf-plugin-gardener/core';
 import type { ApiVersion } from './api-version.js';
 import { ProjectFile } from './project-file.js';
 
@@ -13,11 +13,11 @@ export class ProjectFiles {
     /**
      * Builds the metadata files of the components.
      *
-     * @param components The components, whose roots hold the files.
+     * @param componentFiles The components, whose roots hold the files.
      */
-    public static from({ components }: { components: Components }): ProjectFiles {
-        const files = components.listRoots().map((component) => new ProjectFile({
-            component,
+    public static from({ componentFiles }: { componentFiles: ComponentFiles }): ProjectFiles {
+        const files = componentFiles.listRoots().map((componentFile) => new ProjectFile({
+            componentFile,
         }));
 
         return new ProjectFiles({

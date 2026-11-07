@@ -2,10 +2,10 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { SfProject } from '@salesforce/core';
 import { MetadataResolver, type SourceComponent } from '@salesforce/source-deploy-retrieve';
-import { Component, Components } from '@sf-plugin-gardener/core';
+import { ComponentFile, ComponentFiles } from '@sf-plugin-gardener/core';
 import { Project } from '../services/index.js';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
-import { SourceComponentReader, type XmlComponent } from './source-component-reader.js';
+import { SourceComponentFileReader, type XmlComponent } from './source-component-file-reader.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {
     try {
@@ -19,18 +19,18 @@ function hasXml(component: SourceComponent): component is XmlComponent {
     return component.xml != null;
 }
 
-function buildComponent({
+function buildComponentFile({
     component, projectDirectory, child,
 }: {
     component: XmlComponent;
     projectDirectory: string;
     child: boolean;
-}): Component {
-    const reader = new SourceComponentReader({
+}): ComponentFile {
+    const reader = new SourceComponentFileReader({
         component,
     });
 
-    return new Component({
+    return new ComponentFile({
         name: component.fullName,
         type: component.type.name,
         path: path.relative(projectDirectory, component.xml),
@@ -39,26 +39,26 @@ function buildComponent({
     });
 }
 
-function buildComponents({
+function buildComponentFiles({
     components, projectDirectory,
 }: {
     components: XmlComponent[];
     projectDirectory: string;
-}): Components {
+}): ComponentFiles {
     const children = components.flatMap((component) => component.getChildren()).filter(hasXml);
-    const roots = components.map((component) => buildComponent({
+    const roots = components.map((component) => buildComponentFile({
         component,
         projectDirectory,
         child: false,
     }));
-    const nested = children.map((component) => buildComponent({
+    const nested = children.map((component) => buildComponentFile({
         component,
         projectDirectory,
         child: true,
     }));
 
-    return new Components({
-        components: [
+    return new ComponentFiles({
+        componentFiles: [
             ...roots,
             ...nested,
         ],
@@ -101,13 +101,13 @@ export class SfProjectLocator implements ProjectLocator {
 
         const resolver = new MetadataResolver();
         const components = fullPaths.flatMap((fullPath) => resolver.getComponentsFromPath(fullPath).filter(hasXml));
-        const metadataComponents = buildComponents({
+        const componentFiles = buildComponentFiles({
             components,
             projectDirectory,
         });
         const project = new Project({
             directory: projectDirectory,
-            components: metadataComponents,
+            componentFiles,
         });
 
         return {

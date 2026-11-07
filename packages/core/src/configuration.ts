@@ -1,5 +1,5 @@
 import type { Finding } from './finding.js';
-import type { Components } from './components.js';
+import type { ComponentFiles } from './component-files.js';
 import type { Rule } from './rule.js';
 
 export class Configuration {
@@ -12,9 +12,9 @@ export class Configuration {
     /**
      * Checks the components with the rules that the configuration enables.
      *
-     * @param components The components to check.
+     * @param componentFiles The components to check.
      */
-    public check(components: Components): Finding[] {
-        return this.rules.flatMap((rule) => rule.run(components));
+    public check(componentFiles: ComponentFiles): Finding[] {
+        return this.rules.flatMap((rule) => rule.run(componentFiles));
     }
 }
