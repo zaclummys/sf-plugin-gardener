@@ -12,9 +12,11 @@ function buildComponent({
         name,
         type,
         path: `${name}.xml`,
-        size: 1,
         child,
-        content: {},
+        reader: {
+            readContent: () => ({}),
+            measureSize: () => 1,
+        },
     });
 }
 

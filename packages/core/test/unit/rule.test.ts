@@ -32,9 +32,11 @@ const components = new Components({
             name: 'Sample__c',
             type: 'CustomObject',
             path: 'force-app/Sample__c.object-meta.xml',
-            size: 1,
             child: false,
-            content: {},
+            reader: {
+                readContent: () => ({}),
+                measureSize: () => 1,
+            },
         }),
     ],
 });
