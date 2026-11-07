@@ -1,18 +1,22 @@
 import { expect } from 'chai';
-import { Rule, type Finding, type Project } from '../../lib/index.js';
+import { Component, Components, Rule, type Finding } from '../../lib/index.js';
 
-class ReportingRule extends Rule {
+class CountRule extends Rule<number> {
     public constructor() {
         super({
-            name: 'project/reporting',
+            name: 'project/count',
             severity: 'warn',
         });
     }
 
-    public check({ project }: { project: Project }): Finding[] {
+    protected read({ components }: { components: Components }): number {
+        return components.countRoots();
+    }
+
+    public check({ input }: { input: number }): Finding[] {
         return [
             this.report({
-                message: `About ${project.getDirectory()}.`,
+                message: `Counted ${input}.`,
             }),
             this.reportFile({
                 message: 'About a file.',
@@ -22,35 +26,53 @@ class ReportingRule extends Rule {
     }
 }
 
+const components = new Components({
+    components: [
+        new Component({
+            name: 'Sample__c',
+            type: 'CustomObject',
+            path: 'force-app/Sample__c.object-meta.xml',
+            size: 1,
+            child: false,
+            content: {},
+        }),
+    ],
+});
+
 describe('Rule', () => {
     it('returns its name', () => {
-        const rule = new ReportingRule();
+        const rule = new CountRule();
 
-        expect(rule.getName()).to.equal('project/reporting');
+        expect(rule.getName()).to.equal('project/count');
     });
 
-    it('reports a finding about the project, with its name and severity', () => {
-        const rule = new ReportingRule();
-        const [finding] = rule.check({
-            project: {
-                getDirectory: () => '/project',
-            } as Project,
+    it('checks the input that it reads from the components', () => {
+        const rule = new CountRule();
+        const findings = rule.run({
+            components,
         });
 
-        expect(finding).to.deep.include({
-            rule: 'project/reporting',
+        expect(findings.at(0)?.getMessage()).to.equal('Counted 1.');
+    });
+
+    it('reports a finding without a file, with its name and severity', () => {
+        const rule = new CountRule();
+        const findings = rule.check({
+            input: 3,
+        });
+
+        expect(findings.at(0)).to.deep.include({
+            rule: 'project/count',
             severity: 'warn',
-            message: 'About /project.',
+            message: 'Counted 3.',
             file: null,
         });
     });
 
     it('reports a finding about a file', () => {
-        const rule = new ReportingRule();
+        const rule = new CountRule();
         const findings = rule.check({
-            project: {
-                getDirectory: () => '/project',
-            } as Project,
+            input: 3,
         });
 
         expect(findings.at(1)).to.deep.include({

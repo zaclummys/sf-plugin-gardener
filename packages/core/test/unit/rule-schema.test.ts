@@ -1,12 +1,16 @@
 import { expect } from 'chai';
 import { defineSeverityOnlySchema, severitySchema, Rule, type Finding } from '../../lib/index.js';
 
-class SeverityRule extends Rule {
+class SeverityRule extends Rule<null> {
     public constructor({ severity }: { severity: 'error' | 'warn' }) {
         super({
             name: 'project/severity',
             severity,
         });
+    }
+
+    protected read(): null {
+        return null;
     }
 
     public check(): Finding[] {
@@ -22,8 +26,8 @@ const schema = defineSeverityOnlySchema((properties) => new SeverityRule(propert
 
 function readSeverity(entry: unknown): string {
     const rule = schema.parse(entry);
-    const [finding] = rule.check({
-        project: undefined as never,
+    const [finding] = rule.run({
+        components: undefined as never,
     });
 
     return finding.getSeverity();

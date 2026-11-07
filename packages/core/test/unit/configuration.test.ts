@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import { Configuration, Finding, Rule, type Project } from '../../lib/index.js';
+import { Components, Configuration, Finding, Rule } from '../../lib/index.js';
 
-class FixedRule extends Rule {
+class FixedRule extends Rule<null> {
     public constructor(name: string) {
         super({
             name,
@@ -9,7 +9,11 @@ class FixedRule extends Rule {
         });
     }
 
-    public check(_: { project: Project }): Finding[] {
+    protected read(_: { components: Components }): null {
+        return null;
+    }
+
+    public check(_: { input: null }): Finding[] {
         return [
             this.report({
                 message: this.getName(),
@@ -27,7 +31,9 @@ describe('Configuration', () => {
             ],
         });
         const findings = configuration.check({
-            project: {} as Project,
+            components: new Components({
+                components: [],
+            }),
         });
         const messages = findings.map((finding: Finding) => finding.getMessage());
 
