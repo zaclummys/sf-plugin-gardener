@@ -4,7 +4,7 @@ import path from 'node:path';
 import { SfProject } from '@salesforce/core';
 import { MetadataResolver, type SourceComponent } from '@salesforce/source-deploy-retrieve';
 import { getString } from '@salesforce/ts-types';
-import { ApiVersion, CustomField, CustomFields, CustomObject, CustomObjects, DeploymentStatus, Project, ProjectFile, SharingModel } from '../core/index.js';
+import { ApiVersion, CustomField, CustomFields, CustomObject, CustomObjects, DeploymentStatus, Description, Project, ProjectFile, SharingModel } from '../core/index.js';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {
@@ -59,12 +59,13 @@ function buildCustomField({
     projectDirectory: string;
 }): CustomField {
     const xml = component.parseXmlSync();
-    const description = getString(xml, 'CustomField.description');
+    const descriptionText = getString(xml, 'CustomField.description');
+    const description = descriptionText ? new Description(descriptionText) : null;
 
     return new CustomField({
         name: component.fullName,
         path: path.relative(projectDirectory, component.xml),
-        described: Boolean(description),
+        description,
     });
 }
 
