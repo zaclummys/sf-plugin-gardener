@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 import { execLintJson, findFixture } from '../run.ts';
 
-describe('lint run custom-object/no-public-sharing-model', () => {
-    it('reports the object whose sharingModel is public', () => {
-        const directory = findFixture('custom-object-public-sharing-model-project');
+describe('lint run custom-object/forbidden-sharing-models', () => {
+    it('reports the object whose sharingModel is forbidden', () => {
+        const directory = findFixture('custom-object-forbidden-sharing-model-project');
         const output = execLintJson({
             directory,
         }, {
@@ -12,9 +12,9 @@ describe('lint run custom-object/no-public-sharing-model', () => {
 
         expect(output.result.findings).to.deep.equal([
             {
-                rule: 'custom-object/no-public-sharing-model',
+                rule: 'custom-object/forbidden-sharing-models',
                 severity: 'error',
-                message: 'The object Sample__c has the public sharingModel ReadWrite.',
+                message: 'The object Sample__c has the forbidden sharingModel ReadWrite.',
                 file: 'force-app/main/default/objects/Sample__c/Sample__c.object-meta.xml',
             },
         ]);

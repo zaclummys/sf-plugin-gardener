@@ -1,8 +1,8 @@
 {
     "rules": {
-        "custom-object/no-public-sharing-model": {
+        "custom-object/forbidden-sharing-models": {
             "severity": "error",
-            "publicModels": [
+            "forbiddenModels": [
                 "ReadWrite"
             ]
         }
