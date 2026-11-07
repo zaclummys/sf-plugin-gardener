@@ -9,7 +9,6 @@ Same as `flow/no-inactive-component`. Applies to the `active` element.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `flow/no-inactive-component`. Applies to the `active` element.
 {
   "rules": {
     "custom-site/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -33,7 +29,6 @@ Same as `approval-process/no-specific-user-reference`. Applies to the default ow
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt usernames
 
 **Example:**
 
@@ -41,10 +36,7 @@ Same as `approval-process/no-specific-user-reference`. Applies to the default ow
 {
   "rules": {
     "custom-site/no-specific-user-reference": {
-      "severity": "warn",
-      "allowlist": [
-        "integration@example.com"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -52,12 +44,11 @@ Same as `approval-process/no-specific-user-reference`. Applies to the default ow
 
 ## `custom-site/no-standard-pages-for-guest`
 
-Any `allowStandard*` true requires an allowlist. Standard search and lookup exposed to the public are classic vectors for record enumeration.
+Any `allowStandard*` true is reported. Standard search and lookup exposed to the public are classic vectors for record enumeration.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -65,10 +56,7 @@ Any `allowStandard*` true requires an allowlist. Standard search and lookup expo
 {
   "rules": {
     "custom-site/no-standard-pages-for-guest": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

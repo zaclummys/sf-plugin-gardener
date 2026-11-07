@@ -9,7 +9,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -19,9 +18,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "sharing-rules/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -48,12 +44,11 @@ Same as `list-view/boolean-filter-valid`.
 
 ## `sharing-rules/no-guest-sharing-rule`
 
-Any guest sharing rule exposes data to an unauthenticated user and requires an allowlist.
+Any guest sharing rule exposes data to an unauthenticated user and is reported.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -61,10 +56,7 @@ Any guest sharing rule exposes data to an unauthenticated user and requires an a
 {
   "rules": {
     "sharing-rules/no-guest-sharing-rule": {
-      "severity": "error",
-      "allowlist": [
-        "Public_Account"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -72,12 +64,11 @@ Any guest sharing rule exposes data to an unauthenticated user and requires an a
 
 ## `sharing-rules/no-share-with-all-users`
 
-Sharing with all internal, partner or portal users requires an allowlist.
+Sharing with all internal, partner or portal users is reported.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -85,10 +76,7 @@ Sharing with all internal, partner or portal users requires an allowlist.
 {
   "rules": {
     "sharing-rules/no-share-with-all-users": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -101,7 +89,6 @@ Reports write `accessLevel` on a criteria rule, because mass write via sharing i
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -109,10 +96,7 @@ Reports write `accessLevel` on a criteria rule, because mass write via sharing i
 {
   "rules": {
     "sharing-rules/sharing-edit-access-justified": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

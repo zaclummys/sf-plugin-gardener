@@ -9,7 +9,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -19,9 +18,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "matching-rule/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -35,7 +31,6 @@ Same as `flow/no-inactive-component`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -43,10 +38,7 @@ Same as `flow/no-inactive-component`.
 {
   "rules": {
     "matching-rule/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -72,12 +64,11 @@ Same as `list-view/boolean-filter-valid`.
 
 ## `matching-rule/no-match-blanks`
 
-`blankValueBehavior` equal to `MatchBlanks` makes two records with the empty field count as duplicates and requires an allowlist.
+`blankValueBehavior` equal to `MatchBlanks` makes two records with the empty field count as duplicates and is reported.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -85,10 +76,7 @@ Same as `list-view/boolean-filter-valid`.
 {
   "rules": {
     "matching-rule/no-match-blanks": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

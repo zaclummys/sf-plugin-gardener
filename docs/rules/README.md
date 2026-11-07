@@ -452,7 +452,6 @@ Rules that do not belong to a type live in Project structure rules. A new rule g
 Each rule is a section and lists under `Properties` everything it accepts in the configuration. A property with no description in the rule itself has the meaning defined here.
 
 - `severity`: `error`, `warn` or `off`. Every rule accepts this property.
-- `allowlist`: list of components exempt from the rule. Each item is an API name or, in its absence, a file path. Items accept glob.
 - `max`: integer numeric limit, required and with no built-in default value, because the limit varies by project, by org edition and by API version. The rule text says what is measured. In rules with a **Reference** line, the value is usually the official platform limit.
 - `allowedDomains`: list of accepted email domains.
 
@@ -468,4 +467,4 @@ A property becomes its own rule when it passes at least one of the tests below.
 2. **Independently switchable.** If a reasonable person wants to turn one behavior off and keep the other, they are two rules.
 3. **Detects something else.** A property that changes what is detected, and not the limit, the scope or the list of values, is a rule. The classic sign is a boolean that turns on a variant.
 
-What stays a property is whatever only tunes an existing detection. This includes limits such as `max` and `minLength`, lists of values such as `forbiddenSuffixes`, scope such as `objects` and exemptions. The `allowlist` is never promoted.
+What stays a property is whatever only tunes an existing detection. This includes limits such as `max` and `minLength`, lists of values such as `forbiddenSuffixes`, scope such as `objects`.

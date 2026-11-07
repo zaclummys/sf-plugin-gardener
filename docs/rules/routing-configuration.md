@@ -9,7 +9,6 @@ Reports a routing configuration without `pushTimeout`, because an item pushed to
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Reports a routing configuration without `pushTimeout`, because an item pushed to
 {
   "rules": {
     "routing-configuration/push-timeout-required": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

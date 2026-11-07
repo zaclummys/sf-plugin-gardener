@@ -9,7 +9,6 @@ Same as `flow/no-inactive-component`. Applies to the `available` element.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `flow/no-inactive-component`. Applies to the `available` element.
 {
   "rules": {
     "email-template/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -33,7 +29,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -43,9 +38,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "email-template/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -59,7 +51,6 @@ Reports a new template with `uiType` equal to `Aloha`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -67,10 +58,7 @@ Reports a new template with `uiType` equal to `Aloha`.
 {
   "rules": {
     "email-template/prefer-lightning-email-template": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -78,12 +66,11 @@ Reports a new template with `uiType` equal to `Aloha`.
 
 ## `email-template/utf8-encoding-required`
 
-An `encodingKey` other than UTF-8 requires an allowlist, because exotic encoding silently breaks accented characters.
+An `encodingKey` other than UTF-8 is reported, because exotic encoding silently breaks accented characters.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -91,10 +78,7 @@ An `encodingKey` other than UTF-8 requires an allowlist, because exotic encoding
 {
   "rules": {
     "email-template/utf8-encoding-required": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

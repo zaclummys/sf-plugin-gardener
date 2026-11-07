@@ -27,7 +27,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -37,9 +36,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "custom-metadata/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -53,7 +49,6 @@ Same as `custom-object/naming-convention`. Applies to the type and to the record
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `patterns`: map from metadata type to a regular expression for the name
 - `forbiddenSuffixes`: list of forbidden suffixes
 - `forbiddenPrefixes`: list of forbidden prefixes
@@ -65,9 +60,6 @@ Same as `custom-object/naming-convention`. Applies to the type and to the record
   "rules": {
     "custom-metadata/naming-convention": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "patterns": {
         "CustomField": "^[A-Z][A-Za-z0-9]*__c$"
       },
@@ -110,7 +102,6 @@ Every field of the `__mdt` type must appear in the `values` of each record, even
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -118,10 +109,7 @@ Every field of the `__mdt` type must appear in the `values` of each record, even
 {
   "rules": {
     "custom-metadata/complete-values": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

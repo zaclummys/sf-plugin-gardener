@@ -4,12 +4,11 @@
 
 ## `experience-bundle/no-public-site`
 
-A site with public authentication requires an allowlist. Making the site public is the heaviest security decision in the bundle and an AI agent must not make it by accident.
+A site with public authentication is reported. Making the site public is the heaviest security decision in the bundle and an AI agent must not make it by accident.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ A site with public authentication requires an allowlist. Making the site public 
 {
   "rules": {
     "experience-bundle/no-public-site": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -28,12 +24,11 @@ A site with public authentication requires an allowlist. Making the site public 
 
 ## `experience-bundle/no-public-route`
 
-A route with `pageAccess` equal to `Public` requires a per-route allowlist, because the override punctures the site control and goes unnoticed in a large diff.
+A route with `pageAccess` equal to `Public` is reported, because the override punctures the site control and goes unnoticed in a large diff.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: authorized routes, identified by site and route name
 
 **Example:**
 
@@ -41,10 +36,7 @@ A route with `pageAccess` equal to `Public` requires a per-route allowlist, beca
 {
   "rules": {
     "experience-bundle/no-public-route": {
-      "severity": "error",
-      "allowlist": [
-        "Portal:Home"
-      ]
+      "severity": "error"
     }
   }
 }

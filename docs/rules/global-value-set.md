@@ -11,7 +11,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -21,9 +20,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "global-value-set/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }

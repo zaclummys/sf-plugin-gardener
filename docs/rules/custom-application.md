@@ -9,7 +9,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -19,9 +18,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "custom-application/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -53,7 +49,6 @@ A new app with `uiType` equal to `Aloha` is forbidden.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -61,10 +56,7 @@ A new app with `uiType` equal to `Aloha` is forbidden.
 {
   "rules": {
     "custom-application/no-new-classic-app": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -77,7 +69,6 @@ Reports the same utility bar referenced by more than one app.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -85,10 +76,7 @@ Reports the same utility bar referenced by more than one app.
 {
   "rules": {
     "custom-application/utility-bar-single-app": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

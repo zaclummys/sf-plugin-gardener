@@ -11,7 +11,6 @@ Same as `flow/no-inactive-component`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -19,10 +18,7 @@ Same as `flow/no-inactive-component`.
 {
   "rules": {
     "assignment-rules/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -35,7 +31,6 @@ Same as `approval-process/no-specific-user-reference`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt usernames
 
 **Example:**
 
@@ -43,10 +38,7 @@ Same as `approval-process/no-specific-user-reference`.
 {
   "rules": {
     "assignment-rules/no-specific-user-reference": {
-      "severity": "warn",
-      "allowlist": [
-        "integration@example.com"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -59,7 +51,6 @@ Same as `workflow/no-hardcoded-email-address`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt addresses
 - `allowedDomains`: addresses in these domains are not reported
 
 **Example:**
@@ -69,9 +60,6 @@ Same as `workflow/no-hardcoded-email-address`.
   "rules": {
     "assignment-rules/no-hardcoded-email-address": {
       "severity": "warn",
-      "allowlist": [
-        "ops@example.com"
-      ],
       "allowedDomains": [
         "example.com"
       ]

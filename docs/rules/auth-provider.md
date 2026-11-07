@@ -9,7 +9,6 @@ Same as `custom-tab/https-required`. Applies to the OAuth endpoints.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt URLs or hosts, such as `localhost`
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `custom-tab/https-required`. Applies to the OAuth endpoints.
 {
   "rules": {
     "auth-provider/https-required": {
-      "severity": "error",
-      "allowlist": [
-        "http://localhost:3000"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -33,7 +29,6 @@ Same as `approval-process/no-specific-user-reference`. Applies to `executionUser
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt usernames
 
 **Example:**
 
@@ -41,10 +36,7 @@ Same as `approval-process/no-specific-user-reference`. Applies to `executionUser
 {
   "rules": {
     "auth-provider/no-specific-user-reference": {
-      "severity": "warn",
-      "allowlist": [
-        "integration@example.com"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -57,7 +49,6 @@ Same as `connected-app/no-secret-in-metadata`. Applies to `consumerSecret`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `extraPatterns`: regular expressions added to the built-in detection ones
 
 **Example:**
@@ -67,9 +58,6 @@ Same as `connected-app/no-secret-in-metadata`. Applies to `consumerSecret`.
   "rules": {
     "auth-provider/no-secret-in-metadata": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "extraPatterns": [
         "acme_key_[A-Za-z0-9]{32}"
       ]
@@ -121,7 +109,6 @@ Reports PKCE turned off on an OpenID Connect provider, because it is the current
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -129,10 +116,7 @@ Reports PKCE turned off on an OpenID Connect provider, because it is the current
 {
   "rules": {
     "auth-provider/pkce-required": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

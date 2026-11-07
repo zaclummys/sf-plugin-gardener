@@ -9,7 +9,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -19,9 +18,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "permission-set/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -35,7 +31,6 @@ Same as `custom-object/naming-convention`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `patterns`: map from metadata type to a regular expression for the name
 - `forbiddenSuffixes`: list of forbidden suffixes
 - `forbiddenPrefixes`: list of forbidden prefixes
@@ -47,9 +42,6 @@ Same as `custom-object/naming-convention`.
   "rules": {
     "permission-set/naming-convention": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "patterns": {
         "CustomField": "^[A-Z][A-Za-z0-9]*__c$"
       },
@@ -69,12 +61,11 @@ Same as `custom-object/naming-convention`.
 
 ## `permission-set/no-dangerous-permission`
 
-Permissions such as Modify All Data, View All Data and Author Apex require an allowlist in the configuration.
+Permissions such as Modify All Data, View All Data and Author Apex are reported.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: permission sets authorized to hold dangerous permissions
 - `dangerousPermissions`: permissions subject to the rule, with the three mentioned as the default
 
 **Example:**
@@ -84,9 +75,6 @@ Permissions such as Modify All Data, View All Data and Author Apex require an al
   "rules": {
     "permission-set/no-dangerous-permission": {
       "severity": "error",
-      "allowlist": [
-        "Admin_Base"
-      ],
       "dangerousPermissions": [
         "ModifyAllData",
         "ViewAllData",
@@ -104,7 +92,6 @@ Reports a permission set with no permission.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -112,10 +99,7 @@ Reports a permission set with no permission.
 {
   "rules": {
     "permission-set/no-empty-permission-set": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

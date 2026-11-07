@@ -11,7 +11,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -21,9 +20,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "permission-set-group/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -37,7 +33,6 @@ Same as `custom-object/naming-convention`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `patterns`: map from metadata type to a regular expression for the name
 - `forbiddenSuffixes`: list of forbidden suffixes
 - `forbiddenPrefixes`: list of forbidden prefixes
@@ -49,9 +44,6 @@ Same as `custom-object/naming-convention`.
   "rules": {
     "permission-set-group/naming-convention": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "patterns": {
         "CustomField": "^[A-Z][A-Za-z0-9]*__c$"
       },

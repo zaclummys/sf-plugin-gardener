@@ -29,7 +29,6 @@ Same as `translations/coverage-per-language`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `languages`: checked languages, with all versioned ones as the default
 
 **Example:**
@@ -39,9 +38,6 @@ Same as `translations/coverage-per-language`.
   "rules": {
     "custom-object-translation/coverage-per-language": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "languages": [
         "pt_BR",
         "es"

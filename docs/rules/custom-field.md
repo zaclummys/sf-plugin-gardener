@@ -9,7 +9,6 @@ Same as `flow/no-hardcoded-id`. Applies to the formula text and to the `defaultV
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `exemptElements`: names of XML elements added to the built-in list of exemptions
 
 **Example:**
@@ -19,9 +18,6 @@ Same as `flow/no-hardcoded-id`. Applies to the formula text and to the `defaultV
   "rules": {
     "custom-field/no-hardcoded-id": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "exemptElements": [
         "requestSigningCertId"
       ]
@@ -37,7 +33,6 @@ Same as `custom-tab/no-hardcoded-url`. Applies to the formula text and to the `d
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `forbiddenHostPatterns`: forbidden host patterns, with `*.my.salesforce.com` included by default
 
 **Example:**
@@ -47,9 +42,6 @@ Same as `custom-tab/no-hardcoded-url`. Applies to the formula text and to the `d
   "rules": {
     "custom-field/no-hardcoded-url": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "forbiddenHostPatterns": [
         "*.my.salesforce.com"
       ]
@@ -65,7 +57,6 @@ Same as `validation-rule/error-message-quality`. Applies to the `errorMessage` o
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum message length in characters
 - `genericMessages`: forbidden generic texts
 
@@ -76,9 +67,6 @@ Same as `validation-rule/error-message-quality`. Applies to the `errorMessage` o
   "rules": {
     "custom-field/error-message-quality": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 30,
       "genericMessages": [
         "Invalid value",
@@ -96,7 +84,6 @@ Same as `flow/no-inactive-component`. Applies to picklist values, through `isAct
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -104,10 +91,7 @@ Same as `flow/no-inactive-component`. Applies to picklist values, through `isAct
 {
   "rules": {
     "custom-field/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -120,8 +104,7 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
-- `minLength`: minimum description length in characters
+- `minLength`: minimum description length in characters. Required
 
 **Example:**
 
@@ -130,9 +113,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "custom-field/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -146,7 +126,6 @@ Same as `custom-object/naming-convention`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `patterns`: map from metadata type to a regular expression for the name
 - `forbiddenSuffixes`: list of forbidden suffixes
 - `forbiddenPrefixes`: list of forbidden prefixes
@@ -158,9 +137,6 @@ Same as `custom-object/naming-convention`.
   "rules": {
     "custom-field/naming-convention": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "patterns": {
         "CustomField": "^[A-Z][A-Za-z0-9]*__c$"
       },
@@ -185,7 +161,6 @@ Reports a field visible on a layout without help text.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -193,10 +168,7 @@ Reports a field visible on a layout without help text.
 {
   "rules": {
     "custom-field/help-text-recommended": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -276,7 +248,6 @@ A picklist must restrict values to the defined list.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -284,10 +255,7 @@ A picklist must restrict values to the defined list.
 {
   "rules": {
     "custom-field/picklist-restricted": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -324,7 +292,6 @@ Reports a field changed to required on an existing object, because it breaks int
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -332,10 +299,7 @@ Reports a field changed to required on an existing object, because it breaks int
 {
   "rules": {
     "custom-field/no-required-without-default-consideration": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -348,7 +312,6 @@ The `securityClassification` and `complianceGroup` elements must be filled in. T
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `requiredElements`: required elements, with the two mentioned as the default
 
 **Example:**
@@ -358,9 +321,6 @@ The `securityClassification` and `complianceGroup` elements must be filled in. T
   "rules": {
     "custom-field/data-classification-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "requiredElements": [
         "securityClassification",
         "complianceGroup"
@@ -377,7 +337,6 @@ Reports a field with `externalId` true and `unique` not true, because upsert by 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -385,10 +344,7 @@ Reports a field with `externalId` true and `unique` not true, because upsert by 
 {
   "rules": {
     "custom-field/external-id-should-be-unique": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -401,7 +357,6 @@ A new field of type `EncryptedText` is forbidden, because classic encryption is 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -409,10 +364,7 @@ A new field of type `EncryptedText` is forbidden, because classic encryption is 
 {
   "rules": {
     "custom-field/no-classic-encrypted-field": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

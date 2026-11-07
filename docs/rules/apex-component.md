@@ -11,7 +11,6 @@ Same as `apex-page/no-new-page`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -19,10 +18,7 @@ Same as `apex-page/no-new-page`.
 {
   "rules": {
     "apex-component/no-new-component": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

@@ -9,7 +9,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -19,9 +18,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "report/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -35,7 +31,6 @@ Same as `flow/no-hardcoded-id`. Applies to filter values.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `exemptElements`: names of XML elements added to the built-in list of exemptions
 
 **Example:**
@@ -45,9 +40,6 @@ Same as `flow/no-hardcoded-id`. Applies to filter values.
   "rules": {
     "report/no-hardcoded-id": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "exemptElements": [
         "requestSigningCertId"
       ]
@@ -63,7 +55,6 @@ Reports a report with no filter, no restrictive scope and an open time range, be
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -71,10 +62,7 @@ Reports a report with no filter, no restrictive scope and an open time range, be
 {
   "rules": {
     "report/needs-constraint": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

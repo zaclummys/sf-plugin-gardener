@@ -9,7 +9,6 @@ Same as `validation-rule/error-message-quality`. Applies to the alert text of an
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum message length in characters
 - `genericMessages`: forbidden generic texts
 
@@ -20,9 +19,6 @@ Same as `validation-rule/error-message-quality`. Applies to the alert text of an
   "rules": {
     "duplicate-rule/error-message-quality": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 30,
       "genericMessages": [
         "Invalid value",
@@ -40,7 +36,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -50,9 +45,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "duplicate-rule/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -66,7 +58,6 @@ Same as `flow/no-inactive-component`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -74,10 +65,7 @@ Same as `flow/no-inactive-component`.
 {
   "rules": {
     "duplicate-rule/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -103,12 +91,11 @@ Same as `list-view/boolean-filter-valid`.
 
 ## `duplicate-rule/no-bypass-sharing-in-duplicate-rule`
 
-`securityOption` equal to `BypassSharingRules` shows data from records the user cannot see and requires an allowlist. It is the analog of the flow system mode.
+`securityOption` equal to `BypassSharingRules` shows data from records the user cannot see and is reported. It is the analog of the flow system mode.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -116,10 +103,7 @@ Same as `list-view/boolean-filter-valid`.
 {
   "rules": {
     "duplicate-rule/no-bypass-sharing-in-duplicate-rule": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

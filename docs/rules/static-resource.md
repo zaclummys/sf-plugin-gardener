@@ -9,7 +9,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -19,9 +18,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "static-resource/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -36,7 +32,6 @@ A static resource with more than N megabytes.
 
 - `severity`: [rule level](README.md#common-configuration)
 - `max`: N, size in megabytes. Required
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -45,10 +40,7 @@ A static resource with more than N megabytes.
   "rules": {
     "static-resource/max-size": {
       "severity": "warn",
-      "max": 5,
-      "allowlist": [
-        "Example_Component"
-      ]
+      "max": 5
     }
   }
 }
@@ -73,12 +65,11 @@ The `cacheControl` element must be declared.
 
 ## `static-resource/no-public-cache`
 
-Reports `cacheControl` equal to `Public` outside the allowlist, because it exposes the content to third-party caches.
+Reports `cacheControl` equal to `Public`, because it exposes the content to third-party caches.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: resources authorized to use `Public`
 
 **Example:**
 
@@ -86,10 +77,7 @@ Reports `cacheControl` equal to `Public` outside the allowlist, because it expos
 {
   "rules": {
     "static-resource/no-public-cache": {
-      "severity": "warn",
-      "allowlist": [
-        "Public_Logo"
-      ]
+      "severity": "warn"
     }
   }
 }

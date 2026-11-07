@@ -9,7 +9,6 @@ Same as `custom-object/naming-convention`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `patterns`: map from metadata type to a regular expression for the name
 - `forbiddenSuffixes`: list of forbidden suffixes
 - `forbiddenPrefixes`: list of forbidden prefixes
@@ -21,9 +20,6 @@ Same as `custom-object/naming-convention`.
   "rules": {
     "path-assistant/naming-convention": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "patterns": {
         "CustomField": "^[A-Z][A-Za-z0-9]*__c$"
       },
@@ -48,7 +44,6 @@ Same as `flow/no-inactive-component`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -56,10 +51,7 @@ Same as `flow/no-inactive-component`.
 {
   "rules": {
     "path-assistant/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -72,7 +64,6 @@ Every step must have the `info` guidance text, because per-step guidance is the 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -80,10 +71,7 @@ Every step must have the `info` guidance text, because per-step guidance is the 
 {
   "rules": {
     "path-assistant/step-info-required": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -96,7 +84,6 @@ Reports an active picklist value with no matching step.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -104,10 +91,7 @@ Reports an active picklist value with no matching step.
 {
   "rules": {
     "path-assistant/covers-picklist-values": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

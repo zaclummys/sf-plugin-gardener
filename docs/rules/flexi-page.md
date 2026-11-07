@@ -9,7 +9,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -19,9 +18,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "flexi-page/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -35,7 +31,6 @@ Same as `flow/no-hardcoded-id`. Applies to the `visibilityRule` values.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `exemptElements`: names of XML elements added to the built-in list of exemptions
 
 **Example:**
@@ -45,9 +40,6 @@ Same as `flow/no-hardcoded-id`. Applies to the `visibilityRule` values.
   "rules": {
     "flexi-page/no-hardcoded-id": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "exemptElements": [
         "requestSigningCertId"
       ]
@@ -64,7 +56,6 @@ A region with more than N components hurts performance.
 
 - `severity`: [rule level](README.md#common-configuration)
 - `max`: N, number of components per region. Required
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -73,10 +64,7 @@ A region with more than N components hurts performance.
   "rules": {
     "flexi-page/max-components-per-region": {
       "severity": "warn",
-      "max": 10,
-      "allowlist": [
-        "Example_Component"
-      ]
+      "max": 10
     }
   }
 }
@@ -88,7 +76,6 @@ Reports a record page using the `flexipage:recordDetail` component. Dynamic Form
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -96,10 +83,7 @@ Reports a record page using the `flexipage:recordDetail` component. Dynamic Form
 {
   "rules": {
     "flexi-page/prefer-dynamic-forms": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -113,7 +97,6 @@ A `visibilityRule` with more than N criteria or complex composite logic becomes 
 
 - `severity`: [rule level](README.md#common-configuration)
 - `max`: N, number of criteria per rule. Required
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -122,10 +105,7 @@ A `visibilityRule` with more than N criteria or complex composite logic becomes 
   "rules": {
     "flexi-page/max-visibility-criteria": {
       "severity": "warn",
-      "max": 5,
-      "allowlist": [
-        "Example_Component"
-      ]
+      "max": 5
     }
   }
 }

@@ -27,7 +27,6 @@ For each versioned language, every translatable component needs a matching entry
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `languages`: checked languages, with all versioned ones as the default
 
 **Example:**
@@ -37,9 +36,6 @@ For each versioned language, every translatable component needs a matching entry
   "rules": {
     "translations/coverage-per-language": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "languages": [
         "pt_BR",
         "es"

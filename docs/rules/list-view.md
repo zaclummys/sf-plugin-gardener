@@ -9,7 +9,6 @@ Same as `flow/no-hardcoded-id`. Applies to filter values.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `exemptElements`: names of XML elements added to the built-in list of exemptions
 
 **Example:**
@@ -19,9 +18,6 @@ Same as `flow/no-hardcoded-id`. Applies to filter values.
   "rules": {
     "list-view/no-hardcoded-id": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "exemptElements": [
         "requestSigningCertId"
       ]
@@ -79,12 +75,11 @@ Configuration:
 
 ## `list-view/no-everything-visible-listview`
 
-A list view shared with all users requires an allowlist in the configuration. The implementation must enumerate all `sharedTo` targets, including portal and territory.
+A list view shared with all users is reported. The implementation must enumerate all `sharedTo` targets, including portal and territory.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -92,10 +87,7 @@ A list view shared with all users requires an allowlist in the configuration. Th
 {
   "rules": {
     "list-view/no-everything-visible-listview": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -108,7 +100,6 @@ Reports `filterScope` equal to `Everything` with no filter, because it creates a
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -116,10 +107,7 @@ Reports `filterScope` equal to `Everything` with no filter, because it creates a
 {
   "rules": {
     "list-view/no-unfiltered-everything-scope": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

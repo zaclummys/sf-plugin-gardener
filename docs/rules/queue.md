@@ -9,7 +9,6 @@ Same as `approval-process/no-specific-user-reference`. Applies to individual mem
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt usernames
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `approval-process/no-specific-user-reference`. Applies to individual mem
 {
   "rules": {
     "queue/no-specific-user-reference": {
-      "severity": "warn",
-      "allowlist": [
-        "integration@example.com"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -33,7 +29,6 @@ Reports a queue with no `queueSobject`, because it routes nothing.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -41,10 +36,7 @@ Reports a queue with no `queueSobject`, because it routes nothing.
 {
   "rules": {
     "queue/has-sobject": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -57,7 +49,6 @@ The queue `email` must belong to a configured domain, because a personal address
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `allowedDomains`: [accepted email domains](README.md#common-configuration)
 
 **Example:**
@@ -67,9 +58,6 @@ The queue `email` must belong to a configured domain, because a personal address
   "rules": {
     "queue/email-domain-allowlist": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "allowedDomains": [
         "example.com"
       ]

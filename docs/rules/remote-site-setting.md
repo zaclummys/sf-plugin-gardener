@@ -9,7 +9,6 @@ Reports a new remote site setting. Callouts must use a named credential.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Reports a new remote site setting. Callouts must use a named credential.
 {
   "rules": {
     "remote-site-setting/prefer-named-credential": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

@@ -9,7 +9,6 @@ Same as `certificate/not-expired`. Applies to the X.509 inside `validationCert`,
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `certificate/not-expired`. Applies to the X.509 inside `validationCert`,
 {
   "rules": {
     "saml-sso-config/not-expired": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -33,7 +29,6 @@ Same as `custom-tab/https-required`. Applies to `loginUrl` and `logoutUrl`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt URLs or hosts, such as `localhost`
 
 **Example:**
 
@@ -41,10 +36,7 @@ Same as `custom-tab/https-required`. Applies to `loginUrl` and `logoutUrl`.
 {
   "rules": {
     "saml-sso-config/https-required": {
-      "severity": "error",
-      "allowlist": [
-        "http://localhost:3000"
-      ]
+      "severity": "error"
     }
   }
 }

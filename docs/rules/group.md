@@ -9,7 +9,6 @@ The group must declare `doNotUseOrgChart`. The element decides whether access ex
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ The group must declare `doNotUseOrgChart`. The element decides whether access ex
 {
   "rules": {
     "group/org-chart-explicit": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

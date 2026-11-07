@@ -11,7 +11,6 @@ Same as `custom-object/description-required`. Applies to exposed components, and
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -21,9 +20,6 @@ Same as `custom-object/description-required`. Applies to exposed components, and
   "rules": {
     "lwc/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -104,12 +100,11 @@ Every `targetConfig` must reference only targets declared in `targets`. The mism
 
 ## `lwc/no-relaxed-csp-capability`
 
-The `lightningCommunity__RelaxedCSP` capability loosens security and requires an allowlist.
+The `lightningCommunity__RelaxedCSP` capability loosens security and is reported.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -117,10 +112,7 @@ The `lightningCommunity__RelaxedCSP` capability loosens security and requires an
 {
   "rules": {
     "lwc/no-relaxed-csp-capability": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -133,7 +125,6 @@ Reports a record page target without `objects` in the `targetConfig`, because th
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -141,10 +132,7 @@ Reports a record page target without `objects` in the `targetConfig`, because th
 {
   "rules": {
     "lwc/record-page-objects-scoped": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

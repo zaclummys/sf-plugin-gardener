@@ -9,7 +9,6 @@ Same as `flow/no-inactive-component`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `flow/no-inactive-component`.
 {
   "rules": {
     "workflow/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -33,7 +29,6 @@ Same as `approval-process/no-specific-user-reference`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt usernames
 
 **Example:**
 
@@ -41,10 +36,7 @@ Same as `approval-process/no-specific-user-reference`.
 {
   "rules": {
     "workflow/no-specific-user-reference": {
-      "severity": "warn",
-      "allowlist": [
-        "integration@example.com"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -57,7 +49,6 @@ Reports a person's email address in metadata, such as in an alert copy or an esc
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt addresses
 - `allowedDomains`: addresses in these domains are not reported
 
 **Example:**
@@ -67,9 +58,6 @@ Reports a person's email address in metadata, such as in an alert copy or an esc
   "rules": {
     "workflow/no-hardcoded-email-address": {
       "severity": "warn",
-      "allowlist": [
-        "ops@example.com"
-      ],
       "allowedDomains": [
         "example.com"
       ]
@@ -103,7 +91,6 @@ Forbids an active workflow rule. The technology is legacy and the automation sho
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -111,10 +98,7 @@ Forbids an active workflow rule. The technology is legacy and the automation sho
 {
   "rules": {
     "workflow/no-workflow-rule": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -127,7 +111,6 @@ Reports an outbound message. Prefer a platform event or a callout in a flow.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -135,10 +118,7 @@ Reports an outbound message. Prefer a platform event or a callout in a flow.
 {
   "rules": {
     "workflow/no-outbound-message": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -146,12 +126,11 @@ Reports an outbound message. Prefer a platform event or a callout in a flow.
 
 ## `workflow/no-session-id-in-outbound-message`
 
-`includeSessionId` true sends a valid session to an external endpoint and requires an allowlist.
+`includeSessionId` true sends a valid session to an external endpoint and is reported.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -159,10 +138,7 @@ Reports an outbound message. Prefer a platform event or a callout in a flow.
 {
   "rules": {
     "workflow/no-session-id-in-outbound-message": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -175,7 +151,6 @@ An alert, field update, task or outbound message that no rule or approval proces
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -183,10 +158,7 @@ An alert, field update, task or outbound message that no rule or approval proces
 {
   "rules": {
     "workflow/no-unused-workflow-action": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

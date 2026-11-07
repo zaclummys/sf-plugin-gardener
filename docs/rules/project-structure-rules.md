@@ -11,7 +11,6 @@ Same as `custom-tab/no-hardcoded-url`. Applies to the `sfdcLoginUrl` of `sfdx-pr
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `forbiddenHostPatterns`: forbidden host patterns, with `*.my.salesforce.com` included by default
 
 **Example:**
@@ -21,9 +20,6 @@ Same as `custom-tab/no-hardcoded-url`. Applies to the `sfdcLoginUrl` of `sfdx-pr
   "rules": {
     "project/no-hardcoded-url": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "forbiddenHostPatterns": [
         "*.my.salesforce.com"
       ]
@@ -39,7 +35,6 @@ The same component cannot be defined in two files of the project.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -47,10 +42,7 @@ The same component cannot be defined in two files of the project.
 {
   "rules": {
     "project/no-duplicate-metadata": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -149,7 +141,6 @@ Reports a pattern that matches no file, because it is noise that ages badly.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt patterns
 
 **Example:**
 
@@ -157,10 +148,7 @@ Reports a pattern that matches no file, because it is noise that ages badly.
 {
   "rules": {
     "project/forceignore-dead-pattern": {
-      "severity": "warn",
-      "allowlist": [
-        "**/legado/**"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -168,12 +156,11 @@ Reports a pattern that matches no file, because it is noise that ages badly.
 
 ## `project/forceignore-no-broad-metadata-ignore`
 
-Ignoring an entire metadata directory requires an allowlist, because it hides drift between repository and org.
+Ignoring an entire metadata directory is reported, because it hides drift between repository and org.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: directories authorized to be ignored
 
 **Example:**
 
@@ -181,10 +168,7 @@ Ignoring an entire metadata directory requires an allowlist, because it hides dr
 {
   "rules": {
     "project/forceignore-no-broad-metadata-ignore": {
-      "severity": "error",
-      "allowlist": [
-        "force-app/main/default/territories"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -245,7 +229,6 @@ All `*-meta.xml` files must declare the same apiVersion, aligned with the `sourc
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `expectedVersion`: required version, with `sourceApiVersion` as the default value
 
 **Example:**
@@ -255,9 +238,6 @@ All `*-meta.xml` files must declare the same apiVersion, aligned with the `sourc
   "rules": {
     "project/api-version-consistency": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "expectedVersion": "60.0"
     }
   }
@@ -271,7 +251,6 @@ Reports apiVersion below the configured minimum.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minVersion`: minimum accepted version
 
 **Example:**
@@ -281,9 +260,6 @@ Reports apiVersion below the configured minimum.
   "rules": {
     "project/min-api-version": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minVersion": "60.0"
     }
   }
@@ -376,7 +352,6 @@ Metadata file above the line limit of its type. A small file fits in the AI cont
 
 - `severity`: [rule level](README.md#common-configuration)
 - `limits`: map from metadata type to the maximum number, in number of lines
-- `allowlist`: exempt files, such as a legacy profile not yet split
 
 **Example:**
 
@@ -388,10 +363,7 @@ Metadata file above the line limit of its type. A small file fits in the AI cont
       "limits": {
         "Profile": 5000,
         "Flow": 1500
-      },
-      "allowlist": [
-        "force-app/main/default/profiles/Admin.profile-meta.xml"
-      ]
+      }
     }
   }
 }

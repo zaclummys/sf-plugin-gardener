@@ -9,7 +9,6 @@ The versioned profile may only contain layout assignment, default record type an
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `allowedElements`: top-level elements accepted in the profile, with the three mentioned groups as the default
 
 **Example:**
@@ -19,9 +18,6 @@ The versioned profile may only contain layout assignment, default record type an
   "rules": {
     "profile/minimal-profile": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "allowedElements": [
         "layoutAssignments",
         "recordTypeVisibilities",

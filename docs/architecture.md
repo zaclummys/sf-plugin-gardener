@@ -27,7 +27,7 @@ Two phases are needed because rules such as `project/no-duplicate-metadata` and 
 
 A rule is a module with two parts. The `meta` part holds the name in the form `type/rule`, the metadata type it reads, the schema of its properties and its default severity. The `create` part receives a context and returns the visitors, which are keyed by metadata type and by path, such as `Flow > start > filters`.
 
-A rule only reports. The engine applies the severity and the allowlist, so no rule repeats that logic.
+A rule only reports. The engine applies the severity, so no rule repeats that logic.
 
 A registry maps the file suffix and the directory to a metadata type, including the decomposed layout such as `objects/X/fields/Y.field-meta.xml`. It is what keeps one type per namespace.
 

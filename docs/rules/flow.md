@@ -9,7 +9,6 @@ Same as `workflow/no-workflow-rule`. Applies to a flow with `processType` equal 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `workflow/no-workflow-rule`. Applies to a flow with `processType` equal 
 {
   "rules": {
     "flow/no-workflow-rule": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -33,7 +29,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -43,9 +38,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "flow/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -59,7 +51,6 @@ Same as `custom-object/naming-convention`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `patterns`: map from metadata type to a regular expression for the name
 - `forbiddenSuffixes`: list of forbidden suffixes
 - `forbiddenPrefixes`: list of forbidden prefixes
@@ -71,9 +62,6 @@ Same as `custom-object/naming-convention`.
   "rules": {
     "flow/naming-convention": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "patterns": {
         "CustomField": "^[A-Z][A-Za-z0-9]*__c$"
       },
@@ -98,7 +86,6 @@ Forbids 15 or 18 character record IDs in formulas, filters, flows and any other 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `exemptElements`: names of XML elements added to the built-in list of exemptions
 
 **Example:**
@@ -108,9 +95,6 @@ Forbids 15 or 18 character record IDs in formulas, filters, flows and any other 
   "rules": {
     "flow/no-hardcoded-id": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "exemptElements": [
         "requestSigningCertId"
       ]
@@ -126,7 +110,6 @@ Reports a versioned component with its activation flag turned off. Remove it ins
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -134,10 +117,7 @@ Reports a versioned component with its activation flag turned off. Remove it ins
 {
   "rules": {
     "flow/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -150,7 +130,6 @@ Every DML and callout element needs a fault connector.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `elementTypes`: element types that require a fault connector, with DML and callout as the default
 
 **Example:**
@@ -160,9 +139,6 @@ Every DML and callout element needs a fault connector.
   "rules": {
     "flow/fault-path-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "elementTypes": [
         "recordCreates",
         "recordUpdates",
@@ -181,7 +157,6 @@ Forbids a create, update or delete element inside a loop.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -189,10 +164,7 @@ Forbids a create, update or delete element inside a loop.
 {
   "rules": {
     "flow/no-dml-in-loop": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -205,7 +177,6 @@ Forbids a Get Records element inside a loop. The detection walks the connector g
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -213,10 +184,7 @@ Forbids a Get Records element inside a loop. The detection walks the connector g
 {
   "rules": {
     "flow/no-query-in-loop": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -229,7 +197,6 @@ Reports a Get Records element with no filter.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -237,10 +204,7 @@ Reports a Get Records element with no filter.
 {
   "rules": {
     "flow/query-needs-filter": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -253,7 +217,6 @@ A record-triggered flow must have entry criteria, so it does not run on every wr
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -261,10 +224,7 @@ A record-triggered flow must have entry criteria, so it does not run on every wr
 {
   "rules": {
     "flow/entry-criteria-required": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -277,7 +237,6 @@ One flow per object per trigger event, or an explicit orchestrator flow.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `orchestrators`: flows recognized as orchestrators
 
 **Example:**
@@ -287,9 +246,6 @@ One flow per object per trigger event, or an explicit orchestrator flow.
   "rules": {
     "flow/one-record-triggered-flow-per-object-per-event": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "orchestrators": [
         "Account_Orchestrator"
       ]
@@ -306,7 +262,6 @@ A flow with more than N elements should be split into subflows.
 
 - `severity`: [rule level](README.md#common-configuration)
 - `max`: N, number of elements. Required
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -315,10 +270,7 @@ A flow with more than N elements should be split into subflows.
   "rules": {
     "flow/max-elements": {
       "severity": "warn",
-      "max": 100,
-      "allowlist": [
-        "Example_Component"
-      ]
+      "max": 100
     }
   }
 }
@@ -330,7 +282,6 @@ The flow must use auto layout. Free mode generates coordinate noise in the diff 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -338,10 +289,7 @@ The flow must use auto layout. Free mode generates coordinate noise in the diff 
 {
   "rules": {
     "flow/auto-layout-required": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -349,12 +297,11 @@ The flow must use auto layout. Free mode generates coordinate noise in the diff 
 
 ## `flow/no-system-mode-without-sharing`
 
-`runInMode` equal to `SystemModeWithoutSharing` requires an allowlist. The mode ignores all sharing and is the dangerous setting that an agent turns on without noticing.
+`runInMode` equal to `SystemModeWithoutSharing` is reported. The mode ignores all sharing and is the dangerous setting that an agent turns on without noticing.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -362,10 +309,7 @@ The flow must use auto layout. Free mode generates coordinate noise in the diff 
 {
   "rules": {
     "flow/no-system-mode-without-sharing": {
-      "severity": "error",
-      "allowlist": [
-        "Sync_Accounts"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -414,7 +358,6 @@ Reports a variable, formula, constant or text template with no reference in the 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt resource names, such as input and output variables used by the caller of the flow
 
 **Example:**
 
@@ -422,10 +365,7 @@ Reports a variable, formula, constant or text template with no reference in the 
 {
   "rules": {
     "flow/no-unused-flow-resource": {
-      "severity": "warn",
-      "allowlist": [
-        "recordId"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -438,7 +378,6 @@ An after save flow that only updates its own record should be before save, becau
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -446,10 +385,7 @@ An after save flow that only updates its own record should be before save, becau
 {
   "rules": {
     "flow/prefer-before-save-for-same-record-update": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -462,7 +398,6 @@ Reports `filterFormula` on the `start` when the criteria fit in `filters`, which
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -470,10 +405,7 @@ Reports `filterFormula` on the `start` when the criteria fit in `filters`, which
 {
   "rules": {
     "flow/prefer-entry-filters-over-formula": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -481,13 +413,12 @@ Reports `filterFormula` on the `start` when the criteria fit in `filters`, which
 
 ## `flow/restricted-flow-environment`
 
-`environments` with `Slack` or `Offline` requires an allowlist, because a change of execution surface must be intentional.
+`environments` with `Slack` or `Offline` is reported, because a change of execution surface must be intentional.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
-- `restrictedEnvironments`: environments that require an allowlist, with `Slack` and `Offline` as the default
+- `restrictedEnvironments`: environments that are reported, with `Slack` and `Offline` as the default
 
 **Example:**
 
@@ -496,9 +427,6 @@ Reports `filterFormula` on the `start` when the criteria fit in `filters`, which
   "rules": {
     "flow/restricted-flow-environment": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "restrictedEnvironments": [
         "Slack",
         "Offline"
@@ -533,7 +461,6 @@ A scheduled flow with an object and no filter processes the entire table on each
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -541,10 +468,7 @@ A scheduled flow with an object and no filter processes the entire table on each
 {
   "rules": {
     "flow/scheduled-flow-needs-filter": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

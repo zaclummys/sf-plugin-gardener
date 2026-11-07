@@ -9,7 +9,6 @@ Same as `flow/entry-criteria-required`. A process without `entryCriteria` accept
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `flow/entry-criteria-required`. A process without `entryCriteria` accept
 {
   "rules": {
     "approval-process/entry-criteria-required": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -33,7 +29,6 @@ Same as `custom-object/description-required`. Applies to the process and to each
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -43,9 +38,6 @@ Same as `custom-object/description-required`. Applies to the process and to each
   "rules": {
     "approval-process/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -59,7 +51,6 @@ Same as `flow/no-inactive-component`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -67,10 +58,7 @@ Same as `flow/no-inactive-component`.
 {
   "rules": {
     "approval-process/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -83,7 +71,6 @@ Reports metadata that points to a specific user. This applies to approver, assig
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt usernames
 
 **Example:**
 
@@ -91,10 +78,7 @@ Reports metadata that points to a specific user. This applies to approver, assig
 {
   "rules": {
     "approval-process/no-specific-user-reference": {
-      "severity": "warn",
-      "allowlist": [
-        "integration@example.com"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -120,12 +104,11 @@ Same as `list-view/boolean-filter-valid`.
 
 ## `approval-process/record-editability-strict`
 
-Allowing the approver to edit the pending record requires an allowlist, because the edit invalidates what was already approved.
+Allowing the approver to edit the pending record is reported, because the edit invalidates what was already approved.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -133,10 +116,7 @@ Allowing the approver to edit the pending record requires an allowlist, because 
 {
   "rules": {
     "approval-process/record-editability-strict": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

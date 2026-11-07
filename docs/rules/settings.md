@@ -11,7 +11,6 @@ Same as `approval-process/no-specific-user-reference`. Applies to the default ow
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt usernames
 
 **Example:**
 
@@ -19,10 +18,7 @@ Same as `approval-process/no-specific-user-reference`. Applies to the default ow
 {
   "rules": {
     "settings/no-specific-user-reference": {
-      "severity": "warn",
-      "allowlist": [
-        "integration@example.com"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -84,12 +80,11 @@ Password and session policies must respect the configured limits, because the ve
 
 ## `settings/no-admin-login-as-any-user`
 
-`enableAdminLoginAsAnyUser` true requires an allowlist.
+`enableAdminLoginAsAnyUser` true is reported.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -97,10 +92,7 @@ Password and session policies must respect the configured limits, because the ve
 {
   "rules": {
     "settings/no-admin-login-as-any-user": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -132,12 +124,11 @@ Reports email-to-case addresses outside the configured domain, because an enviro
 
 ## `settings/knowledge-public-sharing-allowlist`
 
-Publishing articles to sites or communities requires an allowlist, because making an article public is an editorial decision, not a side effect of a deploy.
+Publishing articles to sites or communities is reported, because making an article public is an editorial decision, not a side effect of a deploy.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -145,10 +136,7 @@ Publishing articles to sites or communities requires an allowlist, because makin
 {
   "rules": {
     "settings/knowledge-public-sharing-allowlist": {
-      "severity": "error",
-      "allowlist": [
-        "Knowledge"
-      ]
+      "severity": "error"
     }
   }
 }

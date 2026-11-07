@@ -6,12 +6,11 @@ The scope is the same as [LWC](lwc.md).
 
 ## `apex-page/no-new-page`
 
-A new Visualforce page requires an allowlist in the configuration.
+A new Visualforce page is reported.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -19,10 +18,7 @@ A new Visualforce page requires an allowlist in the configuration.
 {
   "rules": {
     "apex-page/no-new-page": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -35,7 +31,6 @@ Reports a Visualforce page without `confirmationTokenRequired` true, because the
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -43,10 +38,7 @@ Reports a Visualforce page without `confirmationTokenRequired` true, because the
 {
   "rules": {
     "apex-page/csrf-token-recommended": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

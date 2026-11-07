@@ -9,7 +9,6 @@ Same as `flow/no-inactive-component`. Applies to the `active` element.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `flow/no-inactive-component`. Applies to the `active` element.
 {
   "rules": {
     "validation-rule/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -33,7 +29,6 @@ Every validation rule must check a bypass custom permission. This allows data lo
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `bypassPermissions`: custom permissions accepted as bypass, or any when empty
 
 **Example:**
@@ -43,9 +38,6 @@ Every validation rule must check a bypass custom permission. This allows data lo
   "rules": {
     "validation-rule/bypass-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "bypassPermissions": [
         "Bypass_Validation"
       ]
@@ -61,7 +53,6 @@ The error message must have a minimum length and cannot be a generic text. The m
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum message length in characters
 - `genericMessages`: forbidden generic texts
 
@@ -72,9 +63,6 @@ The error message must have a minimum length and cannot be a generic text. The m
   "rules": {
     "validation-rule/error-message-quality": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 30,
       "genericMessages": [
         "Invalid value",

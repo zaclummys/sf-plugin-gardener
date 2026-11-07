@@ -6,12 +6,11 @@ Applies `custom-field/single-default-picklist-value` to the values.
 
 ## `standard-value-set/allowlist`
 
-Versioning a StandardValueSet requires an allowlist, because it overrides the standard picklists of the whole org and usually gets in through an accidental retrieve.
+Versioning a StandardValueSet is reported, because it overrides the standard picklists of the whole org and usually gets in through an accidental retrieve.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: allowed StandardValueSet names
 
 **Example:**
 
@@ -19,10 +18,7 @@ Versioning a StandardValueSet requires an allowlist, because it overrides the st
 {
   "rules": {
     "standard-value-set/allowlist": {
-      "severity": "error",
-      "allowlist": [
-        "LeadSource"
-      ]
+      "severity": "error"
     }
   }
 }

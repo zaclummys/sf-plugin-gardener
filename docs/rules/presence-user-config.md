@@ -9,7 +9,6 @@ Same as `approval-process/no-specific-user-reference`. Applies to overflow and i
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt usernames
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `approval-process/no-specific-user-reference`. Applies to overflow and i
 {
   "rules": {
     "presence-user-config/no-specific-user-reference": {
-      "severity": "warn",
-      "allowlist": [
-        "integration@example.com"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -33,7 +29,6 @@ Reports a presence assignment per individual user, because assignment by profile
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -41,10 +36,7 @@ Reports a presence assignment per individual user, because assignment by profile
 {
   "rules": {
     "presence-user-config/assign-by-profile": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

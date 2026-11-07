@@ -9,8 +9,7 @@ Every custom component needs a filled-in description. The description is the con
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
-- `minLength`: minimum description length in characters
+- `minLength`: minimum description length in characters. Required
 
 **Example:**
 
@@ -19,9 +18,6 @@ Every custom component needs a filled-in description. The description is the con
   "rules": {
     "custom-object/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -35,7 +31,6 @@ The API name must follow the pattern configured for the type. Suffixes such as `
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `patterns`: map from metadata type to a regular expression for the name
 - `forbiddenSuffixes`: list of forbidden suffixes
 - `forbiddenPrefixes`: list of forbidden prefixes
@@ -47,9 +42,6 @@ The API name must follow the pattern configured for the type. Suffixes such as `
   "rules": {
     "custom-object/naming-convention": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "patterns": {
         "CustomField": "^[A-Z][A-Za-z0-9]*__c$"
       },
@@ -87,13 +79,12 @@ The object must declare `sharingModel` explicitly in the XML. The same holds for
 
 ## `custom-object/forbidden-sharing-models`
 
-A forbidden value such as `ReadWrite` in `sharingModel` or `externalSharingModel` requires justification via allowlist.
+An object whose `sharingModel` or `externalSharingModel` is one of the forbidden models, such as `ReadWrite`, is reported.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: objects authorized to use a forbidden model
-- `forbiddenModels`: values that only pass if the object is in the `allowlist`. Required
+- `forbiddenModels`: values that the object cannot declare. Required
 
 **Example:**
 
@@ -102,9 +93,6 @@ A forbidden value such as `ReadWrite` in `sharingModel` or `externalSharingModel
   "rules": {
     "custom-object/forbidden-sharing-models": {
       "severity": "error",
-      "allowlist": [
-        "Account"
-      ],
       "forbiddenModels": [
         "ReadWrite"
       ]
@@ -115,12 +103,11 @@ A forbidden value such as `ReadWrite` in `sharingModel` or `externalSharingModel
 
 ## `custom-object/external-sharing-model-not-wider`
 
-External sharing more permissive than internal requires an allowlist.
+External sharing more permissive than internal is reported.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -128,10 +115,7 @@ External sharing more permissive than internal requires an allowlist.
 {
   "rules": {
     "custom-object/external-sharing-model-not-wider": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -144,7 +128,6 @@ Reports an object with `deploymentStatus` equal to `InDevelopment`, because it i
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -152,10 +135,7 @@ Reports an object with `deploymentStatus` equal to `InDevelopment`, because it i
 {
   "rules": {
     "custom-object/deployment-status-deployed": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -353,7 +333,6 @@ A new list custom setting is forbidden. Custom metadata versions better and trav
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -361,10 +340,7 @@ A new list custom setting is forbidden. Custom metadata versions better and trav
 {
   "rules": {
     "custom-object/prefer-custom-metadata": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -377,7 +353,6 @@ A hierarchy custom setting is allowed only for per-user or per-profile configura
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -385,10 +360,7 @@ A hierarchy custom setting is allowed only for per-user or per-profile configura
 {
   "rules": {
     "custom-object/hierarchy-setting-allowed": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

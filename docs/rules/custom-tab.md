@@ -9,7 +9,6 @@ Same as `custom-object/description-required`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `minLength`: minimum description length in characters
 
 **Example:**
@@ -19,9 +18,6 @@ Same as `custom-object/description-required`.
   "rules": {
     "custom-tab/description-required": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "minLength": 20
     }
   }
@@ -35,7 +31,6 @@ Forbids org URLs, such as `*.my.salesforce.com`, in any metadata. Applies to the
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `forbiddenHostPatterns`: forbidden host patterns, with `*.my.salesforce.com` included by default
 
 **Example:**
@@ -45,9 +40,6 @@ Forbids org URLs, such as `*.my.salesforce.com`, in any metadata. Applies to the
   "rules": {
     "custom-tab/no-hardcoded-url": {
       "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ],
       "forbiddenHostPatterns": [
         "*.my.salesforce.com"
       ]
@@ -63,7 +55,6 @@ Any endpoint, callback or web tab URL element must use https. Applies to the `ur
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt URLs or hosts, such as `localhost`
 
 **Example:**
 
@@ -71,10 +62,7 @@ Any endpoint, callback or web tab URL element must use https. Applies to the `ur
 {
   "rules": {
     "custom-tab/https-required": {
-      "severity": "error",
-      "allowlist": [
-        "http://localhost:3000"
-      ]
+      "severity": "error"
     }
   }
 }

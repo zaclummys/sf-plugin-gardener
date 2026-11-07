@@ -9,7 +9,6 @@ Same as `flow/no-inactive-component`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `flow/no-inactive-component`.
 {
   "rules": {
     "transaction-security-policy/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -33,7 +29,6 @@ Same as `approval-process/no-specific-user-reference`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt usernames
 
 **Example:**
 
@@ -41,10 +36,7 @@ Same as `approval-process/no-specific-user-reference`.
 {
   "rules": {
     "transaction-security-policy/no-specific-user-reference": {
-      "severity": "warn",
-      "allowlist": [
-        "integration@example.com"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -75,7 +67,6 @@ Reports elements of the legacy Transaction Security model, such as `eventType` a
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -83,10 +74,7 @@ Reports elements of the legacy Transaction Security model, such as `eventType` a
 {
   "rules": {
     "transaction-security-policy/no-legacy-fields": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

@@ -9,7 +9,6 @@ Reports `expirationDate` in the past. This avoids the classic SSO outage from an
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Reports `expirationDate` in the past. This avoids the classic SSO outage from an
 {
   "rules": {
     "certificate/not-expired": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -33,7 +29,6 @@ Reports `expirationDate` less than N days away. It also applies to the `validati
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 - `warnDays`: N, lead time in days counted from the expiration date
 
 **Example:**
@@ -43,9 +38,6 @@ Reports `expirationDate` less than N days away. It also applies to the `validati
   "rules": {
     "certificate/expiring-soon": {
       "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ],
       "warnDays": 60
     }
   }
@@ -54,12 +46,11 @@ Reports `expirationDate` less than N days away. It also applies to the `validati
 
 ## `certificate/private-key-not-exportable`
 
-`privateKeyExportable` must be declared as `false`, with an allowlist for exceptions.
+`privateKeyExportable` must be declared as `false`.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -67,10 +58,7 @@ Reports `expirationDate` less than N days away. It also applies to the `validati
 {
   "rules": {
     "certificate/private-key-not-exportable": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -105,7 +93,6 @@ Reports a PEM private key block in a certificate file or in a markup file, such 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt file paths, such as test fixtures
 
 **Example:**
 
@@ -113,10 +100,7 @@ Reports a PEM private key block in a certificate file or in a markup file, such 
 {
   "rules": {
     "certificate/no-private-key-material": {
-      "severity": "error",
-      "allowlist": [
-        "test/fixtures/key.pem"
-      ]
+      "severity": "error"
     }
   }
 }

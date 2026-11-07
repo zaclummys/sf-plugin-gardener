@@ -9,7 +9,6 @@ Two labels with the same text should become one.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Two labels with the same text should become one.
 {
   "rules": {
     "custom-label/no-duplicate-label-value": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -33,7 +29,6 @@ Every label needs a filled-in category, for organization and search.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -41,10 +36,7 @@ Every label needs a filled-in category, for organization and search.
 {
   "rules": {
     "custom-label/category-required": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

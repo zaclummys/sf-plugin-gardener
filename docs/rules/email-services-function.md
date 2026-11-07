@@ -9,7 +9,6 @@ Same as `flow/no-inactive-component`.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `flow/no-inactive-component`.
 {
   "rules": {
     "email-services-function/no-inactive-component": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -33,7 +29,6 @@ Same as `approval-process/no-specific-user-reference`. `runAsUser` is exempt, be
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt usernames
 
 **Example:**
 
@@ -41,10 +36,7 @@ Same as `approval-process/no-specific-user-reference`. `runAsUser` is exempt, be
 {
   "rules": {
     "email-services-function/no-specific-user-reference": {
-      "severity": "warn",
-      "allowlist": [
-        "integration@example.com"
-      ]
+      "severity": "warn"
     }
   }
 }
@@ -52,12 +44,11 @@ Same as `approval-process/no-specific-user-reference`. `runAsUser` is exempt, be
 
 ## `email-services-function/authorized-senders-required`
 
-An empty `authorizedSenders` requires an allowlist, because the service would execute Apex from an email from any sender.
+An empty `authorizedSenders` is reported, because the service would execute Apex from an email from any sender.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -65,10 +56,7 @@ An empty `authorizedSenders` requires an allowlist, because the service would ex
 {
   "rules": {
     "email-services-function/authorized-senders-required": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -81,7 +69,6 @@ Reports waiving the SPF and DKIM check.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -89,10 +76,7 @@ Reports waiving the SPF and DKIM check.
 {
   "rules": {
     "email-services-function/authentication-required": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

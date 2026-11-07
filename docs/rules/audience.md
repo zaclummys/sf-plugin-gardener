@@ -9,7 +9,6 @@ Reports an audience with no criteria and no formula, because it matches any visi
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Reports an audience with no criteria and no formula, because it matches any visi
 {
   "rules": {
     "audience/criteria-required": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }

@@ -11,7 +11,6 @@ A new Aura component is forbidden.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -19,10 +18,7 @@ A new Aura component is forbidden.
 {
   "rules": {
     "aura/prefer-lwc": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

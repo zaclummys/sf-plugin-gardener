@@ -9,7 +9,6 @@ Same as `custom-tab/https-required`. Applies to the entries.
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: exempt URLs or hosts, such as `localhost`
 
 **Example:**
 
@@ -17,10 +16,7 @@ Same as `custom-tab/https-required`. Applies to the entries.
 {
   "rules": {
     "iframe-white-list-url-settings/https-required": {
-      "severity": "error",
-      "allowlist": [
-        "http://localhost:3000"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -28,12 +24,11 @@ Same as `custom-tab/https-required`. Applies to the entries.
 
 ## `iframe-white-list-url-settings/allowlist-no-wildcard-domain`
 
-An entry with a domain wildcard requires an allowlist, because it allows framing by any subdomain and opens clickjacking.
+An entry with a domain wildcard is reported, because it allows framing by any subdomain and opens clickjacking.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: entries authorized to use a wildcard
 
 **Example:**
 
@@ -41,10 +36,7 @@ An entry with a domain wildcard requires an allowlist, because it allows framing
 {
   "rules": {
     "iframe-white-list-url-settings/allowlist-no-wildcard-domain": {
-      "severity": "error",
-      "allowlist": [
-        "*.example.com"
-      ]
+      "severity": "error"
     }
   }
 }

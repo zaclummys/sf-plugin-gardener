@@ -4,12 +4,11 @@
 
 ## `network/no-guest-chatter`
 
-Chatter for the guest user requires an allowlist.
+Chatter for the guest user is reported.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Chatter for the guest user requires an allowlist.
 {
   "rules": {
     "network/no-guest-chatter": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }
@@ -28,12 +24,11 @@ Chatter for the guest user requires an allowlist.
 
 ## `network/no-guest-file-access`
 
-Guest access to files requires an allowlist.
+Guest access to files is reported.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -41,10 +36,7 @@ Guest access to files requires an allowlist.
 {
   "rules": {
     "network/no-guest-file-access": {
-      "severity": "error",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "error"
     }
   }
 }

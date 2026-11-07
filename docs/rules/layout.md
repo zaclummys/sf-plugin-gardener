@@ -10,7 +10,6 @@ A layout with more than N fields hurts usability and performance.
 
 - `severity`: [rule level](README.md#common-configuration)
 - `max`: N, number of fields. Required
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -19,10 +18,7 @@ A layout with more than N fields hurts usability and performance.
   "rules": {
     "layout/max-fields-per-layout": {
       "severity": "warn",
-      "max": 100,
-      "allowlist": [
-        "Example_Component"
-      ]
+      "max": 100
     }
   }
 }

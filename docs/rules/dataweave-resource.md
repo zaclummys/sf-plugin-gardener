@@ -9,7 +9,6 @@ Reports a DataWeave script with `isGlobal` true outside a package project, becau
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: [exempt components](README.md#common-configuration)
 
 **Example:**
 
@@ -17,10 +16,7 @@ Reports a DataWeave script with `isGlobal` true outside a package project, becau
 {
   "rules": {
     "dataweave-resource/no-global": {
-      "severity": "warn",
-      "allowlist": [
-        "Example_Component"
-      ]
+      "severity": "warn"
     }
   }
 }
