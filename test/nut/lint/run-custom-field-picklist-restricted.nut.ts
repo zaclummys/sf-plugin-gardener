@@ -51,6 +51,15 @@ describe('lint run custom-field/picklist-restricted', () => {
         expect(output.result.findings).to.deep.equal([]);
     });
 
+    it('reports nothing for a field that declares no type', () => {
+        const directory = findFixture('standard-field-project');
+        const output = execLintJson({
+            directory,
+        });
+
+        expect(output.result.findings).to.deep.equal([]);
+    });
+
     it('reports nothing for a field that is not a picklist', () => {
         const directory = findFixture('custom-field-text-project');
         const output = execLintJson({
