@@ -1,0 +1,7 @@
+{
+    "rules": {
+        "custom-field/compliance-group-required": {
+            "severity": "warn"
+        }
+    }
+}
