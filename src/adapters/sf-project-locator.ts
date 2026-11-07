@@ -4,7 +4,7 @@ import path from 'node:path';
 import { SfProject } from '@salesforce/core';
 import { MetadataResolver, type SourceComponent } from '@salesforce/source-deploy-retrieve';
 import { getString } from '@salesforce/ts-types';
-import { ApiVersion, CustomObject, CustomObjects, DeploymentStatus, Project, ProjectFile, SharingModel } from '../core/index.js';
+import { ApiVersion, CustomField, CustomFields, CustomObject, CustomObjects, DeploymentStatus, Project, ProjectFile, SharingModel } from '../core/index.js';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {
@@ -46,6 +46,26 @@ async function buildProjectFile({
 
 function isCustomObject(component: SourceComponent): boolean {
     return component.type.name === 'CustomObject';
+}
+
+function isCustomField(component: SourceComponent): boolean {
+    return component.type.name === 'CustomField';
+}
+
+function buildCustomField({
+    component, projectDirectory,
+}: {
+    component: XmlComponent;
+    projectDirectory: string;
+}): CustomField {
+    const xml = component.parseXmlSync();
+    const description = getString(xml, 'CustomField.description');
+
+    return new CustomField({
+        name: component.fullName,
+        path: path.relative(projectDirectory, component.xml),
+        described: Boolean(description),
+    });
 }
 
 function buildCustomObject({
@@ -91,52 +111,44 @@ export class SfProjectLocator implements ProjectLocator {
             .getSfProjectJson()
             .getContents();
 
-        const packageDirectories = projectJson.packageDirectories;
-        const files: ProjectFile[] = [];
-        const objects: CustomObject[] = [];
+        const fullPaths = projectJson.packageDirectories.map((packageDirectory) => path.resolve(projectDirectory, packageDirectory.path));
+        const missingPath = fullPaths.find((fullPath) => !existsSync(fullPath));
 
-        for (const packageDirectory of packageDirectories) {
-            const fullPath = path.resolve(projectDirectory, packageDirectory.path);
-
-            if (!existsSync(fullPath)) {
-                return {
-                    success: false,
-                    error: 'package-directory-not-found',
-                    directory: fullPath,
-                };
-            }
-
-            const resolver = new MetadataResolver();
-            const components = resolver.getComponentsFromPath(fullPath).filter(hasXml);
-
-            for (const component of components) {
-                const file = await buildProjectFile({
-                    component,
-                    projectDirectory,
-                });
-
-                files.push(file);
-            }
-
-            const objectComponents = components.filter(isCustomObject);
-
-            for (const component of objectComponents) {
-                const object = buildCustomObject({
-                    component,
-                    projectDirectory,
-                });
-
-                objects.push(object);
-            }
+        if (missingPath) {
+            return {
+                success: false,
+                error: 'package-directory-not-found',
+                directory: missingPath,
+            };
         }
+
+        const resolver = new MetadataResolver();
+        const components = fullPaths.flatMap((fullPath) => resolver.getComponentsFromPath(fullPath).filter(hasXml));
+        const files = await Promise.all(components.map((component) => buildProjectFile({
+            component,
+            projectDirectory,
+        })));
+        const objects = components.filter(isCustomObject).map((component) => buildCustomObject({
+            component,
+            projectDirectory,
+        }));
+        const children = components.flatMap((component) => component.getChildren());
+        const fields = children.filter(hasXml).filter(isCustomField).map((component) => buildCustomField({
+            component,
+            projectDirectory,
+        }));
 
         const customObjects = new CustomObjects({
             objects,
+        });
+        const customFields = new CustomFields({
+            fields,
         });
         const project = new Project({
             directory: projectDirectory,
             files,
             customObjects,
+            customFields,
         });
 
         return {

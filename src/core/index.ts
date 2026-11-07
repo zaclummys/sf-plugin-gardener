@@ -1,5 +1,7 @@
 export { ApiVersion } from './api-version.js';
 export { Configuration } from './configuration.js';
+export { CustomField } from './custom-field.js';
+export { CustomFields } from './custom-fields.js';
 export { CustomObject } from './custom-object.js';
 export { CustomObjects } from './custom-objects.js';
 export { DeploymentStatus } from './deployment-status.js';

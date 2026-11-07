@@ -1,5 +1,6 @@
 import type { z } from 'zod';
 import type { Rule } from '../../core/index.js';
+import { customFieldRules } from './custom-field.js';
 import { customObjectRules } from './custom-object.js';
 import { projectRules } from './project.js';
 
@@ -9,6 +10,7 @@ type RuleSchemas = Map<string, z.ZodType<Rule>>;
 const plugins: RuleSchemas[] = [
     projectRules,
     customObjectRules,
+    customFieldRules,
 ];
 
 /** The schemas of every rule, by the name that the configuration file uses. */
