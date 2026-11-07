@@ -43,7 +43,7 @@ const maxApiVersion = z.object({
 }).transform((properties) => new MaxApiVersionRule(properties));
 
 /** The rules of the project namespace, by their full name. Each one is the schema that reads its entry and builds the rule. */
-export const projectRules = new Map<string, z.ZodType<Rule>>([
+export const projectRules = new Map<string, z.ZodType<Rule<unknown>>>([
     [
         'project/max-files',
         maxFiles,

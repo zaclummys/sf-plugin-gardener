@@ -1,7 +1,7 @@
 import { Finding, type Severity } from './finding.js';
-import type { Project } from './project.js';
+import type { Components } from './components.js';
 
-export abstract class Rule {
+export abstract class Rule<Input> {
     private readonly name: string;
     private readonly severity: Severity;
 
@@ -21,11 +21,29 @@ export abstract class Rule {
     }
 
     /**
-     * Checks a project and reports what the rule finds.
+     * Reads from the components what the rule checks.
      *
-     * @param project The project to check.
+     * @param components The components to read from.
      */
-    public abstract check({ project }: { project: Project }): Finding[];
+    protected abstract read(components: Components): Input;
+
+    /**
+     * Checks the input and reports what the rule finds.
+     *
+     * @param input The input to check.
+     */
+    public abstract check(input: Input): Finding[];
+
+    /**
+     * Reads the input from the components, checks it and reports what the rule finds.
+     *
+     * @param components The components to run the rule on.
+     */
+    public run(components: Components): Finding[] {
+        const input = this.read(components);
+
+        return this.check(input);
+    }
 
     /**
      * Builds a finding of this rule, with the severity that the configuration gave it.

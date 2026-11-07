@@ -1,22 +1,20 @@
 import type { Finding } from './finding.js';
-import type { Project } from './project.js';
+import type { Components } from './components.js';
 import type { Rule } from './rule.js';
 
 export class Configuration {
-    private readonly rules: Rule[];
+    private readonly rules: Rule<unknown>[];
 
-    public constructor({ rules }: { rules: Rule[] }) {
+    public constructor({ rules }: { rules: Rule<unknown>[] }) {
         this.rules = rules;
     }
 
     /**
-     * Checks a project with the rules that the configuration enables.
+     * Checks the components with the rules that the configuration enables.
      *
-     * @param project The project to check.
+     * @param components The components to check.
      */
-    public check({ project }: { project: Project }): Finding[] {
-        return this.rules.flatMap((rule) => rule.check({
-            project,
-        }));
+    public check(components: Components): Finding[] {
+        return this.rules.flatMap((rule) => rule.run(components));
     }
 }

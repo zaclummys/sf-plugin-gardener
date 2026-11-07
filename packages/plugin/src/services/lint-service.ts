@@ -53,11 +53,8 @@ export class LintService {
         }
 
         const configuration = configurationFindOutput.configuration;
-        const findings = configuration.check({
-            project,
-        });
-
         const components = project.getComponents();
+        const findings = configuration.check(components);
 
         return {
             success: true,

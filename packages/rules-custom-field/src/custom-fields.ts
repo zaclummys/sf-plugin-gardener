@@ -1,4 +1,4 @@
-import type { Project } from '@sf-plugin-gardener/core';
+import type { Components } from '@sf-plugin-gardener/core';
 import { CustomField } from './custom-field.js';
 import type { DescriptionLength } from './description-length.js';
 
@@ -11,12 +11,11 @@ export class CustomFields {
     }
 
     /**
-     * Builds the custom fields of a project.
+     * Builds the custom fields of the components.
      *
-     * @param project The project whose components hold the field files.
+     * @param components The components, some of which hold field files.
      */
-    public static from({ project }: { project: Project }): CustomFields {
-        const components = project.getComponents();
+    public static from({ components }: { components: Components }): CustomFields {
         const fields = components.listOfType('CustomField').map((component) => CustomField.from({
             component,
         }));

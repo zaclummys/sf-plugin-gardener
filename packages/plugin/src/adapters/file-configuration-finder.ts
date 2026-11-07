@@ -2,9 +2,10 @@ import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { z } from 'zod';
-import { Configuration, type Project, type Rule } from '@sf-plugin-gardener/core';
+import { Configuration, type Rule } from '@sf-plugin-gardener/core';
 import { presets } from '../presets/index.js';
 import type { ConfigurationFinder, ConfigurationFindOutput } from '../services/adapters/index.js';
+import type { Project } from '../services/index.js';
 import { ruleSchemas } from './rules/index.js';
 
 const schema = z.object({
@@ -30,7 +31,7 @@ type ConfigurationParseOutput =
 type PresetResolveOutput =
     | {
         success: true;
-        rules: Rule[];
+        rules: Rule<unknown>[];
     }
     | {
         success: false;
@@ -38,8 +39,8 @@ type PresetResolveOutput =
     };
 
 class ConfigurationParser {
-    private readonly ruleSchemas: Map<string, z.ZodType<Rule>>;
-    private readonly presets: Map<string, Rule[]>;
+    private readonly ruleSchemas: Map<string, z.ZodType<Rule<unknown>>>;
+    private readonly presets: Map<string, Rule<unknown>[]>;
 
     /**
      * @param ruleSchemas The schemas of the rules that exist, by name. Each one builds its rule.
@@ -48,8 +49,8 @@ class ConfigurationParser {
     public constructor({
         ruleSchemas, presets,
     }: {
-        ruleSchemas: Map<string, z.ZodType<Rule>>;
-        presets: Map<string, Rule[]>;
+        ruleSchemas: Map<string, z.ZodType<Rule<unknown>>>;
+        presets: Map<string, Rule<unknown>[]>;
     }) {
         this.ruleSchemas = ruleSchemas;
         this.presets = presets;
@@ -104,7 +105,7 @@ class ConfigurationParser {
     }
 
     private resolvePresets(names: string[]): PresetResolveOutput {
-        const rules: Rule[] = [];
+        const rules: Rule<unknown>[] = [];
 
         for (const name of names) {
             const preset = this.presets.get(name);
@@ -125,8 +126,8 @@ class ConfigurationParser {
         };
     }
 
-    private buildProjectRules(entries: Record<string, unknown>): Rule[] | null {
-        const rules: Rule[] = [];
+    private buildProjectRules(entries: Record<string, unknown>): Rule<unknown>[] | null {
+        const rules: Rule<unknown>[] = [];
 
         for (const [
             name,
@@ -148,8 +149,8 @@ class ConfigurationParser {
         return rules;
     }
 
-    private static mergeByName(rules: Rule[]): Rule[] {
-        const byName = new Map<string, Rule>();
+    private static mergeByName(rules: Rule<unknown>[]): Rule<unknown>[] {
+        const byName = new Map<string, Rule<unknown>>();
 
         for (const rule of rules) {
             byName.set(rule.getName(), rule);

@@ -1,4 +1,4 @@
-import type { Project } from '@sf-plugin-gardener/core';
+import type { Project } from '../project.js';
 
 export type ProjectLocateOutput =
     | {

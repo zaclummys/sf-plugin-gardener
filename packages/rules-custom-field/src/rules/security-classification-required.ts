@@ -10,7 +10,7 @@ export class SecurityClassificationRequiredRule extends CustomFieldRule {
         });
     }
 
-    public checkFields({ customFields }: { customFields: CustomFields }): Finding[] {
+    public check(customFields: CustomFields): Finding[] {
         const fields = customFields.listWithoutSecurityClassification();
 
         return fields.map((field) => this.reportFile({

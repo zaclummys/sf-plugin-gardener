@@ -13,7 +13,7 @@ export const severitySchema = z.enum([
  *
  * @param build Builds the rule from its severity.
  */
-export function defineSeverityOnlySchema(build: (properties: { severity: Severity }) => Rule): z.ZodType<Rule> {
+export function defineSeverityOnlySchema(build: (properties: { severity: Severity }) => Rule<unknown>): z.ZodType<Rule<unknown>> {
     return z.union([
         severitySchema.transform((level) => ({
             severity: level,

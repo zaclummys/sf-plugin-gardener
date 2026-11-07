@@ -1,4 +1,5 @@
-import type { Configuration, Project } from '@sf-plugin-gardener/core';
+import type { Configuration } from '@sf-plugin-gardener/core';
+import type { Project } from '../project.js';
 
 export type ConfigurationFindOutput =
     | {

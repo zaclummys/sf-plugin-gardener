@@ -1,4 +1,4 @@
-import type { Components } from './components.js';
+import type { Components } from '@sf-plugin-gardener/core';
 
 export class Project {
     private readonly directory: string;

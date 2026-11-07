@@ -10,7 +10,7 @@ export class PicklistRestrictedRule extends CustomFieldRule {
         });
     }
 
-    public checkFields({ customFields }: { customFields: CustomFields }): Finding[] {
+    public check(customFields: CustomFields): Finding[] {
         const fields = customFields.listUnrestrictedPicklists();
 
         return fields.map((field) => this.reportFile({

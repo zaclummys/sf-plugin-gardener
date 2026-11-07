@@ -20,7 +20,7 @@ export class MaxApiVersionRule extends ProjectFileRule {
         this.maxVersion = maxVersion;
     }
 
-    public checkFiles({ projectFiles }: { projectFiles: ProjectFiles }): Finding[] {
+    public check(projectFiles: ProjectFiles): Finding[] {
         const files = projectFiles.listWithApiVersionAbove(this.maxVersion);
 
         return files.map((file) => this.reportFile({

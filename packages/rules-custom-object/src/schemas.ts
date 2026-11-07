@@ -19,7 +19,7 @@ const forbiddenSharingModels = z.object({
 }).transform((properties) => new ForbiddenSharingModelsRule(properties));
 
 /** The rules of the custom-object namespace, by their full name. Each one is the schema that reads its entry and builds the rule. */
-export const customObjectRules = new Map<string, z.ZodType<Rule>>([
+export const customObjectRules = new Map<string, z.ZodType<Rule<unknown>>>([
     [
         'custom-object/deployment-status-deployed',
         deploymentStatusDeployed,

@@ -1,4 +1,4 @@
-import type { Project } from '@sf-plugin-gardener/core';
+import type { Components } from '@sf-plugin-gardener/core';
 import { CustomObject } from './custom-object.js';
 import type { SharingModels } from './sharing-models.js';
 
@@ -11,12 +11,11 @@ export class CustomObjects {
     }
 
     /**
-     * Builds the custom objects of a project.
+     * Builds the custom objects of the components.
      *
-     * @param project The project whose components hold the object files.
+     * @param components The components, some of which hold object files.
      */
-    public static from({ project }: { project: Project }): CustomObjects {
-        const components = project.getComponents();
+    public static from({ components }: { components: Components }): CustomObjects {
         const objects = components.listOfType('CustomObject').map((component) => CustomObject.from({
             component,
         }));

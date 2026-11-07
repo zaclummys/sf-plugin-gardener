@@ -20,7 +20,7 @@ export class ForbiddenSharingModelsRule extends CustomObjectRule {
         this.forbiddenModels = forbiddenModels;
     }
 
-    public checkObjects({ customObjects }: { customObjects: CustomObjects }): Finding[] {
+    public check(customObjects: CustomObjects): Finding[] {
         const objects = customObjects.listWithSharingModelIn(this.forbiddenModels);
 
         return objects.map((object) => this.reportFile({

@@ -4,7 +4,7 @@ import { customFieldRules } from '@sf-plugin-gardener/rules-custom-field';
 import { customObjectRules } from '@sf-plugin-gardener/rules-custom-object';
 import { projectRules } from '@sf-plugin-gardener/rules-project';
 
-type RuleSchemas = Map<string, z.ZodType<Rule>>;
+type RuleSchemas = Map<string, z.ZodType<Rule<unknown>>>;
 
 /** The plugins that bring the rules. Each one is a namespace and registers its own rules. */
 const plugins: RuleSchemas[] = [

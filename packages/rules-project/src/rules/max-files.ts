@@ -19,7 +19,7 @@ export class MaxFilesRule extends ProjectFileRule {
         this.max = max;
     }
 
-    public checkFiles({ projectFiles }: { projectFiles: ProjectFiles }): Finding[] {
+    public check(projectFiles: ProjectFiles): Finding[] {
 
         if (projectFiles.countFiles() <= this.max) {
             return [];

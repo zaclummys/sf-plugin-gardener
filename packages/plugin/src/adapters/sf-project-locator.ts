@@ -3,7 +3,8 @@ import { stat } from 'node:fs/promises';
 import path from 'node:path';
 import { SfProject } from '@salesforce/core';
 import { MetadataResolver, type SourceComponent } from '@salesforce/source-deploy-retrieve';
-import { Component, Components, Project } from '@sf-plugin-gardener/core';
+import { Component, Components } from '@sf-plugin-gardener/core';
+import { Project } from '../services/index.js';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {

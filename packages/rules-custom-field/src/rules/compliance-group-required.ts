@@ -10,7 +10,7 @@ export class ComplianceGroupRequiredRule extends CustomFieldRule {
         });
     }
 
-    public checkFields({ customFields }: { customFields: CustomFields }): Finding[] {
+    public check(customFields: CustomFields): Finding[] {
         const fields = customFields.listWithoutComplianceGroup();
 
         return fields.map((field) => this.reportFile({

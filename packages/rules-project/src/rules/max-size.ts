@@ -21,7 +21,7 @@ export class MaxSizeRule extends ProjectFileRule {
         this.maxInMegabytes = maxInMegabytes;
     }
 
-    public checkFiles({ projectFiles }: { projectFiles: ProjectFiles }): Finding[] {
+    public check(projectFiles: ProjectFiles): Finding[] {
 
         if (projectFiles.sumSizes() <= this.maxInMegabytes * bytesInMegabyte) {
             return [];

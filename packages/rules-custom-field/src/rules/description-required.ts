@@ -20,7 +20,7 @@ export class DescriptionRequiredRule extends CustomFieldRule {
         this.minLength = minLength;
     }
 
-    public checkFields({ customFields }: { customFields: CustomFields }): Finding[] {
+    public check(customFields: CustomFields): Finding[] {
         const undescribed = customFields.listUndescribed().map((field) => this.reportFile({
             message: `The field ${field.getName()} declares no description.`,
             file: field.getPath(),

@@ -18,7 +18,7 @@ const complianceGroupRequired = defineSeverityOnlySchema((properties) => new Com
 const picklistRestricted = defineSeverityOnlySchema((properties) => new PicklistRestrictedRule(properties));
 
 /** The rules of the custom-field namespace, by their full name. Each one is the schema that reads its entry and builds the rule. */
-export const customFieldRules = new Map<string, z.ZodType<Rule>>([
+export const customFieldRules = new Map<string, z.ZodType<Rule<unknown>>>([
     [
         'custom-field/description-required',
         descriptionRequired,

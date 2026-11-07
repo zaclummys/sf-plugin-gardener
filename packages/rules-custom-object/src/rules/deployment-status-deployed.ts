@@ -10,7 +10,7 @@ export class DeploymentStatusDeployedRule extends CustomObjectRule {
         });
     }
 
-    public checkObjects({ customObjects }: { customObjects: CustomObjects }): Finding[] {
+    public check(customObjects: CustomObjects): Finding[] {
         const objects = customObjects.listInDevelopment();
 
         return objects.map((object) => this.reportFile({

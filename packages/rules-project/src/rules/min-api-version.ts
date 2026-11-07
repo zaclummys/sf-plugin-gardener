@@ -20,7 +20,7 @@ export class MinApiVersionRule extends ProjectFileRule {
         this.minVersion = minVersion;
     }
 
-    public checkFiles({ projectFiles }: { projectFiles: ProjectFiles }): Finding[] {
+    public check(projectFiles: ProjectFiles): Finding[] {
         const files = projectFiles.listWithApiVersionBelow(this.minVersion);
 
         return files.map((file) => this.reportFile({
