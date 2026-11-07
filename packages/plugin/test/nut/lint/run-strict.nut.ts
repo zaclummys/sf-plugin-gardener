@@ -1,9 +1,9 @@
 import { expect } from 'chai';
-import { execLintJson, findFixture } from '../run.ts';
+import { execLintJson, findFixture } from '@sf-plugin-gardener/testkit';
 
 describe('lint run strict', () => {
     it('fails when the project has warnings', () => {
-        const directory = findFixture('max-files-warning-project');
+        const directory = findFixture('warning-project');
         const output = execLintJson({
             directory,
             strict: true,

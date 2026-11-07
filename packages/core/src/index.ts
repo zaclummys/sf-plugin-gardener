@@ -1,15 +1,7 @@
-export { ApiVersion } from './api-version.js';
+export { Component } from './component.js';
+export { Components } from './components.js';
 export { Configuration } from './configuration.js';
-export { CustomField } from './custom-field.js';
-export { CustomFields } from './custom-fields.js';
-export { CustomObject } from './custom-object.js';
-export { CustomObjects } from './custom-objects.js';
-export { DeploymentStatus } from './deployment-status.js';
-export { Description } from './description.js';
-export { DescriptionLength } from './description-length.js';
 export { Finding, type Severity } from './finding.js';
-export { SharingModel } from './sharing-model.js';
-export { SharingModels } from './sharing-models.js';
-export { ProjectFile } from './project-file.js';
 export { Project } from './project.js';
 export { Rule } from './rule.js';
+export { defineSeverityOnlySchema, severitySchema } from './rule-schema.js';

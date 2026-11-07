@@ -46,13 +46,21 @@
         "compile": {
             "dependencies": [
                 "./packages/core:compile",
+                "./packages/testkit:compile",
+                "./packages/rules-custom-field:compile",
+                "./packages/rules-custom-object:compile",
+                "./packages/rules-project:compile",
                 "./packages/plugin:compile"
             ]
         },
         "lint": {
             "command": "eslint . --color --cache --cache-location .eslintcache",
             "dependencies": [
-                "./packages/core:compile"
+                "./packages/core:compile",
+                "./packages/testkit:compile",
+                "./packages/rules-custom-field:compile",
+                "./packages/rules-custom-object:compile",
+                "./packages/rules-project:compile"
             ],
             "files": [
                 "packages/*/src/**/*.ts",
@@ -71,17 +79,21 @@
         },
         "test": {
             "dependencies": [
-                "./packages/plugin:test"
+                "test:unit",
+                "test:nut"
             ]
         },
         "test:nut": {
             "dependencies": [
-                "./packages/plugin:test:nut"
+                "./packages/plugin:test:nut",
+                "./packages/rules-custom-field:test:nut",
+                "./packages/rules-custom-object:test:nut",
+                "./packages/rules-project:test:nut"
             ]
         },
         "test:unit": {
             "dependencies": [
-                "./packages/plugin:test:unit"
+                "./packages/core:test:unit"
             ]
         }
     }

@@ -1,7 +1,7 @@
 import { Messages, SfError } from '@salesforce/core';
 import { Flags, SfCommand } from '@salesforce/sf-plugins-core';
 import { FileConfigurationFinder, SfProjectLocator } from '../../adapters/index.js';
-import type { Severity } from '@sf-plugin-gardener/core';
+import type { Finding, Severity } from '@sf-plugin-gardener/core';
 import { LintService, type LintServiceOutput } from '../../services/index.js';
 
 
@@ -17,6 +17,24 @@ export type LintRunResult = {
         file?: string;
     }[];
 };
+
+function describeFinding(finding: Finding): LintRunResult['findings'][number] {
+    const description = {
+        rule: finding.getRule(),
+        severity: finding.getSeverity(),
+        message: finding.getMessage(),
+    };
+    const file = finding.getFile();
+
+    if (!file) {
+        return description;
+    }
+
+    return {
+        ...description,
+        file,
+    };
+}
 
 type LintFailure = Exclude<LintServiceOutput, { success: true }>;
 
@@ -102,18 +120,7 @@ export default class Run extends SfCommand<LintRunResult> {
             process.exitCode = 1;
         }
 
-        const findings = result.listFindings().map((finding) => {
-            const file = finding.getFile();
-
-            return {
-                rule: finding.getRule(),
-                severity: finding.getSeverity(),
-                message: finding.getMessage(),
-                ...file ? {
-                    file,
-                } : {},
-            };
-        });
+        const findings = result.listFindings().map((finding) => describeFinding(finding));
 
         return {
             files: result.countFiles(),

@@ -1,0 +1,40 @@
+{
+    "name": "@sf-plugin-gardener/testkit",
+    "description": "The helpers that the tests of Gardener share.",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "license": "BSD-3-Clause",
+    "author": "Isaac Ferreira",
+    "engines": {
+        "node": ">=22.13.0"
+    },
+    "dependencies": {
+        "@salesforce/cli-plugins-testkit": "^5"
+    },
+    "exports": {
+        ".": {
+            "types": "./lib/index.d.ts",
+            "import": "./lib/index.js"
+        }
+    },
+    "scripts": {
+        "clean": "rm -rf lib *.tsbuildinfo .wireit",
+        "compile": "wireit"
+    },
+    "wireit": {
+        "compile": {
+            "command": "tsc -p . --pretty --incremental",
+            "files": [
+                "src/**/*.ts",
+                "tsconfig.json",
+                "../../tsconfig.base.json"
+            ],
+            "output": [
+                "lib/**",
+                "*.tsbuildinfo"
+            ],
+            "clean": "if-file-deleted"
+        }
+    }
+}

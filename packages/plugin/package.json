@@ -13,9 +13,11 @@
         "@salesforce/core": "^9",
         "@salesforce/sf-plugins-core": "^13",
         "@salesforce/source-deploy-retrieve": "^13",
-        "@salesforce/ts-types": "^3",
         "@salesforce/types": "^1",
         "@sf-plugin-gardener/core": "^0",
+        "@sf-plugin-gardener/rules-custom-field": "^0",
+        "@sf-plugin-gardener/rules-custom-object": "^0",
+        "@sf-plugin-gardener/rules-project": "^0",
         "@xmldom/xmldom": "^0.9",
         "minimatch": "^11",
         "zod": "^4"
@@ -23,6 +25,7 @@
     "devDependencies": {
         "@oclif/plugin-help": "^7",
         "@salesforce/cli-plugins-testkit": "^5",
+        "@sf-plugin-gardener/testkit": "^0",
         "@types/chai": "^5",
         "@types/mocha": "^10",
         "c8": "^12",
@@ -73,7 +76,10 @@
         "compile": {
             "command": "tsc -p . --pretty --incremental",
             "dependencies": [
-                "../core:compile"
+                "../core:compile",
+                "../rules-custom-field:compile",
+                "../rules-custom-object:compile",
+                "../rules-project:compile"
             ],
             "files": [
                 "src/**/*.ts",
@@ -90,7 +96,8 @@
         "test:unit": {
             "command": "mocha --config .mocharc.unit.json",
             "dependencies": [
-                "compile"
+                "compile",
+                "../testkit:compile"
             ],
             "env": {
                 "FORCE_COLOR": "0",
@@ -107,7 +114,8 @@
         "test:nut": {
             "command": "c8 --config .c8rc.nut.json mocha --config .mocharc.nut.json",
             "dependencies": [
-                "compile"
+                "compile",
+                "../testkit:compile"
             ],
             "env": {
                 "FORCE_COLOR": "0",

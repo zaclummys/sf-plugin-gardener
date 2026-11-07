@@ -3,9 +3,7 @@ import { stat } from 'node:fs/promises';
 import path from 'node:path';
 import { SfProject } from '@salesforce/core';
 import { MetadataResolver, type SourceComponent } from '@salesforce/source-deploy-retrieve';
-import { getString } from '@salesforce/ts-types';
-import type { CustomField as CustomFieldMetadata, CustomObject as CustomObjectMetadata } from '@salesforce/types/metadata';
-import { ApiVersion, CustomField, CustomFields, CustomObject, CustomObjects, Project, ProjectFile } from '@sf-plugin-gardener/core';
+import { Component, Components, Project } from '@sf-plugin-gardener/core';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {
@@ -22,69 +20,58 @@ function hasXml(component: SourceComponent): component is XmlComponent {
     return component.xml != null;
 }
 
-async function buildProjectFile({
-    component, projectDirectory,
-}: {
-    component: XmlComponent;
-    projectDirectory: string;
-}): Promise<ProjectFile> {
+async function measureSize(component: XmlComponent): Promise<number> {
     const paths = [
         component.xml,
         ...component.walkContent(),
     ];
     const stats = await Promise.all(paths.map((file) => stat(file)));
-    const size = stats.reduce((total, fileStat) => total + fileStat.size, 0);
-    const xml = component.parseXmlSync();
-    const apiVersionText = getString(xml, `${component.type.name}.apiVersion`);
-    const apiVersion = ApiVersion.from(apiVersionText ?? null);
 
-    return new ProjectFile({
+    return stats.reduce((total, fileStat) => total + fileStat.size, 0);
+}
+
+async function buildComponent({
+    component, projectDirectory, child,
+}: {
+    component: XmlComponent;
+    projectDirectory: string;
+    child: boolean;
+}): Promise<Component> {
+    const size = await measureSize(component);
+
+    return new Component({
+        name: component.fullName,
+        type: component.type.name,
         path: path.relative(projectDirectory, component.xml),
         size,
-        apiVersion,
+        child,
+        content: component.parseXmlSync(),
     });
 }
 
-function isCustomObject(component: SourceComponent): boolean {
-    return component.type.name === 'CustomObject';
-}
-
-function isCustomField(component: SourceComponent): boolean {
-    return component.type.name === 'CustomField';
-}
-
-function buildCustomField({
-    component, projectDirectory,
+async function buildComponents({
+    components, projectDirectory,
 }: {
-    component: XmlComponent;
+    components: XmlComponent[];
     projectDirectory: string;
-}): CustomField {
-    const xml = component.parseXmlSync<{ CustomField: CustomFieldMetadata }>();
+}): Promise<Components> {
+    const children = components.flatMap((component) => component.getChildren()).filter(hasXml);
+    const roots = await Promise.all(components.map((component) => buildComponent({
+        component,
+        projectDirectory,
+        child: false,
+    })));
+    const nested = await Promise.all(children.map((component) => buildComponent({
+        component,
+        projectDirectory,
+        child: true,
+    })));
 
-    return new CustomField({
-        name: component.fullName,
-        path: path.relative(projectDirectory, component.xml),
-        description: xml.CustomField.description ?? null,
-        securityClassification: xml.CustomField.securityClassification ?? null,
-        complianceGroup: xml.CustomField.complianceGroup ?? null,
-        type: xml.CustomField.type ?? null,
-        restricted: xml.CustomField.valueSet?.restricted?.toString() ?? null,
-    });
-}
-
-function buildCustomObject({
-    component, projectDirectory,
-}: {
-    component: XmlComponent;
-    projectDirectory: string;
-}): CustomObject {
-    const xml = component.parseXmlSync<{ CustomObject: CustomObjectMetadata }>();
-
-    return new CustomObject({
-        name: component.fullName,
-        path: path.relative(projectDirectory, component.xml),
-        deploymentStatus: xml.CustomObject.deploymentStatus ?? null,
-        sharingModel: xml.CustomObject.sharingModel ?? null,
+    return new Components({
+        components: [
+            ...roots,
+            ...nested,
+        ],
     });
 }
 
@@ -124,31 +111,13 @@ export class SfProjectLocator implements ProjectLocator {
 
         const resolver = new MetadataResolver();
         const components = fullPaths.flatMap((fullPath) => resolver.getComponentsFromPath(fullPath).filter(hasXml));
-        const files = await Promise.all(components.map((component) => buildProjectFile({
-            component,
+        const metadataComponents = await buildComponents({
+            components,
             projectDirectory,
-        })));
-        const objects = components.filter(isCustomObject).map((component) => buildCustomObject({
-            component,
-            projectDirectory,
-        }));
-        const children = components.flatMap((component) => component.getChildren());
-        const fields = children.filter(hasXml).filter(isCustomField).map((component) => buildCustomField({
-            component,
-            projectDirectory,
-        }));
-
-        const customObjects = new CustomObjects({
-            objects,
-        });
-        const customFields = new CustomFields({
-            fields,
         });
         const project = new Project({
             directory: projectDirectory,
-            files,
-            customObjects,
-            customFields,
+            components: metadataComponents,
         });
 
         return {

@@ -57,10 +57,12 @@ export class LintService {
             project,
         });
 
+        const components = project.getComponents();
+
         return {
             success: true,
             result: new LintResult({
-                files: project.countFiles(),
+                files: components.countRoots(),
                 findings,
             }),
         };

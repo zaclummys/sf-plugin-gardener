@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { execLintText, findFixture } from '../run.ts';
+import { execLintText, findFixture } from '@sf-plugin-gardener/testkit';
 
 describe('lint run output', () => {
     it('ends with the number of errors and warnings', () => {
@@ -12,7 +12,7 @@ describe('lint run output', () => {
     });
 
     it('counts the errors that the rules report', () => {
-        const directory = findFixture('max-files-project');
+        const directory = findFixture('error-project');
         const text = execLintText({
             directory,
         }, {

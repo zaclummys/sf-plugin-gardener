@@ -4,14 +4,19 @@ The plugin is a Salesforce CLI plugin built on oclif. It is layered so every com
 
 ## Packages
 
-The repository is an npm workspace. `packages/core` is the pure domain, published as `@sf-plugin-gardener/core`. `packages/plugin` is the Salesforce CLI plugin, and it depends on the core.
+The repository is an npm workspace.
+
+- `packages/core`: the pure domain that every rule shares, such as the project, its components, the findings and the contract of a rule. It is published as `@sf-plugin-gardener/core`.
+- `packages/rules-<type>`: one package per group of rules, named after the namespace of the rules. Each one holds the domain of its type, its rules, the schemas that read their configuration and its own tests. It depends only on the core.
+- `packages/plugin`: the Salesforce CLI plugin. It reads the project, registers the schemas of every group and runs the rules.
+- `packages/testkit`: the helpers that the tests of the other packages share.
 
 ## Layers
 
 - **Commands** (`packages/plugin/src/commands/lint/`): oclif only. They parse flags, build the service, render the output and set the exit code.
 - **Services** (`packages/plugin/src/services/`): one per command. Each is a class whose constructor takes its dependencies, while the inputs of a run are the parameters of `run()`. The contracts of the adapters live in `packages/plugin/src/services/adapters/`, and a service never imports `packages/plugin/src/adapters/`.
 - **Core** (`packages/core/src/`): the reusable building blocks, such as the findings, the configuration contract, the registry of metadata types and the index. It is pure and imports nothing from `@salesforce/*`, so each piece is testable on its own.
-- **Rules** (`packages/plugin/src/rules/<type>/`): one file per rule, in a directory named after the metadata type. The directory is the namespace in the rule name.
+- **Rules** (`packages/rules-<type>/src/rules/`): one file per rule, in the package named after the metadata type. The type is the namespace in the rule name.
 - **Adapters** (`packages/plugin/src/adapters/`): the implementations of the contracts in `packages/plugin/src/services/adapters/`, such as the readers of XML, JSON and YAML, the loader of the configuration file and the file system. See [Core concepts](/concepts/#scope-and-offline-analysis) for what the linter may read.
 - **UI** (`packages/plugin/src/ui/`): the human format of the output and the only place that knows about colour.
 

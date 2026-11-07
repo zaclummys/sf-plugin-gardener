@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { expect } from 'chai';
-import { findFixture, execLintJson, makeEmptyDirectory } from '../run.ts';
+import { findFixture, execLintJson, makeEmptyDirectory } from '@sf-plugin-gardener/testkit';
 
 describe('lint run project', () => {
     it('reports no findings for a project without metadata', () => {

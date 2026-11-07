@@ -1,0 +1,83 @@
+{
+    "name": "@sf-plugin-gardener/rules-project",
+    "description": "The rules of Gardener that look at the project as a whole.",
+    "version": "0.0.0",
+    "type": "module",
+    "license": "BSD-3-Clause",
+    "author": "Isaac Ferreira",
+    "engines": {
+        "node": ">=22.13.0"
+    },
+    "dependencies": {
+        "@sf-plugin-gardener/core": "^0",
+        "zod": "^4"
+    },
+    "devDependencies": {
+        "@sf-plugin-gardener/testkit": "^0",
+        "@types/chai": "^5",
+        "@types/mocha": "^10",
+        "c8": "^12",
+        "chai": "^6",
+        "mocha": "^12",
+        "sf-plugin-gardener": "^0"
+    },
+    "exports": {
+        ".": {
+            "types": "./lib/index.d.ts",
+            "import": "./lib/index.js"
+        }
+    },
+    "files": [
+        "/lib"
+    ],
+    "scripts": {
+        "clean": "rm -rf lib coverage *.tsbuildinfo .wireit",
+        "compile": "wireit",
+        "test": "wireit",
+        "test:nut": "wireit"
+    },
+    "wireit": {
+        "compile": {
+            "command": "tsc -p . --pretty --incremental",
+            "dependencies": [
+                "../core:compile"
+            ],
+            "files": [
+                "src/**/*.ts",
+                "tsconfig.json",
+                "../../tsconfig.base.json"
+            ],
+            "output": [
+                "lib/**",
+                "*.tsbuildinfo"
+            ],
+            "clean": "if-file-deleted"
+        },
+        "test:nut": {
+            "command": "c8 --config .c8rc.nut.json mocha --config .mocharc.nut.json",
+            "dependencies": [
+                "compile",
+                "../plugin:compile",
+                "../testkit:compile"
+            ],
+            "env": {
+                "FORCE_COLOR": "0",
+                "NO_COLOR": "1",
+                "SF_DISABLE_TELEMETRY": "true"
+            },
+            "files": [
+                "test/nut/**",
+                "test/fixtures/**",
+                "test/tsconfig.json",
+                ".mocharc.nut.json",
+                ".c8rc.nut.json"
+            ],
+            "output": []
+        },
+        "test": {
+            "dependencies": [
+                "test:nut"
+            ]
+        }
+    }
+}

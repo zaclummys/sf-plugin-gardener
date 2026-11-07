@@ -32,7 +32,7 @@ function ruleFile(name) {
         rule = null,
     ] = name.split("/")
 
-    return rule == null ? `packages/plugin/src/rules/cross-cutting/${name}.ts` : `packages/plugin/src/rules/${namespace}/${rule}.ts`
+    return rule == null ? `packages/rules-cross-cutting/src/rules/${name}.ts` : `packages/rules-${namespace}/src/rules/${rule}.ts`
 }
 
 /** The status of a rule: implemented when its file exists, planned otherwise. */

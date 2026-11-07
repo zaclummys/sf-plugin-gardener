@@ -8,6 +8,16 @@
     "engines": {
         "node": ">=22.13.0"
     },
+    "dependencies": {
+        "zod": "^4"
+    },
+    "devDependencies": {
+        "@types/chai": "^5",
+        "@types/mocha": "^10",
+        "c8": "^12",
+        "chai": "^6",
+        "mocha": "^12"
+    },
     "exports": {
         ".": {
             "types": "./lib/index.d.ts",
@@ -18,7 +28,10 @@
         "/lib"
     ],
     "scripts": {
-        "compile": "wireit"
+        "compile": "wireit",
+        "test": "wireit",
+        "test:unit": "wireit",
+        "clean": "rm -rf lib coverage *.tsbuildinfo .wireit"
     },
     "wireit": {
         "compile": {
@@ -33,6 +46,29 @@
                 "*.tsbuildinfo"
             ],
             "clean": "if-file-deleted"
+        },
+        "test:unit": {
+            "command": "c8 --config .c8rc.unit.json mocha --config .mocharc.unit.json",
+            "dependencies": [
+                "compile"
+            ],
+            "env": {
+                "FORCE_COLOR": "0",
+                "NO_COLOR": "1",
+                "TZ": "UTC"
+            },
+            "files": [
+                "test/unit/**",
+                "test/tsconfig.json",
+                ".mocharc.unit.json",
+                ".c8rc.unit.json"
+            ],
+            "output": []
+        },
+        "test": {
+            "dependencies": [
+                "test:unit"
+            ]
         }
     }
 }

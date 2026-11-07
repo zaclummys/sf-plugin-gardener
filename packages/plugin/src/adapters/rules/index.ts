@@ -1,8 +1,8 @@
 import type { z } from 'zod';
 import type { Rule } from '@sf-plugin-gardener/core';
-import { customFieldRules } from './custom-field.js';
-import { customObjectRules } from './custom-object.js';
-import { projectRules } from './project.js';
+import { customFieldRules } from '@sf-plugin-gardener/rules-custom-field';
+import { customObjectRules } from '@sf-plugin-gardener/rules-custom-object';
+import { projectRules } from '@sf-plugin-gardener/rules-project';
 
 type RuleSchemas = Map<string, z.ZodType<Rule>>;
 

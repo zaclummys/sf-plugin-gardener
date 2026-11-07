@@ -33,10 +33,10 @@ jobs:
           node-version: "24"
           cache: npm
       - run: npm ci
-      - run: npm run test:nut
+      - run: npm test
       - uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./packages/plugin/coverage/nut/lcov.info
+          files: ./packages/core/coverage/unit/lcov.info,./packages/plugin/coverage/nut/lcov.info,./packages/rules-custom-field/coverage/nut/lcov.info,./packages/rules-custom-object/coverage/nut/lcov.info,./packages/rules-project/coverage/nut/lcov.info
           disable_search: true
           fail_ci_if_error: true

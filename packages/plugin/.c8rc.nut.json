@@ -1,8 +1,7 @@
 {
     "all": true,
     "src": [
-        "lib",
-        "../core/lib"
+        "lib"
     ],
     "exclude": [
         "**/src/index.ts",
@@ -21,6 +20,5 @@
     "lines": 100,
     "functions": 100,
     "branches": 100,
-    "statements": 100,
-    "allowExternal": true
+    "statements": 100
 }
