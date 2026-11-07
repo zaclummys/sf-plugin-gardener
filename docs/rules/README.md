@@ -17,7 +17,7 @@ A rule that anticipates a limit Salesforce already enforces carries a **Referenc
   - [`custom-object/description-required`](custom-object.md#custom-object-description-required)
   - [`custom-object/naming-convention`](custom-object.md#custom-object-naming-convention)
   - [`custom-object/sharing-model-explicit`](custom-object.md#custom-object-sharing-model-explicit)
-  - [`custom-object/no-permissive-sharing-model`](custom-object.md#custom-object-no-permissive-sharing-model)
+  - [`custom-object/forbidden-sharing-models`](custom-object.md#custom-object-forbidden-sharing-models)
   - [`custom-object/external-sharing-model-not-wider`](custom-object.md#custom-object-external-sharing-model-not-wider)
   - [`custom-object/deployment-status-deployed`](custom-object.md#custom-object-deployment-status-deployed)
   - [`custom-object/no-default-action-override`](custom-object.md#custom-object-no-default-action-override)

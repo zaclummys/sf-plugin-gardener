@@ -85,27 +85,27 @@ The object must declare `sharingModel` explicitly in the XML. The same holds for
 }
 ```
 
-## `custom-object/no-permissive-sharing-model`
+## `custom-object/forbidden-sharing-models`
 
-A permissive value such as `ReadWrite` in `sharingModel` or `externalSharingModel` requires justification via allowlist.
+A forbidden value such as `ReadWrite` in `sharingModel` or `externalSharingModel` requires justification via allowlist.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `allowlist`: objects authorized to use a permissive model
-- `permissiveModels`: values that only pass if the object is in the `allowlist`
+- `allowlist`: objects authorized to use a forbidden model
+- `forbiddenModels`: values that only pass if the object is in the `allowlist`. Required
 
 **Example:**
 
 ```json
 {
   "rules": {
-    "custom-object/no-permissive-sharing-model": {
+    "custom-object/forbidden-sharing-models": {
       "severity": "error",
       "allowlist": [
         "Account"
       ],
-      "permissiveModels": [
+      "forbiddenModels": [
         "ReadWrite"
       ]
     }

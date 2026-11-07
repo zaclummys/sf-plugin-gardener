@@ -4,7 +4,7 @@ import path from 'node:path';
 import { SfProject } from '@salesforce/core';
 import { MetadataResolver, type SourceComponent } from '@salesforce/source-deploy-retrieve';
 import { getString } from '@salesforce/ts-types';
-import { ApiVersion, CustomObject, CustomObjects, DeploymentStatus, Project, ProjectFile } from '../core/index.js';
+import { ApiVersion, CustomObject, CustomObjects, DeploymentStatus, Project, ProjectFile, SharingModel } from '../core/index.js';
 import type { ProjectLocateOutput, ProjectLocator } from '../services/adapters/index.js';
 
 async function resolveSfProject(directory: string): Promise<SfProject | null> {
@@ -57,11 +57,14 @@ function buildCustomObject({
     const xml = component.parseXmlSync();
     const deploymentStatusText = getString(xml, 'CustomObject.deploymentStatus');
     const deploymentStatus = deploymentStatusText ? new DeploymentStatus(deploymentStatusText) : null;
+    const sharingModelText = getString(xml, 'CustomObject.sharingModel');
+    const sharingModel = sharingModelText ? new SharingModel(sharingModelText) : null;
 
     return new CustomObject({
         name: component.fullName,
         path: path.relative(projectDirectory, component.xml),
         deploymentStatus,
+        sharingModel,
     });
 }
 

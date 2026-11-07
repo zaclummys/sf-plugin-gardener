@@ -91,7 +91,7 @@ The `max` values of the platform limits are the official limits, with the source
 - [`connected-app/https-required`](/rules/connected-app/#connected-app-https-required)
 - [`connected-app/no-secret-in-metadata`](/rules/connected-app/#connected-app-no-secret-in-metadata)
 - [`custom-object/external-sharing-model-not-wider`](/rules/custom-object/#custom-object-external-sharing-model-not-wider)
-- [`custom-object/no-permissive-sharing-model`](/rules/custom-object/#custom-object-no-permissive-sharing-model)
+- [`custom-object/forbidden-sharing-models`](/rules/custom-object/#custom-object-forbidden-sharing-models)
 - [`custom-object/sharing-model-explicit`](/rules/custom-object/#custom-object-sharing-model-explicit)
 - [`custom-site/browser-protections-required`](/rules/custom-site/#custom-site-browser-protections-required)
 - [`custom-site/clickjack-protection`](/rules/custom-site/#custom-site-clickjack-protection)
