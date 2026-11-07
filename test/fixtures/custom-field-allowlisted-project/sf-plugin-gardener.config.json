@@ -1,0 +1,11 @@
+{
+    "rules": {
+        "custom-field/description-required": {
+            "severity": "error",
+            "allowlist": [
+                "Sample__c.Code__c"
+            ],
+            "minLength": 20
+        }
+    }
+}
