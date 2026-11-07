@@ -19,4 +19,13 @@ describe('lint run custom-object/deployment-status-deployed', () => {
             },
         ]);
     });
+
+    it('reports nothing for an object that declares no deploymentStatus', () => {
+        const directory = findFixture('standard-object-deployment-status-project');
+        const output = execLintJson({
+            directory,
+        });
+
+        expect(output.result.findings).to.deep.equal([]);
+    });
 });

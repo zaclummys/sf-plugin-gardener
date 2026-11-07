@@ -19,4 +19,26 @@ describe('lint run custom-object/forbidden-sharing-models', () => {
             },
         ]);
     });
+
+    it('reports nothing for an object that declares no sharingModel', () => {
+        const directory = findFixture('standard-object-sharing-model-project');
+        const output = execLintJson({
+            directory,
+        });
+
+        expect(output.result.findings).to.deep.equal([]);
+    });
+
+    it('fails when the forbidden models are missing', () => {
+        const directory = findFixture('invalid-forbidden-sharing-models-project');
+        const output = execLintJson({
+            directory,
+        }, {
+            exitCode: 1,
+        });
+
+        expect(output).to.include({
+            name: 'invalid-configuration',
+        });
+    });
 });
