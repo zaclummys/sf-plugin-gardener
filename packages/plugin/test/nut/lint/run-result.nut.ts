@@ -29,6 +29,23 @@ describe('lint run result', () => {
         expect(output.result.files).to.equal(1);
     });
 
+    it('measures the size of the files when a rule asks for it', () => {
+        const directory = findFixture('sized-project');
+        const output = execLintJson({
+            directory,
+        }, {
+            exitCode: 1,
+        });
+
+        expect(output.result.findings).to.deep.equal([
+            {
+                rule: 'project/max-size',
+                severity: 'error',
+                message: 'The project is larger than 0.00001 MB.',
+            },
+        ]);
+    });
+
     it('counts a component without its children', () => {
         const directory = findFixture('parent-project');
         const output = execLintJson({
