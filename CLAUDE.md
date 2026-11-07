@@ -66,7 +66,7 @@ Não use primitivo, `Map` nem `Array` para representar um conceito do domínio. 
 
 ## Construtor
 
-O construtor de uma classe do domínio recebe os dados crus num objeto anônimo, com um campo por dado. Ele mesmo cria as classes internas. Não embrulhe os dados numa propriedade nem num tipo novo.
+O construtor de uma classe do domínio recebe os dados crus num objeto anônimo, com um campo por dado. Ele mesmo cria as classes internas. Não embrulhe os dados numa propriedade nem num tipo novo quando não houver necessidade.
 
 ## Método from
 
@@ -75,6 +75,10 @@ O método estático que cria uma classe a partir de um valor se chama `from`. El
 ## Uma regra, um elemento
 
 Uma regra de lint verifica um único elemento. Nunca crie propriedade que escolha o que ela verifica. Crie uma regra por elemento.
+
+## Nome específico
+
+Nunca use um termo genérico onde houver um termo específico, como `input` ou `data`. Nomeie pelo que é, como `customFields`. O termo genérico só vale onde o tipo é genérico.
 
 ## Ternário
 
