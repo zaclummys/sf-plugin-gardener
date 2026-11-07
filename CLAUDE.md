@@ -80,6 +80,10 @@ Uma regra de lint verifica um único elemento. Nunca crie propriedade que escolh
 
 Nunca use um termo genérico onde houver um termo específico, como `input` ou `data`. Nomeie pelo que é, como `customFields`. O termo genérico só vale onde o tipo é genérico.
 
+## Sufixo File
+
+Toda classe que tem `path` como propriedade leva o sufixo `File`, como `ProjectFile` e `CustomFieldFile`. A coleção leva `Files`, como `CustomFieldFiles`.
+
 ## Ternário
 
 Nunca use operador ternário. Use `if` ou extraia uma função.
