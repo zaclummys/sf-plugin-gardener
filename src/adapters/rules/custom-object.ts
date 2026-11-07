@@ -2,20 +2,9 @@ import { z } from 'zod';
 import { SharingModel, SharingModels, type Rule } from '../../core/index.js';
 import { DeploymentStatusDeployedRule } from '../../rules/custom-object/deployment-status-deployed.js';
 import { ForbiddenSharingModelsRule } from '../../rules/custom-object/forbidden-sharing-models.js';
+import { defineSeverityOnlySchema, severity } from './severity.js';
 
-const severity = z.enum([
-    'error',
-    'warn',
-]);
-
-const deploymentStatusDeployed = z.union([
-    severity.transform((level) => ({
-        severity: level,
-    })),
-    z.object({
-        severity,
-    }),
-]).transform((properties) => new DeploymentStatusDeployedRule(properties));
+const deploymentStatusDeployed = defineSeverityOnlySchema((properties) => new DeploymentStatusDeployedRule(properties));
 
 const sharingModels = z.array(z.string())
     .transform((texts) => texts.map((text) => new SharingModel(text)))

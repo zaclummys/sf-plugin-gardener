@@ -67,6 +67,8 @@ function buildCustomField({
         name: component.fullName,
         path: path.relative(projectDirectory, component.xml),
         description,
+        securityClassified: Boolean(xml.CustomField.securityClassification),
+        complianceGrouped: Boolean(xml.CustomField.complianceGroup),
     });
 }
 

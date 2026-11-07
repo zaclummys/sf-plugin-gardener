@@ -14,6 +14,16 @@ export class CustomFields {
         return this.fields.filter((field) => field.isUndescribed());
     }
 
+    /** Lists the custom fields that declare no securityClassification. */
+    public listWithoutSecurityClassification(): CustomField[] {
+        return this.fields.filter((field) => field.lacksSecurityClassification());
+    }
+
+    /** Lists the custom fields that declare no complianceGroup. */
+    public listWithoutComplianceGroup(): CustomField[] {
+        return this.fields.filter((field) => field.lacksComplianceGroup());
+    }
+
     /**
      * Lists the custom fields that declare a description shorter than a length.
      *

@@ -305,27 +305,38 @@ Reports a field changed to required on an existing object, because it breaks int
 }
 ```
 
-## `custom-field/data-classification-required`
+## `custom-field/security-classification-required`
 
-The `securityClassification` and `complianceGroup` elements must be filled in. The classification tells humans and AI how sensitive the field is before exposing it in a layout, report or integration.
+The `securityClassification` element must be filled in. The classification tells humans and AI how sensitive the field is before exposing it in a layout, report or integration.
 
 **Properties:**
 
 - `severity`: [rule level](README.md#common-configuration)
-- `requiredElements`: required elements, with the two mentioned as the default
 
 **Example:**
 
 ```json
 {
   "rules": {
-    "custom-field/data-classification-required": {
-      "severity": "error",
-      "requiredElements": [
-        "securityClassification",
-        "complianceGroup"
-      ]
-    }
+    "custom-field/security-classification-required": "error"
+  }
+}
+```
+
+## `custom-field/compliance-group-required`
+
+The `complianceGroup` element must be filled in. The group tells humans and AI which regulation covers the field before exposing it in a layout, report or integration.
+
+**Properties:**
+
+- `severity`: [rule level](README.md#common-configuration)
+
+**Example:**
+
+```json
+{
+  "rules": {
+    "custom-field/compliance-group-required": "error"
   }
 }
 ```
