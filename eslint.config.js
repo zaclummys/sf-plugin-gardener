@@ -49,8 +49,9 @@ export default defineConfig([
     // buries the real findings under thousands of them.
     {
         ignores: [
-            "lib/**",
-            ".wireit/**",
+            "**/lib/**",
+            "**/.wireit/**",
+            "**/coverage/**",
             "tmp/**",
             "node_modules/**",
             "example/**",
@@ -264,7 +265,7 @@ export default defineConfig([
 
     // Project conventions (see CLAUDE.md).
     {
-        files: ["src/**/*.ts"],
+        files: ["packages/*/src/**/*.ts"],
         rules: {
             ...sharedCaps,
             // Source only, because a describe callback is a list of cases rather than a
@@ -325,7 +326,7 @@ export default defineConfig([
 
     // Layering: core/ stays pure (no I/O, no @salesforce, no outer layers).
     {
-        files: ["src/core/**/*.ts"],
+        files: ["packages/core/src/**/*.ts"],
         rules: {
             "no-restricted-imports": [
                 "error",
@@ -360,9 +361,9 @@ export default defineConfig([
         },
     },
 
-    // Layering + barrels: services/ may not import commands, and reach core through its barrel.
+    // Layering + barrels: services/ may not import commands or ui, and reaches adapters through their barrel.
     {
-        files: ["src/services/**/*.ts"],
+        files: ["packages/plugin/src/services/**/*.ts"],
         rules: {
             "no-restricted-imports": [
                 "error",
@@ -374,13 +375,6 @@ export default defineConfig([
                                 "**/ui/**",
                             ],
                             message: "services/ must not import commands or ui (commands -> services -> core).",
-                        },
-                        {
-                            group: [
-                                "**/core/*",
-                                "!**/core/index.js",
-                            ],
-                            message: "Import core through its index.js barrel.",
                         },
                         {
                             group: [
@@ -404,19 +398,12 @@ export default defineConfig([
 
     // Barrels: commands reach every inner layer through its index.js barrel.
     {
-        files: ["src/commands/**/*.ts"],
+        files: ["packages/plugin/src/commands/**/*.ts"],
         rules: {
             "no-restricted-imports": [
                 "error",
                 {
                     patterns: [
-                        {
-                            group: [
-                                "**/core/*",
-                                "!**/core/index.js",
-                            ],
-                            message: "Import core through its index.js barrel.",
-                        },
                         {
                             group: [
                                 "**/services/*",
@@ -448,7 +435,7 @@ export default defineConfig([
     // nothing else. Colour depends on a TTY and on the environment, which is exactly
     // what core/ may not know about.
     {
-        files: ["src/ui/**/*.ts"],
+        files: ["packages/plugin/src/ui/**/*.ts"],
         rules: {
             "no-restricted-imports": [
                 "error",
@@ -462,13 +449,6 @@ export default defineConfig([
                             ],
                             message: "ui/ must not import from outer layers (commands -> ui -> core).",
                         },
-                        {
-                            group: [
-                                "**/core/*",
-                                "!**/core/index.js",
-                            ],
-                            message: "Import core through its index.js barrel.",
-                        },
                     ],
                 },
             ],
@@ -478,7 +458,7 @@ export default defineConfig([
     // Test code, specs and helpers alike: a spec is code, so the caps that measure a body
     // rather than a file's structure hold there too.
     {
-        files: ["test/**/*.ts"],
+        files: ["packages/*/test/**/*.ts"],
         rules: {
             ...sharedCaps,
         },
@@ -490,8 +470,8 @@ export default defineConfig([
     // and branches the suite needs live there for exactly that reason.
     {
         files: [
-            "test/**/*.nut.ts",
-            "test/**/*.test.ts",
+            "packages/*/test/**/*.nut.ts",
+            "packages/*/test/**/*.test.ts",
         ],
         rules: {
             "no-restricted-syntax": [

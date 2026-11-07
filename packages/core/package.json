@@ -1,0 +1,38 @@
+{
+    "name": "@sf-plugin-gardener/core",
+    "description": "The domain of Gardener: projects, metadata and findings.",
+    "version": "0.0.0",
+    "type": "module",
+    "license": "BSD-3-Clause",
+    "author": "Isaac Ferreira",
+    "engines": {
+        "node": ">=22.13.0"
+    },
+    "exports": {
+        ".": {
+            "types": "./lib/index.d.ts",
+            "import": "./lib/index.js"
+        }
+    },
+    "files": [
+        "/lib"
+    ],
+    "scripts": {
+        "compile": "wireit"
+    },
+    "wireit": {
+        "compile": {
+            "command": "tsc -p . --pretty --incremental",
+            "files": [
+                "src/**/*.ts",
+                "tsconfig.json",
+                "../../tsconfig.base.json"
+            ],
+            "output": [
+                "lib/**",
+                "*.tsbuildinfo"
+            ],
+            "clean": "if-file-deleted"
+        }
+    }
+}

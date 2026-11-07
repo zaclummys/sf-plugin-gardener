@@ -22,7 +22,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm install --global @salesforce/cli
-      - run: sf plugins link .
+      - run: sf plugins link packages/plugin
 
   test:
     runs-on: ubuntu-latest
@@ -37,6 +37,6 @@ jobs:
       - uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/nut/lcov.info
+          files: ./packages/plugin/coverage/nut/lcov.info
           disable_search: true
           fail_ci_if_error: true

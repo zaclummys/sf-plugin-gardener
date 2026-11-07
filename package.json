@@ -1,40 +1,23 @@
 {
-    "name": "sf-plugin-gardener",
-    "description": "Gardener lints the metadata of Salesforce DX projects, as a Salesforce CLI plugin.",
+    "name": "sf-plugin-gardener-workspace",
+    "description": "The workspace of Gardener, a Salesforce CLI plugin that lints the metadata of Salesforce DX projects.",
     "version": "0.0.0",
-    "homepage": "https://zaclummys.github.io/sf-plugin-gardener/",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/zaclummys/sf-plugin-gardener.git"
-    },
-    "dependencies": {
-        "@oclif/core": "^5",
-        "@salesforce/core": "^9",
-        "@salesforce/sf-plugins-core": "^13",
-        "@salesforce/source-deploy-retrieve": "^13",
-        "@salesforce/ts-types": "^3",
-        "@salesforce/types": "^1",
-        "@xmldom/xmldom": "^0.9",
-        "minimatch": "^11",
-        "zod": "^4"
-    },
+    "private": true,
+    "type": "module",
+    "author": "Isaac Ferreira",
+    "license": "BSD-3-Clause",
+    "workspaces": [
+        "packages/*"
+    ],
     "devDependencies": {
         "@11ty/eleventy": "^3",
         "@eslint/js": "^10",
         "@fontsource/fredoka": "^5",
-        "@oclif/plugin-help": "^7",
-        "@salesforce/cli-plugins-testkit": "^5",
         "@stylistic/eslint-plugin": "^5",
-        "@types/chai": "^5",
-        "@types/mocha": "^10",
         "@types/node": "^22",
-        "c8": "^12",
-        "chai": "^6",
         "eslint": "^10",
         "globals": "^17",
         "markdown-it-anchor": "^10",
-        "mocha": "^12",
-        "ts-node": "^10",
         "typescript": "^6",
         "typescript-eslint": "^8",
         "wireit": "^0"
@@ -42,42 +25,13 @@
     "engines": {
         "node": ">=22.13.0"
     },
-    "files": [
-        "/lib",
-        "/messages"
-    ],
-    "keywords": [
-        "salesforce",
-        "sf-plugin",
-        "sfdx-plugin",
-        "lint",
-        "linter",
-        "gardener",
-        "metadata"
-    ],
-    "license": "BSD-3-Clause",
-    "oclif": {
-        "commands": "./lib/commands",
-        "bin": "sf",
-        "topicSeparator": " ",
-        "devPlugins": [
-            "@oclif/plugin-help"
-        ],
-        "topics": {
-            "lint": {
-                "description": "Lint the metadata of a Salesforce DX project."
-            }
-        },
-        "flexibleTaxonomy": true
-    },
     "scripts": {
         "build": "wireit",
-        "clean": "rm -rf lib tmp *.tsbuildinfo .eslintcache .wireit",
+        "clean": "rm -rf tmp .eslintcache .wireit && npm run clean --workspaces --if-present",
         "compile": "wireit",
         "docs:build": "eleventy",
         "docs:dev": "eleventy --serve",
         "lint": "wireit",
-        "prepack": "npm run compile",
         "test": "wireit",
         "test:nut": "wireit",
         "test:unit": "wireit"
@@ -90,76 +44,45 @@
             ]
         },
         "compile": {
-            "command": "tsc -p . --pretty --incremental",
-            "files": [
-                "src/**/*.ts",
-                "**/tsconfig.json",
-                "messages/**"
-            ],
-            "output": [
-                "lib/**",
-                "*.tsbuildinfo"
-            ],
-            "clean": "if-file-deleted"
+            "dependencies": [
+                "./packages/core:compile",
+                "./packages/plugin:compile"
+            ]
         },
         "lint": {
             "command": "eslint . --color --cache --cache-location .eslintcache",
+            "dependencies": [
+                "./packages/core:compile"
+            ],
             "files": [
-                "src/**/*.ts",
-                "test/**/*.ts",
-                "bin/**",
-                "messages/**",
+                "packages/*/src/**/*.ts",
+                "packages/*/test/**/*.ts",
+                "packages/*/bin/**",
+                "packages/*/messages/**",
                 "eslint.config.js",
                 "eleventy.config.js",
                 "package.json",
-                "**/tsconfig.json"
-            ],
-            "output": []
-        },
-        "test:unit": {
-            "command": "mocha --config .mocharc.unit.json",
-            "dependencies": [
-                "compile"
-            ],
-            "env": {
-                "FORCE_COLOR": "0",
-                "NO_COLOR": "1",
-                "TZ": "UTC"
-            },
-            "files": [
-                "test/unit/**",
-                "test/tsconfig.json",
-                ".mocharc.unit.json"
-            ],
-            "output": []
-        },
-        "test:nut": {
-            "command": "c8 --config .c8rc.nut.json mocha --config .mocharc.nut.json",
-            "dependencies": [
-                "compile"
-            ],
-            "env": {
-                "FORCE_COLOR": "0",
-                "NO_COLOR": "1",
-                "SF_DISABLE_TELEMETRY": "true"
-            },
-            "files": [
-                "test/nut/**",
-                "test/fixtures/**",
-                "test/tsconfig.json",
-                ".mocharc.nut.json",
-                ".c8rc.nut.json"
+                "packages/*/package.json",
+                "tsconfig.base.json",
+                "packages/*/tsconfig.json",
+                "packages/*/test/tsconfig.json"
             ],
             "output": []
         },
         "test": {
             "dependencies": [
-                "test:unit",
-                "test:nut"
+                "./packages/plugin:test"
+            ]
+        },
+        "test:nut": {
+            "dependencies": [
+                "./packages/plugin:test:nut"
+            ]
+        },
+        "test:unit": {
+            "dependencies": [
+                "./packages/plugin:test:unit"
             ]
         }
-    },
-    "exports": "./lib/index.js",
-    "type": "module",
-    "author": "Isaac Ferreira"
+    }
 }
