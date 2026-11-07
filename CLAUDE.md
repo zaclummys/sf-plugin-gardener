@@ -8,6 +8,14 @@ Use `!x` ou `== null`. Nunca use `=== undefined` nem `!== undefined`.
 
 Quando não há valor, retorne `null`. Nunca retorne `undefined`.
 
+## Parâmetro opcional
+
+Nunca declare parâmetro nem propriedade de objeto com `?`. Use `T | null`. O adaptador converte o `undefined` da biblioteca com `?? null`.
+
+## Verificação de nulo
+
+Nunca use `Boolean(x)`. Use `x != null` ou `!x`.
+
 ## Promises
 
 Prefira `async/await`. Nunca use `.then()`.
@@ -56,6 +64,22 @@ Todo nome de função e de método começa com um verbo.
 
 Não use primitivo, `Map` nem `Array` para representar um conceito do domínio. Crie uma classe que o modele. A classe guarda a validação e os métodos do conceito.
 
+## Construtor
+
+O construtor de uma classe do domínio recebe os dados crus num objeto anônimo, com um campo por dado. Ele mesmo cria as classes internas. Não embrulhe os dados numa propriedade nem num tipo novo.
+
+## Método from
+
+O método estático que cria uma classe a partir de um valor se chama `from`. Ele devolve `null` quando o valor é `null`. É a exceção da regra Nome de função.
+
+## Uma regra, um elemento
+
+Uma regra de lint verifica um único elemento. Nunca crie propriedade que escolha o que ela verifica. Crie uma regra por elemento.
+
+## Ternário
+
+Nunca use operador ternário. Use `if` ou extraia uma função.
+
 ## Let
 
 Evite `let`. Prefira `const`, e extraia uma função quando a atribuição depender de um `try/catch`.
@@ -95,6 +119,14 @@ Só commite quando eu pedir naquela mensagem. Um pedido anterior não vale para 
 ## Etapas
 
 Nunca faça uma tarefa inteira num único comando de `Bash` ou script de `python`. Quebre em etapas pequenas, uma chamada por etapa. Assim uma falha não desfaz o resto e eu acompanho o progresso.
+
+## Escopo
+
+Faça só o que eu pedi. Não crie propriedade, tipo nem classe que eu não pedi.
+
+## Decisões
+
+Decida sozinho quando houver uma opção razoável e diga qual escolheu. Pergunte só quando não houver.
 
 # Convenções da documentação
 
