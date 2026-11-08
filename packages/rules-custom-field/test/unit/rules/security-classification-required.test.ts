@@ -1,9 +1,9 @@
 import { expect } from 'chai';
-import { ComplianceGroupRequiredRule } from '../../lib/rules/compliance-group-required.js';
+import { SecurityClassificationRequiredRule } from '../../../lib/rules/security-classification-required.js';
 import { buildFieldFiles } from './build-field-files.ts';
 
-const rule = new ComplianceGroupRequiredRule({
-    severity: 'warn',
+const rule = new SecurityClassificationRequiredRule({
+    severity: 'error',
 });
 
 const lacking = {
@@ -12,23 +12,23 @@ const lacking = {
     content: {},
 };
 
-const grouped = {
+const classified = {
     name: 'Sample__c.Name__c',
     path: 'force-app/Name__c.field-meta.xml',
     content: {
-        complianceGroup: 'PII',
+        securityClassification: 'Confidential',
     },
 };
 
-describe('ComplianceGroupRequiredRule', () => {
-    it('reports the field that declares no complianceGroup', () => {
+describe('SecurityClassificationRequiredRule', () => {
+    it('reports the field that declares no securityClassification', () => {
         const findings = rule.check(buildFieldFiles([lacking]));
 
-        expect(findings.map((finding) => finding.getMessage())).to.deep.equal(['The field Sample__c.Code__c declares no complianceGroup.']);
+        expect(findings.map((finding) => finding.getMessage())).to.deep.equal(['The field Sample__c.Code__c declares no securityClassification.']);
     });
 
-    it('reports nothing for a field that declares a complianceGroup', () => {
-        expect(rule.check(buildFieldFiles([grouped]))).to.deep.equal([]);
+    it('reports nothing for a field that declares a securityClassification', () => {
+        expect(rule.check(buildFieldFiles([classified]))).to.deep.equal([]);
     });
 
     it('reports the file of the field', () => {
@@ -41,8 +41,8 @@ describe('ComplianceGroupRequiredRule', () => {
         const [finding] = rule.check(buildFieldFiles([lacking]));
 
         expect(finding).to.deep.include({
-            rule: 'custom-field/compliance-group-required',
-            severity: 'warn',
+            rule: 'custom-field/security-classification-required',
+            severity: 'error',
         });
     });
 });

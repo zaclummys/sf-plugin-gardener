@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { DescriptionLength } from '../../lib/description-length.js';
+import { DescriptionLength } from '../../../lib/metadata/description-length.js';
 import { buildField } from './build-field.ts';
 
 describe('CustomField description', () => {

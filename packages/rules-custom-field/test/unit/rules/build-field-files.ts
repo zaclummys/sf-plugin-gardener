@@ -1,7 +1,7 @@
 import { ComponentFile } from '@sf-plugin-gardener/core';
 import { FixedComponentFileReader } from '@sf-plugin-gardener/testkit';
-import { CustomFieldFile } from '../../lib/custom-field-file.js';
-import { CustomFieldFiles } from '../../lib/custom-field-files.js';
+import { CustomFieldFile } from '../../../lib/files/custom-field-file.js';
+import { CustomFieldFiles } from '../../../lib/files/custom-field-files.js';
 
 type FieldFileData = {
     name: string;
@@ -23,6 +23,7 @@ export function buildFieldFiles(data: FieldFileData[]): CustomFieldFiles {
             child: true,
             reader: new FixedComponentFileReader({
                 content: item.content,
+                size: 1,
             }),
         });
 

@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import { defineSeverityOnlySchema, severitySchema, type Rule } from '@sf-plugin-gardener/core';
-import { DeploymentStatusDeployedRule } from './rules/deployment-status-deployed.js';
-import { ForbiddenSharingModelsRule } from './rules/forbidden-sharing-models.js';
-import { SharingModel } from './sharing-model.js';
-import { SharingModels } from './sharing-models.js';
+import { DeploymentStatusDeployedRule } from './deployment-status-deployed.js';
+import { ForbiddenSharingModelsRule } from './forbidden-sharing-models.js';
+import { SharingModel } from '../metadata/sharing-model.js';
+import { SharingModels } from '../metadata/sharing-models.js';
 
 const deploymentStatusDeployed = defineSeverityOnlySchema((properties) => new DeploymentStatusDeployedRule(properties));
 

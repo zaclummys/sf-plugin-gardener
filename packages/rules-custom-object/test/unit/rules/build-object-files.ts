@@ -1,7 +1,7 @@
 import { ComponentFile } from '@sf-plugin-gardener/core';
 import { FixedComponentFileReader } from '@sf-plugin-gardener/testkit';
-import { CustomObjectFile } from '../../lib/custom-object-file.js';
-import { CustomObjectFiles } from '../../lib/custom-object-files.js';
+import { CustomObjectFile } from '../../../lib/files/custom-object-file.js';
+import { CustomObjectFiles } from '../../../lib/files/custom-object-files.js';
 
 type ObjectFileData = {
     name: string;
@@ -23,6 +23,7 @@ export function buildObjectFiles(data: ObjectFileData[]): CustomObjectFiles {
             child: false,
             reader: new FixedComponentFileReader({
                 content: item.content,
+                size: 1,
             }),
         });
 

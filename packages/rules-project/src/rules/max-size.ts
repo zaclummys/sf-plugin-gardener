@@ -1,6 +1,6 @@
 import type { Finding, Severity } from '@sf-plugin-gardener/core';
-import { ProjectFileRule } from '../project-file-rule.js';
-import type { ProjectFiles } from '../project-files.js';
+import { ProjectFileRule } from './project-file-rule.js';
+import type { ProjectFiles } from '../files/project-files.js';
 
 const bytesInMegabyte = 1_048_576;
 

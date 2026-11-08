@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import { ForbiddenSharingModelsRule } from '../../lib/rules/forbidden-sharing-models.js';
-import { SharingModel } from '../../lib/sharing-model.js';
-import { SharingModels } from '../../lib/sharing-models.js';
+import { ForbiddenSharingModelsRule } from '../../../lib/rules/forbidden-sharing-models.js';
+import { SharingModel } from '../../../lib/metadata/sharing-model.js';
+import { SharingModels } from '../../../lib/metadata/sharing-models.js';
 import { buildObjectFiles } from './build-object-files.ts';
 
 const rule = new ForbiddenSharingModelsRule({

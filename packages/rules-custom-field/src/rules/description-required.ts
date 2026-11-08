@@ -1,7 +1,7 @@
 import type { Finding, Severity } from '@sf-plugin-gardener/core';
-import { CustomFieldRule } from '../custom-field-rule.js';
-import type { CustomFieldFiles } from '../custom-field-files.js';
-import type { DescriptionLength } from '../description-length.js';
+import { CustomFieldRule } from './custom-field-rule.js';
+import type { CustomFieldFiles } from '../files/custom-field-files.js';
+import type { DescriptionLength } from '../metadata/description-length.js';
 
 export class DescriptionRequiredRule extends CustomFieldRule {
     private readonly minLength: DescriptionLength;

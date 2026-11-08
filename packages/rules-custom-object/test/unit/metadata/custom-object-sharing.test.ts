@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { SharingModel } from '../../lib/sharing-model.js';
-import { SharingModels } from '../../lib/sharing-models.js';
+import { SharingModel } from '../../../lib/metadata/sharing-model.js';
+import { SharingModels } from '../../../lib/metadata/sharing-models.js';
 import { buildObject } from './build-object.ts';
 
 const forbidden = new SharingModels({

@@ -1,10 +1,10 @@
 import { z } from 'zod';
 import { defineSeverityOnlySchema, severitySchema, type Rule } from '@sf-plugin-gardener/core';
-import { DescriptionLength } from './description-length.js';
-import { ComplianceGroupRequiredRule } from './rules/compliance-group-required.js';
-import { DescriptionRequiredRule } from './rules/description-required.js';
-import { PicklistRestrictedRule } from './rules/picklist-restricted.js';
-import { SecurityClassificationRequiredRule } from './rules/security-classification-required.js';
+import { DescriptionLength } from '../metadata/description-length.js';
+import { ComplianceGroupRequiredRule } from './compliance-group-required.js';
+import { DescriptionRequiredRule } from './description-required.js';
+import { PicklistRestrictedRule } from './picklist-restricted.js';
+import { SecurityClassificationRequiredRule } from './security-classification-required.js';
 
 const descriptionRequired = z.object({
     severity: severitySchema,

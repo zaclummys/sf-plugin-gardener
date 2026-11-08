@@ -1,7 +1,7 @@
 import type { Finding, Severity } from '@sf-plugin-gardener/core';
-import { ProjectFileRule } from '../project-file-rule.js';
-import type { ApiVersion } from '../api-version.js';
-import type { ProjectFiles } from '../project-files.js';
+import { ProjectFileRule } from './project-file-rule.js';
+import type { ApiVersion } from '../metadata/api-version.js';
+import type { ProjectFiles } from '../files/project-files.js';
 
 export class MaxApiVersionRule extends ProjectFileRule {
     private readonly maxVersion: ApiVersion;

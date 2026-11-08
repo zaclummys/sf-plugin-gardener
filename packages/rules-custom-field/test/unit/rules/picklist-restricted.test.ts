@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { PicklistRestrictedRule } from '../../lib/rules/picklist-restricted.js';
+import { PicklistRestrictedRule } from '../../../lib/rules/picklist-restricted.js';
 import { buildFieldFiles } from './build-field-files.ts';
 
 const rule = new PicklistRestrictedRule({

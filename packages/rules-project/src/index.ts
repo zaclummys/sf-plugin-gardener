@@ -1,1 +1,1 @@
-export { projectRules } from './schemas.js';
+export { projectRules } from './rules/schemas.js';

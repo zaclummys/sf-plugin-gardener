@@ -1,6 +1,6 @@
 import type { ComponentFile } from '@sf-plugin-gardener/core';
 import { z } from 'zod';
-import { CustomObject } from './custom-object.js';
+import { CustomObject } from '../metadata/custom-object.js';
 
 const objectContent = z.object({
     deploymentStatus: z.string().nullish(),

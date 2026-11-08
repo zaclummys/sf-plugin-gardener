@@ -1,5 +1,5 @@
 import type { ComponentFiles } from '@sf-plugin-gardener/core';
-import type { ApiVersion } from './api-version.js';
+import type { ApiVersion } from '../metadata/api-version.js';
 import { ProjectFile } from './project-file.js';
 
 export class ProjectFiles {

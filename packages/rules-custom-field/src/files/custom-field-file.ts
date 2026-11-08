@@ -1,6 +1,6 @@
 import type { ComponentFile } from '@sf-plugin-gardener/core';
 import { z } from 'zod';
-import { CustomField } from './custom-field.js';
+import { CustomField } from '../metadata/custom-field.js';
 
 const fieldContent = z.object({
     description: z.string().nullish(),

@@ -1,4 +1,4 @@
-import { CustomObject } from '../../lib/custom-object.js';
+import { CustomObject } from '../../../lib/metadata/custom-object.js';
 
 type ObjectData = {
     deploymentStatus?: string | null;

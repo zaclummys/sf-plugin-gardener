@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { ComponentFile, type ComponentFileReader } from '@sf-plugin-gardener/core';
-import { CustomFieldFile } from '../../lib/custom-field-file.js';
+import { CustomFieldFile } from '../../../lib/files/custom-field-file.js';
 
 class CountingReader implements ComponentFileReader {
     public reads = 0;

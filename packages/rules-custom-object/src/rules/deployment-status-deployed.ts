@@ -1,6 +1,6 @@
 import type { Finding, Severity } from '@sf-plugin-gardener/core';
-import { CustomObjectRule } from '../custom-object-rule.js';
-import type { CustomObjectFiles } from '../custom-object-files.js';
+import { CustomObjectRule } from './custom-object-rule.js';
+import type { CustomObjectFiles } from '../files/custom-object-files.js';
 
 export class DeploymentStatusDeployedRule extends CustomObjectRule {
     public constructor({ severity }: { severity: Severity }) {

@@ -1,1 +1,1 @@
-export { customObjectRules } from './schemas.js';
+export { customObjectRules } from './rules/schemas.js';

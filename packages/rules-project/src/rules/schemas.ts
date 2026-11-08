@@ -1,10 +1,10 @@
 import { z } from 'zod';
 import type { Rule } from '@sf-plugin-gardener/core';
-import { ApiVersion } from './api-version.js';
-import { MaxApiVersionRule } from './rules/max-api-version.js';
-import { MaxFilesRule } from './rules/max-files.js';
-import { MaxSizeRule } from './rules/max-size.js';
-import { MinApiVersionRule } from './rules/min-api-version.js';
+import { ApiVersion } from '../metadata/api-version.js';
+import { MaxApiVersionRule } from './max-api-version.js';
+import { MaxFilesRule } from './max-files.js';
+import { MaxSizeRule } from './max-size.js';
+import { MinApiVersionRule } from './min-api-version.js';
 
 const maxFiles = z.object({
     severity: z.enum([

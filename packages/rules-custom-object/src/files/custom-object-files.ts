@@ -1,6 +1,6 @@
 import type { ComponentFiles } from '@sf-plugin-gardener/core';
 import { CustomObjectFile } from './custom-object-file.js';
-import type { SharingModels } from './sharing-models.js';
+import type { SharingModels } from '../metadata/sharing-models.js';
 
 export class CustomObjectFiles {
     private readonly files: CustomObjectFile[];
