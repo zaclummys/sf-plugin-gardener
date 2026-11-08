@@ -34,7 +34,8 @@
         "clean": "rm -rf lib coverage *.tsbuildinfo .wireit",
         "compile": "wireit",
         "test": "wireit",
-        "test:nut": "wireit"
+        "test:nut": "wireit",
+        "test:unit": "wireit"
     },
     "wireit": {
         "compile": {
@@ -76,8 +77,26 @@
         },
         "test": {
             "dependencies": [
+                "test:unit",
                 "test:nut"
             ]
+        },
+        "test:unit": {
+            "command": "mocha --config .mocharc.unit.json",
+            "dependencies": [
+                "compile"
+            ],
+            "env": {
+                "FORCE_COLOR": "0",
+                "NO_COLOR": "1",
+                "TZ": "UTC"
+            },
+            "files": [
+                "test/unit/**",
+                "test/tsconfig.json",
+                ".mocharc.unit.json"
+            ],
+            "output": []
         }
     }
 }
