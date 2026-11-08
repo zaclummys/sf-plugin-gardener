@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { readRule } from '@sf-plugin-gardener/testkit';
-import { customObjectRules } from '../../../lib/rules/index.js';
+import { customObjectRules } from '../../lib/index.js';
 
 function readName(name: string, entry: unknown): string | null {
     const rule = readRule({

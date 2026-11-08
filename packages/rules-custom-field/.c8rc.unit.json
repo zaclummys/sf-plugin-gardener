@@ -4,7 +4,6 @@
         "lib"
     ],
     "exclude": [
-        "**/src/index.ts",
         "**/src/*/index.ts",
         "**/test/**",
         "**/node_modules/**"
