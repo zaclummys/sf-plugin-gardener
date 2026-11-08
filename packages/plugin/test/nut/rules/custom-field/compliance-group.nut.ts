@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { execLintJson, findFixture } from '@sf-plugin-gardener/testkit';
+import { execLintJson, findFixture } from '../../run.ts';
 
 describe('lint run custom-field/compliance-group-required', () => {
     it('reports as a warning the field that declares no complianceGroup', () => {

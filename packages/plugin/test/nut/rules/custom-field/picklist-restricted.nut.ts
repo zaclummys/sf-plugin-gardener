@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { execLintJson, findFixture } from '@sf-plugin-gardener/testkit';
+import { execLintJson, findFixture } from '../../run.ts';
 
 const unrestrictedFinding = {
     rule: 'custom-field/picklist-restricted',

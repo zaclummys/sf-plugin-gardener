@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { execLintJson, findFixture } from '@sf-plugin-gardener/testkit';
+import { execLintJson, findFixture } from '../run.ts';
 
 describe('lint run result', () => {
     it('includes the file of a finding that has one', () => {

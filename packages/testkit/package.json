@@ -10,7 +10,6 @@
         "node": ">=22.13.0"
     },
     "dependencies": {
-        "@salesforce/cli-plugins-testkit": "^5",
         "@sf-plugin-gardener/core": "^0"
     },
     "exports": {

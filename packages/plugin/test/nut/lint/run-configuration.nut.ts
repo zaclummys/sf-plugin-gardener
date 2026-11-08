@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { findFixture, execLintJson } from '@sf-plugin-gardener/testkit';
+import { findFixture, execLintJson } from '../run.ts';
 
 describe('lint run configuration', () => {
     it('fails when the project has no configuration file', () => {

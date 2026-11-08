@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { execLintText, findFixture } from '@sf-plugin-gardener/testkit';
+import { execLintText, findFixture } from '../run.ts';
 
 describe('lint run output', () => {
     it('ends with the number of errors and warnings', () => {
