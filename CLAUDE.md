@@ -84,6 +84,10 @@ Nunca use um termo genérico onde houver um termo específico, como `input` ou `
 
 Toda classe que tem `path` como propriedade leva o sufixo `File`, como `ProjectFile` e `CustomFieldFile`. A coleção leva `Files`, como `CustomFieldFiles`.
 
+## Objeto literal com funções
+
+Nunca implemente uma interface com um objeto literal que tem funções. Crie uma classe com `implements`.
+
 ## Ternário
 
 Nunca use operador ternário. Use `if` ou extraia uma função.
