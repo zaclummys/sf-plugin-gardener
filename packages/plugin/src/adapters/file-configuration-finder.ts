@@ -6,7 +6,7 @@ import { Configuration, type Rule } from '@sf-plugin-gardener/core';
 import { presets } from '../presets/index.js';
 import type { ConfigurationFinder, ConfigurationFindOutput } from '../services/adapters/index.js';
 import type { Project } from '../services/index.js';
-import { ruleSchemas } from './rules/index.js';
+import { ruleSchemas } from './rule-schemas.js';
 
 const schema = z.object({
     extends: z.array(z.string()).default([]),
