@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { FixedReader } from './fixed-reader.ts';
 import { ComponentFile, ComponentFiles, Rule, type Finding } from '../../lib/index.js';
 
 class CountRule extends Rule<number> {
@@ -33,10 +34,7 @@ const componentFiles = new ComponentFiles({
             type: 'CustomObject',
             path: 'force-app/Sample__c.object-meta.xml',
             child: false,
-            reader: {
-                readContent: () => ({}),
-                readSize: () => 1,
-            },
+            reader: new FixedReader(),
         }),
     ],
 });

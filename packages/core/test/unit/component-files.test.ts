@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { FixedReader } from './fixed-reader.ts';
 import { ComponentFile, ComponentFiles } from '../../lib/index.js';
 
 function buildComponentFile({
@@ -13,10 +14,7 @@ function buildComponentFile({
         type,
         path: `${name}.xml`,
         child,
-        reader: {
-            readContent: () => ({}),
-            readSize: () => 1,
-        },
+        reader: new FixedReader(),
     });
 }
 

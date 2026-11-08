@@ -10,7 +10,8 @@
         "node": ">=22.13.0"
     },
     "dependencies": {
-        "@salesforce/cli-plugins-testkit": "^5"
+        "@salesforce/cli-plugins-testkit": "^5",
+        "@sf-plugin-gardener/core": "^0"
     },
     "exports": {
         ".": {
@@ -34,7 +35,10 @@
                 "lib/**",
                 "*.tsbuildinfo"
             ],
-            "clean": "if-file-deleted"
+            "clean": "if-file-deleted",
+            "dependencies": [
+                "../core:compile"
+            ]
         }
     }
 }

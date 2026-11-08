@@ -85,3 +85,4 @@ export function execLintText(options: LintOptions, expectation: LintExpectation 
 export function makeEmptyDirectory(): string {
     return mkdtempSync(path.join(tmpdir(), 'lint-nut-'));
 }
+export { FixedComponentFileReader } from './fixed-component-file-reader.js';
