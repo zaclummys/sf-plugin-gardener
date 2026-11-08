@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { buildComponentFiles } from '@sf-plugin-gardener/testkit';
 import { MaxFilesRule } from '../../../lib/rules/index.js';
 import { buildProjectFiles, describeFile } from './build-project-files.ts';
 
@@ -41,6 +42,25 @@ describe('MaxFilesRule', () => {
         ]));
 
         expect(findings).to.deep.equal([]);
+    });
+
+    it('reads the files from the components', () => {
+        const findings = rule.run(buildComponentFiles([
+            {
+                name: 'First',
+                type: 'Flow',
+                path: 'force-app/First.flow-meta.xml',
+                content: {},
+            },
+            {
+                name: 'Second',
+                type: 'Flow',
+                path: 'force-app/Second.flow-meta.xml',
+                content: {},
+            },
+        ]));
+
+        expect(findings).to.have.lengthOf(1);
     });
 
     it('reports about the project, with its name and severity', () => {

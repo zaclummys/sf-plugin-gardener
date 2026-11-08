@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { DescriptionLength } from '../../../lib/metadata/index.js';
 import { DescriptionRequiredRule } from '../../../lib/rules/index.js';
+import { buildComponentFiles } from '@sf-plugin-gardener/testkit';
 import { buildFieldFiles } from './build-field-files.ts';
 
 const rule = new DescriptionRequiredRule({
@@ -45,6 +46,23 @@ describe('DescriptionRequiredRule', () => {
 
     it('reports nothing for a field whose description reaches the minimum', () => {
         expect(rule.check(buildFieldFiles([described]))).to.deep.equal([]);
+    });
+
+    it('reads the custom fields from the components', () => {
+        const findings = rule.run(buildComponentFiles([
+            {
+                ...undescribed,
+                type: 'CustomField',
+            },
+            {
+                name: 'Sample__c',
+                type: 'CustomObject',
+                path: 'force-app/Sample__c.object-meta.xml',
+                content: {},
+            },
+        ]));
+
+        expect(findings.map((finding) => finding.getFile())).to.deep.equal(['force-app/Code__c.field-meta.xml']);
     });
 
     it('reports the file of the field', () => {

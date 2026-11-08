@@ -82,7 +82,7 @@
             ]
         },
         "test:unit": {
-            "command": "mocha --config .mocharc.unit.json",
+            "command": "c8 --config .c8rc.unit.json mocha --config .mocharc.unit.json",
             "dependencies": [
                 "compile"
             ],
@@ -94,7 +94,8 @@
             "files": [
                 "test/unit/**",
                 "test/tsconfig.json",
-                ".mocharc.unit.json"
+                ".mocharc.unit.json",
+                ".c8rc.unit.json"
             ],
             "output": []
         }

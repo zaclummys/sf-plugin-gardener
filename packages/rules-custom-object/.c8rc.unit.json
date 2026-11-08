@@ -1,0 +1,23 @@
+{
+    "all": true,
+    "src": [
+        "lib"
+    ],
+    "exclude": [
+        "**/src/index.ts",
+        "**/src/*/index.ts",
+        "**/test/**",
+        "**/node_modules/**"
+    ],
+    "exclude-after-remap": true,
+    "reporter": [
+        "text",
+        "lcov"
+    ],
+    "reports-dir": "coverage/unit",
+    "check-coverage": true,
+    "lines": 100,
+    "functions": 100,
+    "branches": 100,
+    "statements": 100
+}

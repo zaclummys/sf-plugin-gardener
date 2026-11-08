@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import { DeploymentStatusDeployedRule } from '../../../lib/rules/index.js';
+import { buildComponentFiles } from '@sf-plugin-gardener/testkit';
 import { buildObjectFiles } from './build-object-files.ts';
 
 const rule = new DeploymentStatusDeployedRule({
@@ -37,6 +38,21 @@ describe('DeploymentStatusDeployedRule', () => {
 
     it('reports nothing for an object that declares no deploymentStatus', () => {
         expect(rule.check(buildObjectFiles([buildObject({})]))).to.deep.equal([]);
+    });
+
+    it('reads the custom objects from the components', () => {
+        const findings = rule.run(buildComponentFiles([
+            {
+                name: 'Sample__c',
+                type: 'CustomObject',
+                path: 'force-app/Sample__c.object-meta.xml',
+                content: {
+                    deploymentStatus: 'InDevelopment',
+                },
+            },
+        ]));
+
+        expect(findings).to.have.lengthOf(1);
     });
 
     it('reports the file of the object, with its name and severity', () => {
