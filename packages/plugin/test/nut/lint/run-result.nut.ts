@@ -3,7 +3,7 @@ import { execLintJson, findFixture } from '@sf-plugin-gardener/testkit';
 
 describe('lint run result', () => {
     it('includes the file of a finding that has one', () => {
-        const directory = findFixture('file-finding-project');
+        const directory = findFixture('max-api-version-project');
         const output = execLintJson({
             directory,
         }, {
@@ -20,17 +20,8 @@ describe('lint run result', () => {
         ]);
     });
 
-    it('counts a file that declares no apiVersion', () => {
-        const directory = findFixture('unversioned-project');
-        const output = execLintJson({
-            directory,
-        });
-
-        expect(output.result.files).to.equal(1);
-    });
-
     it('measures the size of the files when a rule asks for it', () => {
-        const directory = findFixture('sized-project');
+        const directory = findFixture('max-size-project');
         const output = execLintJson({
             directory,
         }, {

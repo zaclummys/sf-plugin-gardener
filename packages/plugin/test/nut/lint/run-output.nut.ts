@@ -12,7 +12,7 @@ describe('lint run output', () => {
     });
 
     it('counts the errors that the rules report', () => {
-        const directory = findFixture('error-project');
+        const directory = findFixture('max-files-project');
         const text = execLintText({
             directory,
         }, {

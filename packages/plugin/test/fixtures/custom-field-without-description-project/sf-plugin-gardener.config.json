@@ -1,0 +1,8 @@
+{
+    "rules": {
+        "custom-field/description-required": {
+            "severity": "error",
+            "minLength": 20
+        }
+    }
+}
