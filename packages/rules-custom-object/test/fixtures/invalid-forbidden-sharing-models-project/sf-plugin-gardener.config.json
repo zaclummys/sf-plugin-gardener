@@ -1,7 +1,0 @@
-{
-    "rules": {
-        "custom-object/forbidden-sharing-models": {
-            "severity": "error"
-        }
-    }
-}

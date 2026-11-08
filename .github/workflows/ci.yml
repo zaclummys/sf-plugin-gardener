@@ -37,6 +37,6 @@ jobs:
       - uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./packages/core/coverage/unit/lcov.info,./packages/plugin/coverage/nut/lcov.info,./packages/rules-custom-field/coverage/nut/lcov.info,./packages/rules-custom-object/coverage/nut/lcov.info,./packages/rules-project/coverage/nut/lcov.info
+          files: ./packages/core/coverage/unit/lcov.info,./packages/rules-custom-field/coverage/unit/lcov.info,./packages/rules-custom-object/coverage/unit/lcov.info,./packages/rules-project/coverage/unit/lcov.info,./packages/plugin/coverage/nut/lcov.info
           disable_search: true
           fail_ci_if_error: true

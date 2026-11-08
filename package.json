@@ -85,10 +85,7 @@
         },
         "test:nut": {
             "dependencies": [
-                "./packages/plugin:test:nut",
-                "./packages/rules-custom-field:test:nut",
-                "./packages/rules-custom-object:test:nut",
-                "./packages/rules-project:test:nut"
+                "./packages/plugin:test:nut"
             ]
         },
         "test:unit": {

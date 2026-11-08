@@ -1,5 +1,0 @@
-{
-    "rules": {
-        "custom-object/deployment-status-deployed": "error"
-    }
-}

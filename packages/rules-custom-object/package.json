@@ -18,8 +18,7 @@
         "@types/mocha": "^10",
         "c8": "^12",
         "chai": "^6",
-        "mocha": "^12",
-        "sf-plugin-gardener": "^0"
+        "mocha": "^12"
     },
     "exports": {
         ".": {
@@ -34,7 +33,6 @@
         "clean": "rm -rf lib coverage *.tsbuildinfo .wireit",
         "compile": "wireit",
         "test": "wireit",
-        "test:nut": "wireit",
         "test:unit": "wireit"
     },
     "wireit": {
@@ -54,31 +52,9 @@
             ],
             "clean": "if-file-deleted"
         },
-        "test:nut": {
-            "command": "c8 --config .c8rc.nut.json mocha --config .mocharc.nut.json",
-            "dependencies": [
-                "compile",
-                "../plugin:compile",
-                "../testkit:compile"
-            ],
-            "env": {
-                "FORCE_COLOR": "0",
-                "NO_COLOR": "1",
-                "SF_DISABLE_TELEMETRY": "true"
-            },
-            "files": [
-                "test/nut/**",
-                "test/fixtures/**",
-                "test/tsconfig.json",
-                ".mocharc.nut.json",
-                ".c8rc.nut.json"
-            ],
-            "output": []
-        },
         "test": {
             "dependencies": [
-                "test:unit",
-                "test:nut"
+                "test:unit"
             ]
         },
         "test:unit": {
