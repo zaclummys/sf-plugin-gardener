@@ -502,6 +502,87 @@ export default defineConfig([
         },
     },
 
+    // The unit tests mirror the folders of a rule group: a test may reach into its own folder, and
+    // reaches a neighbor folder only through its index.js.
+    {
+        files: ["packages/rules-*/test/unit/metadata/**/*.ts"],
+        rules: {
+            "no-restricted-imports": [
+                "error",
+                {
+                    patterns: [
+                        {
+                            group: [
+                                "**/lib/files/*",
+                                "!**/lib/files/index.js",
+                            ],
+                            message: "A test reaches files/ of another folder only through its index.js barrel.",
+                        },
+                        {
+                            group: [
+                                "**/lib/rules/*",
+                                "!**/lib/rules/index.js",
+                            ],
+                            message: "A test reaches rules/ of another folder only through its index.js barrel.",
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
+        files: ["packages/rules-*/test/unit/files/**/*.ts"],
+        rules: {
+            "no-restricted-imports": [
+                "error",
+                {
+                    patterns: [
+                        {
+                            group: [
+                                "**/lib/metadata/*",
+                                "!**/lib/metadata/index.js",
+                            ],
+                            message: "A test reaches metadata/ of another folder only through its index.js barrel.",
+                        },
+                        {
+                            group: [
+                                "**/lib/rules/*",
+                                "!**/lib/rules/index.js",
+                            ],
+                            message: "A test reaches rules/ of another folder only through its index.js barrel.",
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
+        files: ["packages/rules-*/test/unit/rules/**/*.ts"],
+        rules: {
+            "no-restricted-imports": [
+                "error",
+                {
+                    patterns: [
+                        {
+                            group: [
+                                "**/lib/metadata/*",
+                                "!**/lib/metadata/index.js",
+                            ],
+                            message: "A test reaches metadata/ of another folder only through its index.js barrel.",
+                        },
+                        {
+                            group: [
+                                "**/lib/files/*",
+                                "!**/lib/files/index.js",
+                            ],
+                            message: "A test reaches files/ of another folder only through its index.js barrel.",
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+
     // Layering: ui/ is the terminal's side of the boundary, so it may reach core and
     // nothing else. Colour depends on a TTY and on the environment, which is exactly
     // what core/ may not know about.
