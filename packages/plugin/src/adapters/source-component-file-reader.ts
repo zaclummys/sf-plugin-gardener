@@ -12,13 +12,15 @@ export class SourceComponentFileReader implements ComponentFileReader {
         this.component = component;
     }
 
-    /** Reads and parses the XML file of the component. */
+    /** Reads and parses the XML file of the component, and returns what its root element holds. */
     public readContent(): unknown {
-        return this.component.parseXmlSync();
+        const xml = this.component.parseXmlSync();
+
+        return xml[this.component.type.name];
     }
 
     /** Sums the size of the XML file and of the content files of the component, in bytes. */
-    public measureSize(): number {
+    public readSize(): number {
         const paths = [
             this.component.xml,
             ...this.component.walkContent(),

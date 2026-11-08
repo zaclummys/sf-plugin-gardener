@@ -13,7 +13,7 @@ class CountingReader implements ComponentFileReader {
         };
     }
 
-    public measureSize(): number {
+    public readSize(): number {
         this.measures += 1;
 
         return 42;
@@ -74,7 +74,7 @@ describe('ComponentFile', () => {
     it('reads its content when asked', () => {
         const componentFile = buildComponentFile(new CountingReader());
 
-        expect(componentFile.getContent()).to.deep.equal({
+        expect(componentFile.readContent()).to.deep.equal({
             CustomField: {},
         });
     });
@@ -82,6 +82,6 @@ describe('ComponentFile', () => {
     it('measures its size when asked', () => {
         const componentFile = buildComponentFile(new CountingReader());
 
-        expect(componentFile.getSize()).to.equal(42);
+        expect(componentFile.readSize()).to.equal(42);
     });
 });

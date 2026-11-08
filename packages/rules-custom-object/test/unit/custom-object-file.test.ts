@@ -9,14 +9,12 @@ class CountingReader implements ComponentFileReader {
         this.reads += 1;
 
         return {
-            CustomObject: {
-                deploymentStatus: 'InDevelopment',
-                sharingModel: 'ReadWrite',
-            },
+            deploymentStatus: 'InDevelopment',
+            sharingModel: 'ReadWrite',
         };
     }
 
-    public measureSize(): number {
+    public readSize(): number {
         return 1;
     }
 }

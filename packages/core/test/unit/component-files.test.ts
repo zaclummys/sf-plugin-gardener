@@ -15,7 +15,7 @@ function buildComponentFile({
         child,
         reader: {
             readContent: () => ({}),
-            measureSize: () => 1,
+            readSize: () => 1,
         },
     });
 }

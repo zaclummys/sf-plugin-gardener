@@ -35,7 +35,7 @@ const componentFiles = new ComponentFiles({
             child: false,
             reader: {
                 readContent: () => ({}),
-                measureSize: () => 1,
+                readSize: () => 1,
             },
         }),
     ],

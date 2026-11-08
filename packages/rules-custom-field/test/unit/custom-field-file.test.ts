@@ -9,14 +9,12 @@ class CountingReader implements ComponentFileReader {
         this.reads += 1;
 
         return {
-            CustomField: {
-                description: 'The code of the sample.',
-                type: 'Text',
-            },
+            description: 'The code of the sample.',
+            type: 'Text',
         };
     }
 
-    public measureSize(): number {
+    public readSize(): number {
         return 1;
     }
 }

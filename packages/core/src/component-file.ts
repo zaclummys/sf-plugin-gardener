@@ -3,8 +3,8 @@ export interface ComponentFileReader {
     /** Reads and parses the content of the component files. */
     readContent(): unknown;
 
-    /** Measures the size of the component files, in bytes. */
-    measureSize(): number;
+    /** Reads the size of the component files, in bytes. */
+    readSize(): number;
 }
 
 export class ComponentFile {
@@ -19,7 +19,7 @@ export class ComponentFile {
      * @param type The metadata type of the component, such as CustomField.
      * @param path The path of the component file, relative to the project.
      * @param child Whether the component is a child of another one, such as a field of an object.
-     * @param reader Reads the content and measures the size of the component, when asked.
+     * @param reader Reads the content and the size of the component, when asked.
      */
     public constructor({
         name, type, path, child, reader,
@@ -58,13 +58,13 @@ export class ComponentFile {
     }
 
     /** Reads the parsed content of the component file. */
-    public getContent(): unknown {
+    public readContent(): unknown {
         return this.reader.readContent();
     }
 
-    /** Measures the size of the component files, in bytes. */
-    public getSize(): number {
-        return this.reader.measureSize();
+    /** Reads the size of the component files, in bytes. */
+    public readSize(): number {
+        return this.reader.readSize();
     }
 
     /**

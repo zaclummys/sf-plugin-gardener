@@ -2,19 +2,17 @@ import type { ComponentFile } from '@sf-plugin-gardener/core';
 import { z } from 'zod';
 import { CustomField } from './custom-field.js';
 
-const fieldFile = z.object({
-    CustomField: z.object({
-        description: z.string().nullish(),
-        securityClassification: z.string().nullish(),
-        complianceGroup: z.string().nullish(),
-        type: z.string().nullish(),
-        valueSet: z.object({
-            restricted: z.union([
-                z.string(),
-                z.boolean(),
-            ]).nullish(),
-        }).nullish(),
-    }),
+const fieldContent = z.object({
+    description: z.string().nullish(),
+    securityClassification: z.string().nullish(),
+    complianceGroup: z.string().nullish(),
+    type: z.string().nullish(),
+    valueSet: z.object({
+        restricted: z.union([
+            z.string(),
+            z.boolean(),
+        ]).nullish(),
+    }).nullish(),
 });
 
 export class CustomFieldFile {
@@ -32,8 +30,7 @@ export class CustomFieldFile {
 
     /** Reads the field that the file declares. */
     public getCustomField(): CustomField {
-        const file = fieldFile.parse(this.componentFile.getContent());
-        const metadata = file.CustomField;
+        const metadata = fieldContent.parse(this.componentFile.readContent());
 
         return new CustomField({
             name: this.componentFile.getName(),

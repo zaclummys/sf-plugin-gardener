@@ -2,6 +2,10 @@ import type { ComponentFile } from '@sf-plugin-gardener/core';
 import { z } from 'zod';
 import { ApiVersion } from './api-version.js';
 
+const fileContent = z.object({
+    apiVersion: z.string().nullish(),
+});
+
 export class ProjectFile {
     private readonly componentFile: ComponentFile;
 
@@ -15,22 +19,16 @@ export class ProjectFile {
         return this.componentFile.getPath();
     }
 
-    /** Measures the size of the file, in bytes. */
+    /** Reads the size of the file, in bytes. */
     public getSize(): number {
-        return this.componentFile.getSize();
+        return this.componentFile.readSize();
     }
 
     /** Reads the apiVersion that the file declares, or null when it declares none. */
     public getApiVersion(): ApiVersion | null {
-        const type = this.componentFile.getType();
-        const schema = z.object({
-            [type]: z.object({
-                apiVersion: z.string().nullish(),
-            }),
-        });
-        const file = schema.parse(this.componentFile.getContent());
+        const content = fileContent.parse(this.componentFile.readContent());
 
-        return ApiVersion.from(file[type].apiVersion ?? null);
+        return ApiVersion.from(content.apiVersion ?? null);
     }
 
     /**

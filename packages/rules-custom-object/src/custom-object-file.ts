@@ -2,11 +2,9 @@ import type { ComponentFile } from '@sf-plugin-gardener/core';
 import { z } from 'zod';
 import { CustomObject } from './custom-object.js';
 
-const objectFile = z.object({
-    CustomObject: z.object({
-        deploymentStatus: z.string().nullish(),
-        sharingModel: z.string().nullish(),
-    }),
+const objectContent = z.object({
+    deploymentStatus: z.string().nullish(),
+    sharingModel: z.string().nullish(),
 });
 
 export class CustomObjectFile {
@@ -24,8 +22,7 @@ export class CustomObjectFile {
 
     /** Reads the object that the file declares. */
     public getCustomObject(): CustomObject {
-        const file = objectFile.parse(this.componentFile.getContent());
-        const metadata = file.CustomObject;
+        const metadata = objectContent.parse(this.componentFile.readContent());
 
         return new CustomObject({
             name: this.componentFile.getName(),
