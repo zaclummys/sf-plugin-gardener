@@ -1,6 +1,6 @@
 import { ComponentFile, ComponentFiles } from '@sf-plugin-gardener/core';
 import { FixedComponentFileReader } from '@sf-plugin-gardener/testkit';
-import { ProjectFiles } from '../../../lib/files/project-files.js';
+import { ProjectFiles } from '../../../lib/files/index.js';
 
 type FileData = {
     path: string;

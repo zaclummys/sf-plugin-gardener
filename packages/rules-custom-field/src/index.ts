@@ -1,1 +1,1 @@
-export { customFieldRules } from './rules/schemas.js';
+export { customFieldRules } from './rules/index.js';

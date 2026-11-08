@@ -1,6 +1,6 @@
 import type { ComponentFiles } from '@sf-plugin-gardener/core';
 import { CustomFieldFile } from './custom-field-file.js';
-import type { DescriptionLength } from '../metadata/description-length.js';
+import type { DescriptionLength } from '../metadata/index.js';
 
 export class CustomFieldFiles {
     private readonly files: CustomFieldFile[];

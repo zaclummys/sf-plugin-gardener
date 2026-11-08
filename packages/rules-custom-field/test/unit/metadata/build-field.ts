@@ -1,4 +1,4 @@
-import { CustomField } from '../../../lib/metadata/custom-field.js';
+import { CustomField } from '../../../lib/metadata/index.js';
 
 type FieldData = {
     description?: string | null;

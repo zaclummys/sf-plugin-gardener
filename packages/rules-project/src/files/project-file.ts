@@ -1,6 +1,6 @@
 import type { ComponentFile } from '@sf-plugin-gardener/core';
 import { z } from 'zod';
-import { ApiVersion } from '../metadata/api-version.js';
+import { ApiVersion } from '../metadata/index.js';
 
 const fileContent = z.object({
     apiVersion: z.string().nullish(),

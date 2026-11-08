@@ -431,6 +431,77 @@ export default defineConfig([
         },
     },
 
+    // The folders of a rule group (metadata, files and rules) offer only what their index.js
+    // exports: a neighbor never reaches into a file of another folder.
+    {
+        files: ["packages/rules-*/src/files/**/*.ts"],
+        rules: {
+            "no-restricted-imports": [
+                "error",
+                {
+                    patterns: [
+                        {
+                            group: [
+                                "../metadata/*",
+                                "!../metadata/index.js",
+                            ],
+                            message: "Import metadata through its index.js barrel.",
+                        },
+                        {
+                            group: ["../rules/**"],
+                            message: "files/ must not import rules/ (rules -> files -> metadata).",
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
+        files: ["packages/rules-*/src/rules/**/*.ts"],
+        rules: {
+            "no-restricted-imports": [
+                "error",
+                {
+                    patterns: [
+                        {
+                            group: [
+                                "../metadata/*",
+                                "!../metadata/index.js",
+                            ],
+                            message: "Import metadata through its index.js barrel.",
+                        },
+                        {
+                            group: [
+                                "../files/*",
+                                "!../files/index.js",
+                            ],
+                            message: "Import files through its index.js barrel.",
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
+        files: ["packages/rules-*/src/metadata/**/*.ts"],
+        rules: {
+            "no-restricted-imports": [
+                "error",
+                {
+                    patterns: [
+                        {
+                            group: [
+                                "../files/**",
+                                "../rules/**",
+                            ],
+                            message: "metadata/ must not import its neighbors (rules -> files -> metadata).",
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+
     // Layering: ui/ is the terminal's side of the boundary, so it may reach core and
     // nothing else. Colour depends on a TTY and on the environment, which is exactly
     // what core/ may not know about.

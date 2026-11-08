@@ -1,6 +1,6 @@
 import type { Finding, Severity } from '@sf-plugin-gardener/core';
 import { CustomFieldRule } from './custom-field-rule.js';
-import type { CustomFieldFiles } from '../files/custom-field-files.js';
+import type { CustomFieldFiles } from '../files/index.js';
 
 export class ComplianceGroupRequiredRule extends CustomFieldRule {
     public constructor({ severity }: { severity: Severity }) {

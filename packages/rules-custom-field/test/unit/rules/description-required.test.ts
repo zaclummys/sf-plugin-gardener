@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { DescriptionLength } from '../../../lib/metadata/description-length.js';
-import { DescriptionRequiredRule } from '../../../lib/rules/description-required.js';
+import { DescriptionLength } from '../../../lib/metadata/index.js';
+import { DescriptionRequiredRule } from '../../../lib/rules/index.js';
 import { buildFieldFiles } from './build-field-files.ts';
 
 const rule = new DescriptionRequiredRule({

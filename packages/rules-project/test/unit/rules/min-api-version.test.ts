@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import { ApiVersion } from '../../../lib/metadata/api-version.js';
-import { MinApiVersionRule } from '../../../lib/rules/min-api-version.js';
+import { ApiVersion } from '../../../lib/metadata/index.js';
+import { MinApiVersionRule } from '../../../lib/rules/index.js';
 import { buildProjectFiles, describeFile, describeVersionedFile } from './build-project-files.ts';
 
 const rule = new MinApiVersionRule({

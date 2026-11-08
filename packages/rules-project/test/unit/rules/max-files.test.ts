@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { MaxFilesRule } from '../../../lib/rules/max-files.js';
+import { MaxFilesRule } from '../../../lib/rules/index.js';
 import { buildProjectFiles, describeFile } from './build-project-files.ts';
 
 const rule = new MaxFilesRule({

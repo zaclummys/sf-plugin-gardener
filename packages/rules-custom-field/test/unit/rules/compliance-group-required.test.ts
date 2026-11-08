@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { ComplianceGroupRequiredRule } from '../../../lib/rules/compliance-group-required.js';
+import { ComplianceGroupRequiredRule } from '../../../lib/rules/index.js';
 import { buildFieldFiles } from './build-field-files.ts';
 
 const rule = new ComplianceGroupRequiredRule({

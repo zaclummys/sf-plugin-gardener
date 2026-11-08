@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { DeploymentStatusDeployedRule } from '../../../lib/rules/deployment-status-deployed.js';
+import { DeploymentStatusDeployedRule } from '../../../lib/rules/index.js';
 import { buildObjectFiles } from './build-object-files.ts';
 
 const rule = new DeploymentStatusDeployedRule({

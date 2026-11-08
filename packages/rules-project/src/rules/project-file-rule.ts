@@ -1,5 +1,5 @@
 import { Rule, type ComponentFiles } from '@sf-plugin-gardener/core';
-import { ProjectFiles } from '../files/project-files.js';
+import { ProjectFiles } from '../files/index.js';
 
 export abstract class ProjectFileRule extends Rule<ProjectFiles> {
     protected read(componentFiles: ComponentFiles): ProjectFiles {

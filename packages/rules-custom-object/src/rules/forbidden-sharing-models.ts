@@ -1,7 +1,7 @@
 import type { Finding, Severity } from '@sf-plugin-gardener/core';
 import { CustomObjectRule } from './custom-object-rule.js';
-import type { CustomObjectFiles } from '../files/custom-object-files.js';
-import type { SharingModels } from '../metadata/sharing-models.js';
+import type { CustomObjectFiles } from '../files/index.js';
+import type { SharingModels } from '../metadata/index.js';
 
 export class ForbiddenSharingModelsRule extends CustomObjectRule {
     private readonly forbiddenModels: SharingModels;

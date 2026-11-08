@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { MaxSizeRule } from '../../../lib/rules/max-size.js';
+import { MaxSizeRule } from '../../../lib/rules/index.js';
 import { buildProjectFiles, describeFile } from './build-project-files.ts';
 
 const megabyte = 1_048_576;

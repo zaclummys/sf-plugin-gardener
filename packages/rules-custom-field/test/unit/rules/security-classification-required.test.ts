@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { SecurityClassificationRequiredRule } from '../../../lib/rules/security-classification-required.js';
+import { SecurityClassificationRequiredRule } from '../../../lib/rules/index.js';
 import { buildFieldFiles } from './build-field-files.ts';
 
 const rule = new SecurityClassificationRequiredRule({

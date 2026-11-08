@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import type { Rule } from '@sf-plugin-gardener/core';
-import { ApiVersion } from '../metadata/api-version.js';
+import { ApiVersion } from '../metadata/index.js';
 import { MaxApiVersionRule } from './max-api-version.js';
 import { MaxFilesRule } from './max-files.js';
 import { MaxSizeRule } from './max-size.js';
