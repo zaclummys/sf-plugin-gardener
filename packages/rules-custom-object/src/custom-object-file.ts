@@ -1,8 +1,6 @@
 import type { ComponentFile } from '@sf-plugin-gardener/core';
 import { z } from 'zod';
-import { DeploymentStatus } from './deployment-status.js';
-import { SharingModel } from './sharing-model.js';
-import type { SharingModels } from './sharing-models.js';
+import { CustomObject } from './custom-object.js';
 
 const objectFile = z.object({
     CustomObject: z.object({
@@ -12,74 +10,27 @@ const objectFile = z.object({
 });
 
 export class CustomObjectFile {
-    private readonly name: string;
-    private readonly path: string;
-    private readonly deploymentStatus: DeploymentStatus | null;
-    private readonly sharingModel: SharingModel | null;
+    private readonly componentFile: ComponentFile;
 
-    /**
-     * @param name The full name of the object, such as Sample__c.
-     * @param path The path of the object file, relative to the project.
-     * @param deploymentStatus The deploymentStatus that the object declares, if any.
-     * @param sharingModel The sharingModel that the object declares, if any.
-     */
-    public constructor({
-        name, path, deploymentStatus, sharingModel,
-    }: {
-        name: string;
-        path: string;
-        deploymentStatus: string | null;
-        sharingModel: string | null;
-    }) {
-        this.name = name;
-        this.path = path;
-        this.deploymentStatus = DeploymentStatus.from(deploymentStatus);
-        this.sharingModel = SharingModel.from(sharingModel);
-    }
-
-    /**
-     * Builds an object from a component of the CustomObject type.
-     *
-     * @param componentFile The component that holds the object file.
-     */
-    public static from({ componentFile }: { componentFile: ComponentFile }): CustomObjectFile {
-        const file = objectFile.parse(componentFile.getContent());
-        const metadata = file.CustomObject;
-
-        return new CustomObjectFile({
-            name: componentFile.getName(),
-            path: componentFile.getPath(),
-            deploymentStatus: metadata.deploymentStatus ?? null,
-            sharingModel: metadata.sharingModel ?? null,
-        });
-    }
-
-    /** Returns the full name of the object, such as Sample__c. */
-    public getName(): string {
-        return this.name;
+    /** @param componentFile The component that holds the object file, which is read only when the object is asked for. */
+    public constructor({ componentFile }: { componentFile: ComponentFile }) {
+        this.componentFile = componentFile;
     }
 
     /** Returns the path of the object file, relative to the project. */
     public getPath(): string {
-        return this.path;
+        return this.componentFile.getPath();
     }
 
-    /** Returns the sharingModel that the object declares, or null when it declares none. */
-    public getSharingModel(): SharingModel | null {
-        return this.sharingModel;
-    }
+    /** Reads the object that the file declares. */
+    public getCustomObject(): CustomObject {
+        const file = objectFile.parse(this.componentFile.getContent());
+        const metadata = file.CustomObject;
 
-    /** Tells whether the object is still in development. */
-    public isInDevelopment(): boolean {
-        return this.deploymentStatus?.isInDevelopment() === true;
-    }
-
-    /**
-     * Tells whether the sharingModel of the object is one of the models.
-     *
-     * @param models The models to look in.
-     */
-    public hasSharingModelIn(models: SharingModels): boolean {
-        return this.sharingModel != null && models.includes(this.sharingModel);
+        return new CustomObject({
+            name: this.componentFile.getName(),
+            deploymentStatus: metadata.deploymentStatus ?? null,
+            sharingModel: metadata.sharingModel ?? null,
+        });
     }
 }

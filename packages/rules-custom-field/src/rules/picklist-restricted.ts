@@ -11,11 +11,11 @@ export class PicklistRestrictedRule extends CustomFieldRule {
     }
 
     public check(customFieldFiles: CustomFieldFiles): Finding[] {
-        const fields = customFieldFiles.listUnrestrictedPicklists();
+        const files = customFieldFiles.listUnrestrictedPicklists();
 
-        return fields.map((field) => this.reportFile({
-            message: `The picklist ${field.getName()} is not restricted to its values.`,
-            file: field.getPath(),
+        return files.map((file) => this.reportFile({
+            message: `The picklist ${file.getCustomField().getName()} is not restricted to its values.`,
+            file: file.getPath(),
         }));
     }
 }

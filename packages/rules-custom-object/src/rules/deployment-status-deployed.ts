@@ -11,11 +11,11 @@ export class DeploymentStatusDeployedRule extends CustomObjectRule {
     }
 
     public check(customObjectFiles: CustomObjectFiles): Finding[] {
-        const objects = customObjectFiles.listInDevelopment();
+        const files = customObjectFiles.listInDevelopment();
 
-        return objects.map((object) => this.reportFile({
-            message: `The object ${object.getName()} has the deploymentStatus InDevelopment.`,
-            file: object.getPath(),
+        return files.map((file) => this.reportFile({
+            message: `The object ${file.getCustomObject().getName()} has the deploymentStatus InDevelopment.`,
+            file: file.getPath(),
         }));
     }
 }

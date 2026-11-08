@@ -11,11 +11,11 @@ export class SecurityClassificationRequiredRule extends CustomFieldRule {
     }
 
     public check(customFieldFiles: CustomFieldFiles): Finding[] {
-        const fields = customFieldFiles.listWithoutSecurityClassification();
+        const files = customFieldFiles.listWithoutSecurityClassification();
 
-        return fields.map((field) => this.reportFile({
-            message: `The field ${field.getName()} declares no securityClassification.`,
-            file: field.getPath(),
+        return files.map((file) => this.reportFile({
+            message: `The field ${file.getCustomField().getName()} declares no securityClassification.`,
+            file: file.getPath(),
         }));
     }
 }

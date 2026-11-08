@@ -3,54 +3,54 @@ import { CustomFieldFile } from './custom-field-file.js';
 import type { DescriptionLength } from './description-length.js';
 
 export class CustomFieldFiles {
-    private readonly fields: CustomFieldFile[];
+    private readonly files: CustomFieldFile[];
 
-    /** @param fields The custom fields of the package directories that are linted. */
-    public constructor({ fields }: { fields: CustomFieldFile[] }) {
-        this.fields = fields;
+    /** @param files The custom field files of the package directories that are linted. */
+    public constructor({ files }: { files: CustomFieldFile[] }) {
+        this.files = files;
     }
 
     /**
-     * Builds the custom fields of the components.
+     * Builds the custom field files of the component files.
      *
-     * @param componentFiles The components, some of which hold field files.
+     * @param componentFiles The component files, some of which hold custom fields.
      */
     public static from({ componentFiles }: { componentFiles: ComponentFiles }): CustomFieldFiles {
-        const fields = componentFiles.listOfType('CustomField').map((componentFile) => CustomFieldFile.from({
+        const files = componentFiles.listOfType('CustomField').map((componentFile) => new CustomFieldFile({
             componentFile,
         }));
 
         return new CustomFieldFiles({
-            fields,
+            files,
         });
     }
 
-    /** Lists the custom fields that declare no description. */
+    /** Lists the files of the custom fields that declare no description. */
     public listUndescribed(): CustomFieldFile[] {
-        return this.fields.filter((field) => field.isUndescribed());
+        return this.files.filter((file) => file.getCustomField().isUndescribed());
     }
 
-    /** Lists the custom fields that are picklists not restricted to their values. */
+    /** Lists the files of the custom fields that are picklists not restricted to their values. */
     public listUnrestrictedPicklists(): CustomFieldFile[] {
-        return this.fields.filter((field) => field.isUnrestrictedPicklist());
+        return this.files.filter((file) => file.getCustomField().isUnrestrictedPicklist());
     }
 
-    /** Lists the custom fields that declare no securityClassification. */
+    /** Lists the files of the custom fields that declare no securityClassification. */
     public listWithoutSecurityClassification(): CustomFieldFile[] {
-        return this.fields.filter((field) => field.lacksSecurityClassification());
+        return this.files.filter((file) => file.getCustomField().lacksSecurityClassification());
     }
 
-    /** Lists the custom fields that declare no complianceGroup. */
+    /** Lists the files of the custom fields that declare no complianceGroup. */
     public listWithoutComplianceGroup(): CustomFieldFile[] {
-        return this.fields.filter((field) => field.lacksComplianceGroup());
+        return this.files.filter((file) => file.getCustomField().lacksComplianceGroup());
     }
 
     /**
-     * Lists the custom fields that declare a description shorter than a length.
+     * Lists the files of the custom fields that declare a description shorter than a length.
      *
      * @param length The length to compare with.
      */
     public listWithDescriptionShorterThan(length: DescriptionLength): CustomFieldFile[] {
-        return this.fields.filter((field) => field.hasDescriptionShorterThan(length));
+        return this.files.filter((file) => file.getCustomField().hasDescriptionShorterThan(length));
     }
 }

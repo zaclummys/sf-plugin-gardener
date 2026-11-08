@@ -21,13 +21,13 @@ export class DescriptionRequiredRule extends CustomFieldRule {
     }
 
     public check(customFieldFiles: CustomFieldFiles): Finding[] {
-        const undescribed = customFieldFiles.listUndescribed().map((field) => this.reportFile({
-            message: `The field ${field.getName()} declares no description.`,
-            file: field.getPath(),
+        const undescribed = customFieldFiles.listUndescribed().map((file) => this.reportFile({
+            message: `The field ${file.getCustomField().getName()} declares no description.`,
+            file: file.getPath(),
         }));
-        const short = customFieldFiles.listWithDescriptionShorterThan(this.minLength).map((field) => this.reportFile({
-            message: `The field ${field.getName()} has a description shorter than ${this.minLength.toString()}.`,
-            file: field.getPath(),
+        const short = customFieldFiles.listWithDescriptionShorterThan(this.minLength).map((file) => this.reportFile({
+            message: `The field ${file.getCustomField().getName()} has a description shorter than ${this.minLength.toString()}.`,
+            file: file.getPath(),
         }));
 
         return [

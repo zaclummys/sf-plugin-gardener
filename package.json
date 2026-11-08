@@ -93,7 +93,9 @@
         },
         "test:unit": {
             "dependencies": [
-                "./packages/core:test:unit"
+                "./packages/core:test:unit",
+                "./packages/rules-custom-field:test:unit",
+                "./packages/rules-custom-object:test:unit"
             ]
         }
     }

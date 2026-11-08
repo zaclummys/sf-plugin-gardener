@@ -3,39 +3,39 @@ import { CustomObjectFile } from './custom-object-file.js';
 import type { SharingModels } from './sharing-models.js';
 
 export class CustomObjectFiles {
-    private readonly objects: CustomObjectFile[];
+    private readonly files: CustomObjectFile[];
 
-    /** @param objects The custom objects of the package directories that are linted. */
-    public constructor({ objects }: { objects: CustomObjectFile[] }) {
-        this.objects = objects;
+    /** @param files The custom object files of the package directories that are linted. */
+    public constructor({ files }: { files: CustomObjectFile[] }) {
+        this.files = files;
     }
 
     /**
-     * Builds the custom objects of the components.
+     * Builds the custom object files of the component files.
      *
-     * @param componentFiles The components, some of which hold object files.
+     * @param componentFiles The component files, some of which hold custom objects.
      */
     public static from({ componentFiles }: { componentFiles: ComponentFiles }): CustomObjectFiles {
-        const objects = componentFiles.listOfType('CustomObject').map((componentFile) => CustomObjectFile.from({
+        const files = componentFiles.listOfType('CustomObject').map((componentFile) => new CustomObjectFile({
             componentFile,
         }));
 
         return new CustomObjectFiles({
-            objects,
+            files,
         });
     }
 
-    /** Lists the custom objects that are still in development. */
+    /** Lists the files of the custom objects that are still in development. */
     public listInDevelopment(): CustomObjectFile[] {
-        return this.objects.filter((object) => object.isInDevelopment());
+        return this.files.filter((file) => file.getCustomObject().isInDevelopment());
     }
 
     /**
-     * Lists the custom objects whose sharingModel is one of the models.
+     * Lists the files of the custom objects whose sharingModel is one of the models.
      *
      * @param models The models to look for.
      */
     public listWithSharingModelIn(models: SharingModels): CustomObjectFile[] {
-        return this.objects.filter((object) => object.hasSharingModelIn(models));
+        return this.files.filter((file) => file.getCustomObject().hasSharingModelIn(models));
     }
 }

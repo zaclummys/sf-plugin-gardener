@@ -21,11 +21,11 @@ export class ForbiddenSharingModelsRule extends CustomObjectRule {
     }
 
     public check(customObjectFiles: CustomObjectFiles): Finding[] {
-        const objects = customObjectFiles.listWithSharingModelIn(this.forbiddenModels);
+        const files = customObjectFiles.listWithSharingModelIn(this.forbiddenModels);
 
-        return objects.map((object) => this.reportFile({
-            message: `The object ${object.getName()} has the forbidden sharingModel ${String(object.getSharingModel())}.`,
-            file: object.getPath(),
+        return files.map((file) => this.reportFile({
+            message: `The object ${file.getCustomObject().getName()} has the forbidden sharingModel ${String(file.getCustomObject().getSharingModel())}.`,
+            file: file.getPath(),
         }));
     }
 }

@@ -11,11 +11,11 @@ export class ComplianceGroupRequiredRule extends CustomFieldRule {
     }
 
     public check(customFieldFiles: CustomFieldFiles): Finding[] {
-        const fields = customFieldFiles.listWithoutComplianceGroup();
+        const files = customFieldFiles.listWithoutComplianceGroup();
 
-        return fields.map((field) => this.reportFile({
-            message: `The field ${field.getName()} declares no complianceGroup.`,
-            file: field.getPath(),
+        return files.map((file) => this.reportFile({
+            message: `The field ${file.getCustomField().getName()} declares no complianceGroup.`,
+            file: file.getPath(),
         }));
     }
 }
